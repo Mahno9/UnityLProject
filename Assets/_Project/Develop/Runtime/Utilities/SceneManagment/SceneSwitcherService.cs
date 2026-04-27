@@ -28,7 +28,7 @@ namespace Assets._Project.Develop.Runtime.Utilities.SceneManagment
         {
             _loadingScreen.Show();
 
-            yield return _sceneLoaderService.LoadAsync(Scenes.Empty);
+            yield return _sceneLoaderService.LoadAsync(S._Project.Scenes.Empty);
             yield return _sceneLoaderService.LoadAsync(sceneName);
 
             SceneBootstrap sceneBootstrap = Object.FindObjectOfType<SceneBootstrap>();
