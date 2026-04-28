@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment;
 using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
@@ -16,7 +17,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private DIContainer       _container;
         private GameplayInputArgs _inputArgs;
 
-        private Coroutine            _gameplayCoroutine;
+        private Coroutine            _gameplayCycleCoroutine;
         private GameplayCycle        _gameplayCycle;
         private bool                 _gonnaBackToMenu;
         private StringMatcherService _matcherService;
@@ -39,38 +40,47 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log("Инициализация геймплейной сцены");
 
             ITypeStringGenerator stringGenerator = _container.Resolve<StringGeneratorFactory>().Create(_inputArgs.StringGeneratorType);
-            _matcherService  = new StringMatcherService(stringGenerator.Generate());
+            _matcherService = new StringMatcherService(stringGenerator.Generate());
 
-            TypingInputService inputService = _container.Resolve<TypingInputService>();
-
-            _gameplayCycle = new GameplayCycle(inputService, _matcherService, EndGameAction);
+            _gameplayCycle = new GameplayCycle(_container, _matcherService, EndGameAction);
 
             yield break;
         }
 
         private void EndGameAction(bool isWin)
         {
-            Debug.Log(isWin ? "Победа! Поздравляю!" : "Не получилось. Попробуй ещё раз!");
+            _container.Resolve<ICoroutinesPerformer>().StopPerform(_gameplayCycleCoroutine);
 
-            _container.Resolve<ICoroutinesPerformer>().StopPerform(_gameplayCoroutine);
-            _gonnaBackToMenu = true;
+            if (isWin)
+            {
+                Debug.Log("Победа! Поздравляем!");
+                _container.Resolve<WaitForKeyService>().ListenForKeyCodeOnce(KeyCode.Space, BackToMenu);
+            }
+            else
+            {
+                Debug.Log("Не получилось. Попробуй ещё раз!");
+                _container.Resolve<WaitForKeyService>().ListenForKeyCodeOnce(KeyCode.Space, RestartLevel);
+            }
+
+            Debug.Log("Нажмите Пробел чтобы продолжить");
         }
 
         public override void Run()
         {
             Debug.Log($"Введите пин, состоящий из {(_inputArgs.StringGeneratorType == StringGeneratorType.RandomLetters ? "букв" : "цифр")}: {_matcherService.GetTargetString()}");
 
-            _gameplayCoroutine = _container.Resolve<ICoroutinesPerformer>().StartPerform(_gameplayCycle.Update());
+            _gameplayCycleCoroutine = _container.Resolve<ICoroutinesPerformer>().StartPerform(_gameplayCycle.Update());
         }
 
-        private void Update()
+        private void BackToMenu() => GoToScene(S._Project.Scenes.MainMenu);
+
+        private void RestartLevel() => GoToScene(S._Project.Scenes.Level);
+
+        private void GoToScene(string scene)
         {
-            if (_gonnaBackToMenu)
-            {
-                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-                ICoroutinesPerformer coroutinesPerformer  = _container.Resolve<ICoroutinesPerformer>();
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu));
-            }
+            SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
+            ICoroutinesPerformer coroutinesPerformer  = _container.Resolve<ICoroutinesPerformer>();
+            coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(scene, _inputArgs));
         }
     }
 }

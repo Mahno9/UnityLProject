@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment;
 using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
+using _Project.Develop.Runtime.Infrastructure.DI;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure
@@ -9,19 +10,21 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
     public class GameplayCycle : IPlayerTypingSubscriber, IDisposable
     {
         private readonly TypingInputService   _inputService;
+        private readonly DIContainer          _container;
         private readonly StringMatcherService _matcherService;
         private readonly Action<bool>         _endGameAction;
 
-        public GameplayCycle(TypingInputService inputService, StringMatcherService matcherService, Action<bool> endGameAction)
+        public GameplayCycle(DIContainer container, StringMatcherService matcherService, Action<bool> endGameAction)
         {
-            _inputService = inputService;
+            _container = container;
+            _inputService = _container.Resolve<TypingInputService>();
             _matcherService = matcherService;
             _endGameAction = endGameAction;
 
             _inputService.SubscribeOnTyping(this);
         }
 
-        public void Dispose() => _inputService.UnsubscribeOnTyping(this);
+        public void Dispose() => StopListenTyping();
 
         public IEnumerator Update()
         {
@@ -56,5 +59,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        private void StopListenTyping() => _inputService.UnsubscribeOnTyping(this);
     }
 }
