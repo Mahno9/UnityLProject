@@ -1,6 +1,6 @@
 using System;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement
+namespace _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement
 {
     public class StringGeneratorFactory
     {

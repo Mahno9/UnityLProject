@@ -1,13 +1,13 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
-using Assets._Project.Develop.Runtime.Infrastructure;
-using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
-using System.Collections;
-using _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement;
+﻿using System.Collections;
+using _Project.Develop.Runtime.Gameplay.Infrastructure;
+using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
+using _Project.Develop.Runtime.Infrastructure;
+using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
+namespace _Project.Develop.Runtime.Meta.Infrastructure
 {
     public class MainMenuBootstrap : SceneBootstrap
     {

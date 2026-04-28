@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement
+namespace _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement
 {
     public class RandomNumbersStringGeneratorService : ITypeStringGenerator
     {

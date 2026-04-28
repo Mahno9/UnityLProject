@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.TypeInputManagement
+namespace _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement
 {
     public class TypingInputService
     {

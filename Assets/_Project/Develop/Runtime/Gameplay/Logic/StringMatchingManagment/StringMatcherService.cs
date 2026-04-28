@@ -1,4 +1,4 @@
-namespace _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement
+namespace _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment
 {
     public class StringMatcherService
     {
@@ -8,6 +8,8 @@ namespace _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement
         {
             _targetString = targetString;
         }
+
+        public string GetTargetString() => _targetString;
 
         public CompareResultType MatchString(string probeString)
         {

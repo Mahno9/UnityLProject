@@ -1,9 +1,9 @@
-﻿using _Project.Develop.Runtime.Gameplay.Logic.TypeInputManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement;
-using Assets._Project.Develop.Runtime.Infrastructure.DI;
+﻿using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
+using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
+using _Project.Develop.Runtime.Infrastructure.DI;
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
     public class GameplayContextRegistrations
     {

@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
+using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Infrastructure
+namespace _Project.Develop.Runtime.Infrastructure
 {
     public abstract class SceneBootstrap : MonoBehaviour
     {

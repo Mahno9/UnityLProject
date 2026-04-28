@@ -1,4 +1,4 @@
-namespace _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement
+namespace _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment
 {
     public enum CompareResultType
     {

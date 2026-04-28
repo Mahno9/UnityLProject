@@ -1,20 +1,22 @@
 using System;
 using System.Collections;
-using _Project.Develop.Runtime.Gameplay.Logic.TypeInputManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement;
+using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment;
+using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
     public class GameplayCycle : IPlayerTypingSubscriber, IDisposable
     {
         private readonly TypingInputService   _inputService;
         private readonly StringMatcherService _matcherService;
+        private readonly Action<bool>         _endGameAction;
 
-        public GameplayCycle(TypingInputService inputService, StringMatcherService matcherService)
+        public GameplayCycle(TypingInputService inputService, StringMatcherService matcherService, Action<bool> endGameAction)
         {
             _inputService = inputService;
             _matcherService = matcherService;
+            _endGameAction = endGameAction;
 
             _inputService.SubscribeOnTyping(this);
         }
@@ -38,13 +40,18 @@ namespace Assets._Project.Develop.Runtime.Gameplay.Infrastructure
             {
                 case CompareResultType.FullMatch:
                     Debug.Log($"Полное совпадение: \"{typedString}\"");
+                    _endGameAction(true);
                     break;
+
                 case CompareResultType.PartMatch:
-                    Debug.Log($"Частичное совпадение: \"{typedString}\"");
+                    Debug.Log($"Продолжайте: \"{typedString}\" / {_matcherService.GetTargetString()}");
                     break;
+
                 case CompareResultType.MissMatch:
-                    Debug.Log($"Нет совпадения: \"{typedString}\"");
+                    Debug.Log($"Не совпадает: \"{typedString}\" / {_matcherService.GetTargetString()}");
+                    _endGameAction(false);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

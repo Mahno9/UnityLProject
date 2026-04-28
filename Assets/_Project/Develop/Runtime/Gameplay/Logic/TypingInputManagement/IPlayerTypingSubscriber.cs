@@ -1,4 +1,4 @@
-namespace _Project.Develop.Runtime.Gameplay.Logic.TypeInputManagement
+namespace _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement
 {
     public interface IPlayerTypingSubscriber
     {

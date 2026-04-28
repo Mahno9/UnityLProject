@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-
-namespace _Project.Develop.Runtime.Gameplay.Logic.TypeStringManagement
+namespace _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement
 {
     public interface ITypeStringGenerator
     {

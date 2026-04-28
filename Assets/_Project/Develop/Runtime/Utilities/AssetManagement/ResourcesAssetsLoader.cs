@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Utilities.AssetsManagment
+namespace _Project.Develop.Runtime.Utilities.AssetManagement
 {
     public class ResourcesAssetsLoader
     {
