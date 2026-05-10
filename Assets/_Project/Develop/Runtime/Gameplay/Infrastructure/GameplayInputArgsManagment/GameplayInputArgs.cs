@@ -10,6 +10,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             StringGeneratorType = stringGeneratorType;
         }
 
-        public StringGeneratorType StringGeneratorType;
+        public readonly StringGeneratorType StringGeneratorType;
     }
 }

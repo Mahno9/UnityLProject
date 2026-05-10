@@ -10,11 +10,11 @@ using UnityEngine;
 
 namespace LProject.Assets._Project.Develop.Runtime.Meta.Infrastructure
 {
-    public class GameplayCycle
+    public class MenuGameplayCycle
     {
         private readonly DIContainer          _container;
 
-		public GameplayCycle(DIContainer container)
+		public MenuGameplayCycle(DIContainer container)
 		{
 			_container = container;
 		}

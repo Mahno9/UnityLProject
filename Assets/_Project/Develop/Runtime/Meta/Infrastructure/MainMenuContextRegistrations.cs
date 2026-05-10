@@ -14,7 +14,7 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateLevelLoaderService);
         }
 
-        private static GameplayCycle CreateGameplayCycle(DIContainer c) => new(c);
+        private static MenuGameplayCycle CreateGameplayCycle(DIContainer c) => new(c);
 
         private static LevelLoaderService CreateLevelLoaderService(DIContainer c) => new(c);
     }
