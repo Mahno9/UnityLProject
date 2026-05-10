@@ -22,7 +22,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             if (IsAlreadyRegister<T>())
                 throw new InvalidOperationException($"{typeof(T)} already register");
 
-            Registration registration = new Registration(container => creator.Invoke(container));
+            Registration registration = new(container => creator.Invoke(container));
             _container.Add(typeof(T), registration);
         }
 

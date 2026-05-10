@@ -4,7 +4,7 @@ namespace _Project.Develop.Runtime.Utilities.AssetManagement
 {
     public class ResourcesAssetsLoader
     {
-        public T Load<T>(string resourcePath) where T : Object
+        public static T Load<T>(string resourcePath) where T : Object
             => Resources.Load<T>(resourcePath);
     }
 }

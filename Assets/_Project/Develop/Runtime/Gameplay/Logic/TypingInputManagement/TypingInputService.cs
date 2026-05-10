@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement
@@ -8,9 +9,15 @@ namespace _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement
         private readonly List<IPlayerTypingSubscriber> _subscribers = new();
         private          string                        _typedString;
 
-        public void SubscribeOnTyping(IPlayerTypingSubscriber subscriber) => _subscribers.Add(subscriber);
+        public void SubscribeOnTyping(IPlayerTypingSubscriber subscriber)
+        {
+            _subscribers.Add(subscriber);
+        }
 
-        public void UnsubscribeOnTyping(IPlayerTypingSubscriber subscriber) => _subscribers.Remove(subscriber);
+        public void UnsubscribeOnTyping(IPlayerTypingSubscriber subscriber)
+        {
+            _subscribers.Remove(subscriber);
+        }
 
         public void Update()
         {

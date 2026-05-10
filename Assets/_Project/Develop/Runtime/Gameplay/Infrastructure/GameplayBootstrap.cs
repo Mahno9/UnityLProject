@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections;
 
-using _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment;
-using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
 using UnityEngine;
@@ -17,10 +12,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
     public class GameplayBootstrap : SceneBootstrap
     {
         private DIContainer _container;
-
-        private Coroutine _gameplayCycleCoroutine;
-        private GameplayCycle _gameplayCycle;
-        private bool _gonnaBackToMenu;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {

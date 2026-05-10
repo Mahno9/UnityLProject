@@ -36,7 +36,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _gameplayCycleCoroutine = _container.Resolve<ICoroutinesPerformer>().StartPerform(Update());
         }
 
-        public IEnumerator Update()
+        private IEnumerator Update()
         {
             StringGeneratorType stringType = _container.Resolve<GameplayInputArgsService>().Get().StringGeneratorType;
             Debug.Log($"Введите пин, состоящий из {(stringType == StringGeneratorType.RandomLetters ? "букв" : "цифр")}: {_matcherService.GetTargetString()}");

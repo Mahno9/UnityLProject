@@ -1,11 +1,13 @@
 ﻿using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Logic.LevelPickerService;
+
 using LProject.Assets._Project.Develop.Runtime.Meta.Infrastructure;
+
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Infrastructure
 {
-    public class MainMenuContextRegistrations
+    public static class MainMenuContextRegistrations
     {
         public static void Process(DIContainer container)
         {
@@ -14,8 +16,14 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateLevelLoaderService);
         }
 
-        private static MenuGameplayCycle CreateGameplayCycle(DIContainer c) => new(c);
+        private static MenuGameplayCycle CreateGameplayCycle(DIContainer c)
+        {
+            return new MenuGameplayCycle(c);
+        }
 
-        private static LevelLoaderService CreateLevelLoaderService(DIContainer c) => new(c);
+        private static LevelLoaderService CreateLevelLoaderService(DIContainer c)
+        {
+            return new LevelLoaderService(c);
+        }
     }
 }

@@ -1,8 +1,11 @@
 using System;
+
 using UnityEngine;
 
 namespace Common.Utils
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class SubclassSelectorAttribute : PropertyAttribute { }
+    public class SubclassSelectorAttribute : PropertyAttribute
+    {
+    }
 }

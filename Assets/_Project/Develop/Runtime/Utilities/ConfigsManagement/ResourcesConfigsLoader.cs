@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using _Project.Develop.Runtime.Utilities.AssetManagement;
+
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
@@ -25,7 +27,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
 
             foreach (KeyValuePair<Type, string> configResourcesPath in _configsResourcesPaths)
             {
-                ScriptableObject config = _resources.Load<ScriptableObject>(configResourcesPath.Value);
+                ScriptableObject config = ResourcesAssetsLoader.Load<ScriptableObject>(configResourcesPath.Value);
                 loadedConfigs.Add(configResourcesPath.Key, config);
                 yield return null;
             }

@@ -9,7 +9,10 @@ namespace _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment
             _targetString = targetString;
         }
 
-        public string GetTargetString() => _targetString;
+        public string GetTargetString()
+        {
+            return _targetString;
+        }
 
         public CompareResultType MatchString(string probeString)
         {
@@ -18,10 +21,8 @@ namespace _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment
 
             int i = 0;
             for (; i < probeString.Length; i++)
-            {
                 if (_targetString[i] != probeString[i])
                     return CompareResultType.MissMatch;
-            }
 
             return i == _targetString.Length
                 ? CompareResultType.FullMatch

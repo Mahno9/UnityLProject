@@ -4,6 +4,7 @@ using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.LoadingScreen;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
+
 using Object = UnityEngine.Object;
 
 namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
@@ -26,10 +27,12 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         }
 
         private static SceneSwitcherService CreateSceneSwitcherService(DIContainer c)
-            => new SceneSwitcherService(
+        {
+            return new SceneSwitcherService(
                 c.Resolve<SceneLoaderService>(),
                 c.Resolve<ILoadingScreen>(),
                 c);
+        }
 
         private static SceneLoaderService CreateSceneLoaderService(DIContainer c)
             => new SceneLoaderService();
@@ -38,7 +41,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
 
-            ResourcesConfigsLoader resourcesConfigsLoader = new ResourcesConfigsLoader(resourcesAssetsLoader);
+            ResourcesConfigsLoader resourcesConfigsLoader = new(resourcesAssetsLoader);
 
             return new ConfigsProviderService(resourcesConfigsLoader);
         }
@@ -50,7 +53,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
 
-            CoroutinesPerformer coroutinesPerformerPrefab = resourcesAssetsLoader.Load<CoroutinesPerformer>(R.Utilities.CoroutinesPerformer);
+            CoroutinesPerformer coroutinesPerformerPrefab = ResourcesAssetsLoader.Load<CoroutinesPerformer>(R.Utilities.CoroutinesPerformer);
 
             return Object.Instantiate(coroutinesPerformerPrefab);
         }
@@ -59,7 +62,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
 
-            StandardLoadingScreen standardLoadingScreenPrefab = resourcesAssetsLoader.Load<StandardLoadingScreen>(R.Utilities.StandardLoadingScreen);
+            StandardLoadingScreen standardLoadingScreenPrefab = ResourcesAssetsLoader.Load<StandardLoadingScreen>(R.Utilities.StandardLoadingScreen);
 
             return Object.Instantiate(standardLoadingScreenPrefab);
         }

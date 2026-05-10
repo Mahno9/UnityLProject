@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +7,7 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagement
 {
     public class SceneLoaderService
     {
-        public IEnumerator LoadAsync(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+        public static IEnumerator LoadAsync(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
         {
             AsyncOperation wait = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
 

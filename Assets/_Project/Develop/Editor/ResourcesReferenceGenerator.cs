@@ -21,14 +21,14 @@ namespace Editor
         public static void Generate()
         {
             List<string> resourcePaths = CollectResourcePaths();
-            string code = BuildCode(resourcePaths);
+            string       code          = BuildCode(resourcePaths);
             WriteIfChanged(code);
         }
 
         private static List<string> CollectResourcePaths()
         {
-            var paths = new List<string>();
-            string[] guids = AssetDatabase.FindAssets("", new[] { "Assets" });
+            List<string> paths = new();
+            string[]     guids = AssetDatabase.FindAssets("", new[] { "Assets" });
 
             foreach (string guid in guids)
             {
@@ -69,7 +69,7 @@ namespace Editor
                     string folderName = Sanitize(parts[i]);
                     if (!current.Children.TryGetValue(folderName, out Node child))
                     {
-                        child                        = new Node(folderName);
+                        child = new Node(folderName);
                         current.Children[folderName] = child;
                     }
 
@@ -80,7 +80,7 @@ namespace Editor
                 current.Constants[constName] = path;
             }
 
-            var sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.AppendLine("// AUTO-GENERATED — DO NOT EDIT");
             sb.AppendLine("// Re-generated on each compilation via ResourcesReferenceGenerator.cs");
             sb.AppendLine();
@@ -134,7 +134,9 @@ namespace Editor
             public readonly Dictionary<string, Node>   Children  = new();
             public readonly Dictionary<string, string> Constants = new();
 
-            public Node(string name) { }
+            public Node(string name)
+            {
+            }
         }
     }
 }

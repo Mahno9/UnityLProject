@@ -21,14 +21,14 @@ namespace Editor
         public static void Generate()
         {
             List<SceneEntry> scenes = CollectScenes();
-            string code = BuildCode(scenes);
+            string           code   = BuildCode(scenes);
             WriteIfChanged(code);
         }
 
         private static List<SceneEntry> CollectScenes()
         {
-            var entries = new List<SceneEntry>();
-            string[] guids = AssetDatabase.FindAssets("t:Scene", new[] { "Assets" });
+            List<SceneEntry> entries = new();
+            string[]         guids   = AssetDatabase.FindAssets("t:Scene", new[] { "Assets" });
 
             foreach (string guid in guids)
             {
@@ -62,25 +62,23 @@ namespace Editor
                 Node current = root;
 
                 if (!string.IsNullOrEmpty(entry.Folder))
-                {
                     foreach (string part in entry.Folder.Split('/'))
                     {
                         string folderName = Sanitize(part);
                         if (!current.Children.TryGetValue(folderName, out Node child))
                         {
-                            child                        = new Node(folderName);
+                            child = new Node(folderName);
                             current.Children[folderName] = child;
                         }
 
                         current = child;
                     }
-                }
 
                 string constName = Sanitize(entry.Name);
                 current.Constants[constName] = entry.Name;
             }
 
-            var sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.AppendLine("// AUTO-GENERATED — DO NOT EDIT");
             sb.AppendLine("// Re-generated on each compilation via ScenesReferenceGenerator.cs");
             sb.AppendLine();
@@ -137,7 +135,7 @@ namespace Editor
             public SceneEntry(string folder, string name)
             {
                 Folder = folder;
-                Name   = name;
+                Name = name;
             }
         }
 
@@ -146,7 +144,9 @@ namespace Editor
             public readonly Dictionary<string, Node>   Children  = new();
             public readonly Dictionary<string, string> Constants = new();
 
-            public Node(string name) { }
+            public Node(string name)
+            {
+            }
         }
     }
 }
