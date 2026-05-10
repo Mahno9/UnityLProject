@@ -53,7 +53,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
 
-            CoroutinesPerformer coroutinesPerformerPrefab = ResourcesAssetsLoader.Load<CoroutinesPerformer>(R.Utilities.CoroutinesPerformer);
+            CoroutinesPerformer coroutinesPerformerPrefab = resourcesAssetsLoader.Load<CoroutinesPerformer>(R.Utilities.CoroutinesPerformer);
 
             return Object.Instantiate(coroutinesPerformerPrefab);
         }
@@ -62,7 +62,7 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             ResourcesAssetsLoader resourcesAssetsLoader = c.Resolve<ResourcesAssetsLoader>();
 
-            StandardLoadingScreen standardLoadingScreenPrefab = ResourcesAssetsLoader.Load<StandardLoadingScreen>(R.Utilities.StandardLoadingScreen);
+            StandardLoadingScreen standardLoadingScreenPrefab = resourcesAssetsLoader.Load<StandardLoadingScreen>(R.Utilities.StandardLoadingScreen);
 
             return Object.Instantiate(standardLoadingScreenPrefab);
         }

@@ -27,7 +27,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
 
             foreach (KeyValuePair<Type, string> configResourcesPath in _configsResourcesPaths)
             {
-                ScriptableObject config = ResourcesAssetsLoader.Load<ScriptableObject>(configResourcesPath.Value);
+                ScriptableObject config = _resources.Load<ScriptableObject>(configResourcesPath.Value);
                 loadedConfigs.Add(configResourcesPath.Key, config);
                 yield return null;
             }
