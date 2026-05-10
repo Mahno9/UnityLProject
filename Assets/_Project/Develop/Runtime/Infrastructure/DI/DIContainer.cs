@@ -59,5 +59,14 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
 
             throw new InvalidOperationException($"Registration for {typeof(T)} not exists");
         }
+
+        public void Initialize()
+        {
+            foreach (Registration registration in _container.Values)
+            {
+                if (registration.IsNonLazy)
+                    registration.CreateInstanceFrom(this);
+            }
+        }
     }
 }

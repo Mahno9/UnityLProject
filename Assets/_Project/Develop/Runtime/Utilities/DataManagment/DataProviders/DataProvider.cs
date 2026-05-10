@@ -32,6 +32,9 @@ namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders
                 throw new ArgumentException(nameof(reader));
 
             _readers.Add(reader);
+
+            // Hack to update just after connection
+            reader.ReadFrom(_data);
         }
 
         public IEnumerator Load()

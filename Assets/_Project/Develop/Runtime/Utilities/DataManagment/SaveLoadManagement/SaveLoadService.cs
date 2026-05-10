@@ -1,6 +1,7 @@
 ﻿using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.KeysStorage;
 using Assets._Project.Develop.Runtime.Utilities.DataManagment.Serializers;
+
 using System;
 using System.Collections;
 
@@ -13,8 +14,8 @@ namespace Assets._Project.Develop.Runtime.Utilities.DataManagment
         private readonly IDataRepository _repository;
 
         public SaveLoadService(
-            IDataSerializer serializer, 
-            IDataKeysStorage keysStorage, 
+            IDataSerializer serializer,
+            IDataKeysStorage keysStorage,
             IDataRepository repository)
         {
             _serializer = serializer;

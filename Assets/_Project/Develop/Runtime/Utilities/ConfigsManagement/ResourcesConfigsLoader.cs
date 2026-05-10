@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 
+using LProject.Assets._Project.Develop.Runtime.Configs.Meta.Statistic;
+using LProject.Assets._Project.Develop.Runtime.Configs.Meta.Wallet;
+
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
@@ -14,6 +17,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
 
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
+            {typeof(StartWalletConfig), R.Configs.Meta.Wallet.StartWalletConfig},
+            {typeof(StartStatisticConfig), R.Configs.Meta.Statistic.StartStatisticConfig}
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

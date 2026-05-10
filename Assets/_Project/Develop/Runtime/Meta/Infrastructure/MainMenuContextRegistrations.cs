@@ -12,8 +12,11 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
         public static void Process(DIContainer container)
         {
             Debug.Log("Процесс регистрации сервисов на сцене меню");
+
             container.RegisterAsSingle(CreateGameplayCycle);
             container.RegisterAsSingle(CreateLevelLoaderService);
+
+            container.Initialize();
         }
 
         private static MenuGameplayCycle CreateGameplayCycle(DIContainer c)

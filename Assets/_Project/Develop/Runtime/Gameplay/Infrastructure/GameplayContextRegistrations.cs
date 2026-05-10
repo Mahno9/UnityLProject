@@ -21,6 +21,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateTypingInputService);
             container.RegisterAsSingle(CreateWaitForKeyService);
             container.RegisterAsSingle(c => CreateGameplayInputArgsService(c, args));
+
+            container.Initialize();
         }
 
         private static StringGeneratorFactory CreateStringGeneratorFactory(DIContainer _) => new();
