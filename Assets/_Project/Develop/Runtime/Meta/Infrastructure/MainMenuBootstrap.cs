@@ -29,24 +29,8 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
         public override void Run()
         {
-            Debug.Log("Старт сцены меню" + "\n" +
-                      "1 - Пин из чисел" + "\n" +
-                      "2 - Пин из букв");
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-                StartLevel(StringGeneratorType.RandomNumbers);
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-                StartLevel(StringGeneratorType.RandomLetters);
-        }
-
-        private void StartLevel(StringGeneratorType stringStringGeneratorType)
-        {
-            SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-            ICoroutinesPerformer coroutinesPerformer  = _container.Resolve<ICoroutinesPerformer>();
-            coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.Level, new GameplayInputArgs(stringStringGeneratorType)));
+            CoroutinesPerformer coroutinesPerformer = _container.Resolve<CoroutinesPerformer>();
+            coroutinesPerformer.StartPerform(_container.Resolve<GameplayCycle>().Update());
         }
     }
 }
