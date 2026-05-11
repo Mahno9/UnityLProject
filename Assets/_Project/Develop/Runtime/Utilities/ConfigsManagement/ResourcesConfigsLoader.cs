@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using _Project.Develop.Runtime.Configs.Meta.Market;
+using _Project.Develop.Runtime.Configs.Meta.Progression;
 using _Project.Develop.Runtime.Configs.Meta.Statistic;
 using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
@@ -17,7 +19,9 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
             {typeof(StartWalletConfig), R.Configs.Meta.Wallet.StartWalletConfig},
-            {typeof(StartStatisticConfig), R.Configs.Meta.Statistic.StartStatisticConfig}
+            {typeof(StartStatisticConfig), R.Configs.Meta.Statistic.StartStatisticConfig},
+            {typeof(ProgressionConfig), R.Configs.Meta.Progression.ProgressionConfig},
+            {typeof(MarketConfig), R.Configs.Meta.Market.MarketConfig},
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

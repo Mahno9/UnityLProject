@@ -1,6 +1,6 @@
 namespace _Project.Develop.Runtime.Configs.Meta.Market
 {
-    internal enum ProductName
+    public enum ProductName
     {
         StatisticReset
     }
