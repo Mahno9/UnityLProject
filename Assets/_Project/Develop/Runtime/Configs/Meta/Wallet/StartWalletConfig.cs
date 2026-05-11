@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LProject.Assets._Project.Develop.Runtime.Configs.Meta.Wallet
+namespace _Project.Develop.Runtime.Configs.Meta.Wallet
 {
     [CreateAssetMenu(menuName = "Configs/Meta/PlayerData/NewStartWalletConfig", fileName = "StartWalletConfig")]
     public class StartWalletConfig : ScriptableObject

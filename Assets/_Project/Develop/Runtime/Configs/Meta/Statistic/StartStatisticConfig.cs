@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LProject.Assets._Project.Develop.Runtime.Configs.Meta.Statistic
+namespace _Project.Develop.Runtime.Configs.Meta.Statistic
 {
     [CreateAssetMenu(menuName = "Configs/Meta/PlayerData/NewStartStatisticConfig", fileName = "StartStatisticConfig")]
     public class StartStatisticConfig : ScriptableObject

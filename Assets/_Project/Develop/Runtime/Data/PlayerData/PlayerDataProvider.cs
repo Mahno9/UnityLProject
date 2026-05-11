@@ -1,17 +1,18 @@
-﻿using _Project.Develop.Runtime.Utilities.ConfigsManagement;
+﻿using _Project.Develop.Runtime.Configs.Meta.Statistic;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
+using _Project.Develop.Runtime.Utilities.ConfigsManagement;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
+using _Project.Develop.Runtime.Utilities.DataManagement.SaveLoadManagement;
 
-using LProject.Assets._Project.Develop.Runtime.Configs.Meta.Statistic;
-using LProject.Assets._Project.Develop.Runtime.Configs.Meta.Wallet;
-
-namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders
+namespace _Project.Develop.Runtime.Data.PlayerData
 {
     public class PlayerDataProvider : DataProvider<PlayerData>
     {
         private readonly ConfigsProviderService _configsProviderService;
 
         public PlayerDataProvider(
-            ISaveLoadSerivce saveLoadSerivce,
-            ConfigsProviderService configsProviderService) : base(saveLoadSerivce)
+            ISaveLoadService saveLoadService,
+            ConfigsProviderService configsProviderService) : base(saveLoadService)
         {
             _configsProviderService = configsProviderService;
         }

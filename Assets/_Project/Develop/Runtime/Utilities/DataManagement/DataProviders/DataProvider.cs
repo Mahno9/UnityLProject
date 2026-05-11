@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders
+using _Project.Develop.Runtime.Utilities.DataManagement.SaveLoadManagement;
+
+namespace _Project.Develop.Runtime.Utilities.DataManagement.DataProviders
 {
     public abstract class DataProvider<TData> where TData : ISaveData
     {
@@ -32,9 +34,6 @@ namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders
                 throw new ArgumentException(nameof(reader));
 
             _readers.Add(reader);
-
-            // Hack to update just after connection
-            reader.ReadFrom(_data);
         }
 
         public IEnumerator Load()

@@ -1,10 +1,10 @@
-using _Project.Develop.Runtime.Gameplay.Infrastructure;
+using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagment;
 using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
-namespace _Project.Develop.Runtime.Meta.Logic.LevelPickerService
+namespace _Project.Develop.Runtime.Meta.Logic.LevelsManagment
 {
     public class LevelLoaderService
     {

@@ -1,4 +1,4 @@
-namespace _Project.Develop.Runtime.Gameplay.Infrastructure
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagment
 {
     public class GameplayInputArgsService
     {

@@ -2,10 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using _Project.Develop.Runtime.Configs.Meta.Statistic;
+using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
-
-using LProject.Assets._Project.Develop.Runtime.Configs.Meta.Statistic;
-using LProject.Assets._Project.Develop.Runtime.Configs.Meta.Wallet;
 
 using UnityEngine;
 

@@ -1,10 +1,10 @@
-﻿using Assets._Project.Develop.Runtime.Utilities.DataManagment;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using Assets._Project.Develop.Runtime.Utilities.Reactive;
+﻿using System;
 
-using System;
+using _Project.Develop.Runtime.Data.PlayerData;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
+using _Project.Develop.Runtime.Utilities.Reactive;
 
-namespace Assets._Project.Develop.Runtime.Meta.Features.Wallet
+namespace _Project.Develop.Runtime.Meta.Logic.WalletManagment
 {
     public class WalletService : IDataReader<PlayerData>, IDataWriter<PlayerData>
     {

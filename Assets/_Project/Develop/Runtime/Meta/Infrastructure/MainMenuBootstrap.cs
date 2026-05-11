@@ -5,8 +5,6 @@ using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
-using LProject.Assets._Project.Develop.Runtime.Meta.Infrastructure;
-
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Infrastructure

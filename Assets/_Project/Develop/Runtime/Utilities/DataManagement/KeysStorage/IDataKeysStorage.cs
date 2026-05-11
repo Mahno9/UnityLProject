@@ -1,4 +1,6 @@
-﻿namespace Assets._Project.Develop.Runtime.Utilities.DataManagment.KeysStorage
+﻿using _Project.Develop.Runtime.Utilities.DataManagement.SaveLoadManagement;
+
+namespace _Project.Develop.Runtime.Utilities.DataManagement.KeysStorage
 {
     public interface IDataKeysStorage
     {

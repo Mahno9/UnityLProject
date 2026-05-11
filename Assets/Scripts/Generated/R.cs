@@ -10,6 +10,14 @@ public static class R
     {
         public static class Meta
         {
+            public static class Market
+            {
+                public const string MarketConfig = "Configs/Meta/Market/MarketConfig";
+            }
+            public static class Progression
+            {
+                public const string ProgressionConfig = "Configs/Meta/Progression/ProgressionConfig";
+            }
             public static class Statistic
             {
                 public const string StartStatisticConfig = "Configs/Meta/Statistic/StartStatisticConfig";
