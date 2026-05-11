@@ -1,19 +1,16 @@
-using Assets._Project.Develop.Runtime.Utilities.DataManagment;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using Assets._Project.Develop.Runtime.Utilities.Reactive;
+using _Project.Develop.Runtime.Data.PlayerData;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
+using _Project.Develop.Runtime.Utilities.Reactive;
 
-namespace LProject.Assets._Project.Develop.Runtime.Meta.Logic.StatisticManagment
+namespace _Project.Develop.Runtime.Meta.Logic.StatisticManagment
 {
     public class StatisticService : IDataReader<PlayerData>, IDataWriter<PlayerData>
     {
-        private ReactiveVariable<int> _wins;
-        private ReactiveVariable<int> _loses;
+        private readonly ReactiveVariable<int> _wins  = new();
+        private readonly ReactiveVariable<int> _loses = new();
 
-        public StatisticService(ReactiveVariable<int> wins, ReactiveVariable<int> loses, PlayerDataProvider playerDataProvider)
+        public StatisticService(PlayerDataProvider playerDataProvider)
         {
-            _wins = wins;
-            _loses = loses;
-
             playerDataProvider.RegisterWriter(this);
             playerDataProvider.RegisterReader(this);
         }

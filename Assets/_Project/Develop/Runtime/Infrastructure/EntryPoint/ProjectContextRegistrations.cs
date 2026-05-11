@@ -1,16 +1,16 @@
-﻿using _Project.Develop.Runtime.Infrastructure.DI;
+﻿using _Project.Develop.Runtime.Data.PlayerData;
+using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Logic.StatisticManagment;
+using _Project.Develop.Runtime.Meta.Logic.WalletManagment;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
+using _Project.Develop.Runtime.Utilities.DataManagement.DataRepository;
+using _Project.Develop.Runtime.Utilities.DataManagement.KeysStorage;
+using _Project.Develop.Runtime.Utilities.DataManagement.SaveLoadManagement;
+using _Project.Develop.Runtime.Utilities.DataManagement.Serializers;
 using _Project.Develop.Runtime.Utilities.LoadingScreen;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
-
-using Assets._Project.Develop.Runtime.Meta.Features.Wallet;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataProviders;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.DataRepository;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.KeysStorage;
-using Assets._Project.Develop.Runtime.Utilities.DataManagment.Serializers;
 
 using UnityEngine;
 
@@ -23,24 +23,22 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         public static void Process(DIContainer container)
         {
             container.RegisterAsSingle<ICoroutinesPerformer>(CreateCoroutinesPerformer);
-
             container.RegisterAsSingle(CreateConfigsProviderService);
-
             container.RegisterAsSingle(CreateResourcesAssetsLoader);
-
             container.RegisterAsSingle(CreateSceneLoaderService);
-
             container.RegisterAsSingle(CreateSceneSwitcherService);
-
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
-
             container.RegisterAsSingle(CreateSaveLoadService);
-
-            container.RegisterAsSingle(CreateWalletService);
-
+            container.RegisterAsSingle(CreateWalletService).NonLazy();
             container.RegisterAsSingle(CreatePlayerDataProvider);
+            container.RegisterAsSingle(CreateStatisticService);
 
             container.Initialize();
+        }
+
+        private static StatisticService CreateStatisticService(DIContainer c)
+        {
+            return new StatisticService(c.Resolve<PlayerDataProvider>());
         }
 
         private static PlayerDataProvider CreatePlayerDataProvider(DIContainer c)

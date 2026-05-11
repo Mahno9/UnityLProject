@@ -2,11 +2,12 @@ using System.Collections;
 
 using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Meta.Logic.LevelPickerService;
+using _Project.Develop.Runtime.Meta.Logic.LevelsManagment;
+using _Project.Develop.Runtime.Meta.Logic.StatisticManagment;
 
 using UnityEngine;
 
-namespace LProject.Assets._Project.Develop.Runtime.Meta.Infrastructure
+namespace _Project.Develop.Runtime.Meta.Infrastructure
 {
     public class MenuGameplayCycle
     {
@@ -19,9 +20,9 @@ namespace LProject.Assets._Project.Develop.Runtime.Meta.Infrastructure
 
         public IEnumerator Update()
         {
-            Debug.Log("Старт сцены меню" + "\n" +
-                      "1 - Пин из чисел" + "\n" +
-                      "2 - Пин из букв");
+            PrintStatistic();
+
+            Debug.Log("Старт сцены меню [1] - Пин из чисел [2] - Пин из букв");
 
             while (true)
             {
@@ -32,6 +33,12 @@ namespace LProject.Assets._Project.Develop.Runtime.Meta.Infrastructure
 
                 yield return null;
             }
+        }
+
+        private void PrintStatistic()
+        {
+            StatisticService statisticService = _container.Resolve<StatisticService>();
+            Debug.Log($"Статистика. Побед: {statisticService.GetWins()} Поражений: {statisticService.GetLoses()}");
         }
     }
 }

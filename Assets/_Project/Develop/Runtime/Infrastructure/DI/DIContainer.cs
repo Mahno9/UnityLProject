@@ -17,13 +17,15 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
 
         public DIContainer(DIContainer parent) => _parent = parent;
 
-        public void RegisterAsSingle<T>(Func<DIContainer, T> creator)
+        public Registration RegisterAsSingle<T>(Func<DIContainer, T> creator)
         {
             if (IsAlreadyRegister<T>())
                 throw new InvalidOperationException($"{typeof(T)} already register");
 
             Registration registration = new(container => creator.Invoke(container));
             _container.Add(typeof(T), registration);
+
+            return registration;
         }
 
         public bool IsAlreadyRegister<T>()
