@@ -8,7 +8,7 @@ namespace _Project.Develop.Runtime.Meta.Logic.WalletManagment
 {
     public class WalletService : IDataReader<PlayerData>, IDataWriter<PlayerData>
     {
-        private ReactiveVariable<int> _gold;
+        private readonly ReactiveVariable<int> _gold = new();
 
         public WalletService(PlayerDataProvider playerDataProvider)
         {
@@ -18,7 +18,7 @@ namespace _Project.Develop.Runtime.Meta.Logic.WalletManagment
 
         public IReadOnlyVariable<int> GetGold() => _gold;
 
-        public bool Enough(int amount)
+        public bool EnoughGold(int amount)
         {
             if (amount < 0)
                 throw new ArgumentOutOfRangeException(nameof(amount));
@@ -26,7 +26,7 @@ namespace _Project.Develop.Runtime.Meta.Logic.WalletManagment
             return _gold.Value >= amount;
         }
 
-        public void Add(int amount)
+        public void AddGold(int amount)
         {
             if (amount < 0)
                 throw new ArgumentOutOfRangeException(nameof(amount));
@@ -34,9 +34,9 @@ namespace _Project.Develop.Runtime.Meta.Logic.WalletManagment
             _gold.Value += amount;
         }
 
-        public void Spend(int amount)
+        public void SpendGold(int amount)
         {
-            if (Enough(amount) == false)
+            if (EnoughGold(amount) == false)
                 throw new InvalidOperationException("Not enough gold");
 
             if (amount < 0)
