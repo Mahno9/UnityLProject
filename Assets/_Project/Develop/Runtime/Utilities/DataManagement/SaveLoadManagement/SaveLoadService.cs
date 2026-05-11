@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace Assets._Project.Develop.Runtime.Utilities.DataManagment
 {
-    public class SaveLoadService : ISaveLoadSerivce
+    public class SaveLoadService : ISaveLoadService
     {
         private readonly IDataSerializer _serializer;
         private readonly IDataKeysStorage _keysStorage;

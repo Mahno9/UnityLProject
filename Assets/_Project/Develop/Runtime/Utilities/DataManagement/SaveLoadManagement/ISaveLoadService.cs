@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Assets._Project.Develop.Runtime.Utilities.DataManagment
 {
-    public interface ISaveLoadSerivce
+    public interface ISaveLoadService
     {
         IEnumerator Load<TData>(Action<TData> onLoad) where TData : ISaveData;
         IEnumerator Save<TData>(TData data) where TData : ISaveData;
