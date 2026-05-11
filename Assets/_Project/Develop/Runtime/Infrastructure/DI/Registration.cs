@@ -5,7 +5,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
     public class Registration : IRegistrationOptions
     {
         private readonly Func<DIContainer, object> _creator;
-        private object _cachedInstance;
+        private          object                    _cachedInstance;
 
         public bool IsNonLazy { get; private set; }
 
@@ -13,7 +13,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
 
         public object CreateInstanceFrom(DIContainer container)
         {
-            if (_cachedInstance != null)
+            if (_cachedInstance is not null)
                 return _cachedInstance;
 
             if (_creator == null)
@@ -22,6 +22,12 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             _cachedInstance = _creator.Invoke(container);
 
             return _cachedInstance;
+        }
+
+        public void Dispose()
+        {
+            if (_cachedInstance is IDisposable disposableInstance)
+                disposableInstance.Dispose();
         }
 
         public void NonLazy() => IsNonLazy = true;

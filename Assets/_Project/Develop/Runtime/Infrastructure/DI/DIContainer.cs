@@ -70,5 +70,11 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
                     registration.CreateInstanceFrom(this);
             }
         }
+
+        public void DisposeCurrent()
+        {
+            foreach (KeyValuePair<Type, Registration> registration in _container)
+                registration.Value.Dispose();
+        }
     }
 }

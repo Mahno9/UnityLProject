@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 using _Project.Develop.Runtime.Utilities.DataManagement.SaveLoadManagement;
 
+using UnityEngine.Assertions;
+
 namespace _Project.Develop.Runtime.Utilities.DataManagement.DataProviders
 {
     public abstract class DataProvider<TData> where TData : ISaveData
@@ -34,6 +36,11 @@ namespace _Project.Develop.Runtime.Utilities.DataManagement.DataProviders
                 throw new ArgumentException(nameof(reader));
 
             _readers.Add(reader);
+
+            // Hack to register subscribers without NonLazy()
+            // So, exclude case when _data would be loaded later that subscription
+            if (_data is not null)
+                reader.ReadFrom(_data);
         }
 
         public IEnumerator Load()
