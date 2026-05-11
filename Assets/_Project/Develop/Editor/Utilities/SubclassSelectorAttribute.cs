@@ -2,7 +2,7 @@ using System;
 
 using UnityEngine;
 
-namespace Common.Utils
+namespace _Project.Develop.Editor.Utilities
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class SubclassSelectorAttribute : PropertyAttribute
