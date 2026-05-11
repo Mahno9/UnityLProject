@@ -29,8 +29,7 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
         public override void Run()
         {
-            ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-            coroutinesPerformer.StartPerform(_container.Resolve<MenuGameplayCycle>().Update());
+            _container.Resolve<MenuGameplayCycle>().Start();
         }
     }
 }

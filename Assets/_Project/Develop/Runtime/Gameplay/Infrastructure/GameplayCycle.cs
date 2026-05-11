@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 
-using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagment;
+using _Project.Develop.Runtime.Configs.Meta.Progression;
+using _Project.Develop.Runtime.Data.PlayerData;
+using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment;
+using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
+using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
+using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
@@ -30,7 +35,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _inputService.SubscribeOnTyping(this);
         }
 
-        public void Dispose() => StopListenTyping();
+        public void Dispose()
+        {
+            _container.Resolve<ICoroutinesPerformer>().StopPerform(_gameplayCycleCoroutine);
+        }
 
         public void Start()
         {
@@ -76,21 +84,44 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         private void EndGameAction(bool isWin)
         {
-            _container.Resolve<ICoroutinesPerformer>().StopPerform(_gameplayCycleCoroutine);
+            StopListenTyping();
+            SaveProgress();
+            ProcessLevelResult(isWin);
+        }
+
+        private void ProcessLevelResult(bool isWin)
+        {
+            StatisticService  statisticService  = _container.Resolve<StatisticService>();
+            WaitForKeyService waitForKeyService = _container.Resolve<WaitForKeyService>();
+            WalletService     walletService     = _container.Resolve<WalletService>();
+            ProgressionConfig progressionConfig = _container.Resolve<ConfigsProviderService>().GetConfig<ProgressionConfig>();
 
             if (isWin)
             {
                 Debug.Log("Победа! Поздравляем!");
-                _container.Resolve<WaitForKeyService>().ListenForKeyCodeOnce(KeyCode.Space, BackToMenu);
+
+                statisticService.RegisterWin();
+                walletService.AddGold(progressionConfig.GetWinGoldReward());
+
+                waitForKeyService.ListenForKeyCodeOnce(KeyCode.Space, BackToMenu);
             }
             else
             {
                 Debug.Log("Не получилось. Попробуй ещё раз!");
-                _container.Resolve<WaitForKeyService>().ListenForKeyCodeOnce(KeyCode.Space, RestartLevel);
+
+                statisticService.RegisterLose();
+                walletService.SpendGold(progressionConfig.GetLoseGoldFine());
+
+                waitForKeyService.ListenForKeyCodeOnce(KeyCode.Space, RestartLevel);
             }
 
             Debug.Log("Нажмите Пробел чтобы продолжить");
         }
+
+        private void SaveProgress()
+            => _container.Resolve<ICoroutinesPerformer>().StartPerform(
+                _container.Resolve<PlayerDataProvider>().Save()
+            );
 
         private void StopListenTyping() => _inputService.UnsubscribeOnTyping(this);
 

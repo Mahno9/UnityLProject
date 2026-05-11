@@ -2,7 +2,7 @@ using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
 using _Project.Develop.Runtime.Utilities.Reactive;
 
-namespace _Project.Develop.Runtime.Meta.Logic.StatisticManagment
+namespace _Project.Develop.Runtime.Meta.Logic.StatisticManagement
 {
     public class StatisticService : IDataReader<PlayerData>, IDataWriter<PlayerData>
     {
@@ -22,6 +22,11 @@ namespace _Project.Develop.Runtime.Meta.Logic.StatisticManagment
 
         public void RegisterLose() => _loses.Value++;
 
+        public void ResetStatistic()
+        {
+            _wins.Value = 0;
+            _loses.Value = 0;
+        }
 
         public void ReadFrom(PlayerData data)
         {
