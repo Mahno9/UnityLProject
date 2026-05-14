@@ -1,12 +1,15 @@
-﻿using Assets._Project.Develop.Runtime.Gameplay.Infrastructure;
-using Assets._Project.Develop.Runtime.Infrastructure;
-using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
-using System.Collections;
+﻿using System.Collections;
+
+using _Project.Develop.Runtime.Infrastructure;
+using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
+
+using LProject.Assets._Project.Develop.Runtime.Meta.Infrastructure;
+
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
+namespace _Project.Develop.Runtime.Meta.Infrastructure
 {
     public class MainMenuBootstrap : SceneBootstrap
     {
@@ -28,17 +31,8 @@ namespace Assets._Project.Develop.Runtime.Meta.Infrastructure
 
         public override void Run()
         {
-            Debug.Log("Старт сцены меню");
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-                ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-                coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(Scenes.Gameplay, new GameplayInputArgs(2)));
-            }
+            ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
+            coroutinesPerformer.StartPerform(_container.Resolve<MenuGameplayCycle>().Update());
         }
     }
 }

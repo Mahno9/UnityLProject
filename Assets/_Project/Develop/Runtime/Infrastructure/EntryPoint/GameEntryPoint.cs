@@ -1,12 +1,14 @@
-﻿using Assets._Project.Develop.Runtime.Infrastructure.DI;
-using Assets._Project.Develop.Runtime.Utilities.ConfigsManagement;
-using Assets._Project.Develop.Runtime.Utilities.CoroutinesManagment;
-using Assets._Project.Develop.Runtime.Utilities.LoadingScreen;
-using Assets._Project.Develop.Runtime.Utilities.SceneManagment;
-using System.Collections;
+﻿using System.Collections;
+
+using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Utilities.ConfigsManagement;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
+using _Project.Develop.Runtime.Utilities.LoadingScreen;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
+
 using UnityEngine;
 
-namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
+namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 {
     public class GameEntryPoint : MonoBehaviour
     {
@@ -18,7 +20,7 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 
             Debug.Log("Процесс регистрации сервисов всего проекта");
 
-            DIContainer projectContainer = new DIContainer();
+            DIContainer projectContainer = new();
 
             ProjectContextRegistrations.Process(projectContainer);
 
@@ -33,7 +35,7 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 
         private IEnumerator Initialize(DIContainer container)
         {
-            ILoadingScreen loadingScreen = container.Resolve<ILoadingScreen>();
+            ILoadingScreen       loadingScreen        = container.Resolve<ILoadingScreen>();
             SceneSwitcherService sceneSwitcherService = container.Resolve<SceneSwitcherService>();
 
             loadingScreen.Show();
@@ -42,13 +44,11 @@ namespace Assets._Project.Develop.Runtime.Infrastructure.EntryPoint
 
             yield return container.Resolve<ConfigsProviderService>().LoadAsync();
 
-            yield return new WaitForSeconds(1f);
-
             Debug.Log("Завершается инициализация сервисов");
 
             loadingScreen.Hide();
 
-            yield return sceneSwitcherService.ProcessSwitchTo(Scenes.MainMenu);
+            yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu);
         }
     }
 }

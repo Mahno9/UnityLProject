@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using Unity.VisualScripting;
 
-namespace Assets._Project.Develop.Runtime.Utilities.ConfigsManagement
+namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
 {
     public class ConfigsProviderService
     {
