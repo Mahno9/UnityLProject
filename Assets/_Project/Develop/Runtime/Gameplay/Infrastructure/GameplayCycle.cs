@@ -85,8 +85,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private void EndGameAction(bool isWin)
         {
             StopListenTyping();
-            SaveProgress();
             ProcessLevelResult(isWin);
+            SaveProgress();
         }
 
         private void ProcessLevelResult(bool isWin)
@@ -110,7 +110,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 Debug.Log("Не получилось. Попробуй ещё раз!");
 
                 statisticService.RegisterLose();
-                walletService.SpendGold(progressionConfig.GetLoseGoldFine());
+
+                int lossFine  = progressionConfig.GetLoseGoldFine();
+                int spendFine = (int)MathF.Min(walletService.GetGold().Value, lossFine);
+                walletService.SpendGold(spendFine);
 
                 waitForKeyService.ListenForKeyCodeOnce(KeyCode.Space, RestartLevel);
             }

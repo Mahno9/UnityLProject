@@ -6,6 +6,7 @@ using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
@@ -53,30 +54,15 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    WalletService walletService = _container.Resolve<WalletService>();
-                    if (walletService.EnoughGold(resetPrice))
-                    {
-                        walletService.SpendGold(resetPrice);
-                        ResetStatistic();
+                    MarketService market = _container.Resolve<MarketService>();
 
-                        SaveProgress();
-
-                        RestartMenu();
-                    }
-                    else
-                    {
+                    if (market.TryBuy(ProductName.StatisticReset) == false)
                         Debug.Log($"Недостаточно средств для оплаты сброса. Стоимость: {resetPrice}");
-                    }
                 }
 
                 yield return null;
             }
         }
-
-        private void SaveProgress() =>
-            _container.Resolve<ICoroutinesPerformer>().StartPerform(
-                _container.Resolve<PlayerDataProvider>().Save()
-            );
 
         private int GetResetPrice()
         {
@@ -92,25 +78,11 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.Level, new GameplayInputArgs(stringStringGeneratorType)));
         }
 
-        private void RestartMenu()
-        {
-            SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-            ICoroutinesPerformer coroutinesPerformer  = _container.Resolve<ICoroutinesPerformer>();
-
-            coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu));
-        }
-
         private void PrintStatistic()
         {
             StatisticService statisticService = _container.Resolve<StatisticService>();
             WalletService    walletService    = _container.Resolve<WalletService>();
             Debug.Log($"Статистика. Побед: {statisticService.GetWins().Value} | Поражений: {statisticService.GetLoses().Value} | Деняк: {walletService.GetGold().Value}");
-        }
-
-        public void ResetStatistic()
-        {
-            StatisticService statisticService = _container.Resolve<StatisticService>();
-            statisticService.ResetStatistic();
         }
     }
 }
