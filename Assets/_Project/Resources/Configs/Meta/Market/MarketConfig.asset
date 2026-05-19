@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7deffaf44824a084a8dfe43cc86e4ba2, type: 3}
   m_Name: MarketConfig
   m_EditorClassIdentifier: 
-  _variableName:
+  _productPrices:
   - <Product>k__BackingField: 0
     <Price>k__BackingField: 5

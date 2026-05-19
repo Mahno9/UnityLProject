@@ -31,7 +31,7 @@ namespace _Project.Develop.Runtime.Utilities.SceneManagement
         {
             _loadingScreen.Show();
 
-            _currentSceneContainer?.DisposeCurrent();
+            _currentSceneContainer?.Dispose();
 
             yield return SceneLoaderService.LoadAsync(S._Project.Scenes.Empty);
             yield return SceneLoaderService.LoadAsync(sceneName);

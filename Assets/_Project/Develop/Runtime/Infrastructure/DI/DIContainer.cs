@@ -68,13 +68,15 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             {
                 if (registration.IsNonLazy)
                     registration.CreateInstanceFrom(this);
+
+                registration.OnInitialize();
             }
         }
 
-        public void DisposeCurrent()
+        public void Dispose()
         {
             foreach (KeyValuePair<Type, Registration> registration in _container)
-                registration.Value.Dispose();
+                registration.Value.OnDispose();
         }
     }
 }

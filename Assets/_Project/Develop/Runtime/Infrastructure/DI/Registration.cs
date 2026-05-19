@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Assets._Project.Develop.Runtime.Infrastructure.DI;
+
 namespace _Project.Develop.Runtime.Infrastructure.DI
 {
     public class Registration : IRegistrationOptions
@@ -24,7 +26,18 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             return _cachedInstance;
         }
 
-        public void Dispose()
+        public void OnInitialize()
+        {
+            if (_cachedInstance is null)
+                return;
+
+            if (_cachedInstance is IInitializable initializable)
+                initializable.Initialize();
+            else
+                throw new InvalidOperationException("Instance expect to be initialized. Consider to register with NonLazy()");
+        }
+
+        public void OnDispose()
         {
             if (_cachedInstance is IDisposable disposableInstance)
                 disposableInstance.Dispose();
