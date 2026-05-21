@@ -3,6 +3,7 @@
 
 public static class R
 {
+    public const string DOTweenSettings = "DOTweenSettings";
     public const string LineBreaking_Following_Characters = "LineBreaking Following Characters";
     public const string LineBreaking_Leading_Characters = "LineBreaking Leading Characters";
     public const string TMP_Settings = "TMP Settings";
