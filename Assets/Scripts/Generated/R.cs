@@ -25,6 +25,7 @@ public static class R
             }
             public static class Wallet
             {
+                public const string CurrencyIconsConfig = "Configs/Meta/Wallet/CurrencyIconsConfig";
                 public const string StartWalletConfig = "Configs/Meta/Wallet/StartWalletConfig";
             }
         }
@@ -40,9 +41,25 @@ public static class R
     {
         public const string EmojiOne = "Sprite Assets/EmojiOne";
     }
+    public static class Sprites
+    {
+        public const string GoldCointIcon = "Sprites/GoldCointIcon";
+    }
     public static class Style_Sheets
     {
         public const string Default_Style_Sheet = "Style Sheets/Default Style Sheet";
+    }
+    public static class UI
+    {
+        public static class MainMenu
+        {
+            public const string MainMenuScreenView = "UI/MainMenu/MainMenuScreenView";
+            public const string MainMenuUIRoot = "UI/MainMenu/MainMenuUIRoot";
+        }
+        public static class Wallet
+        {
+            public const string WalletView = "UI/Wallet/WalletView";
+        }
     }
     public static class Utilities
     {

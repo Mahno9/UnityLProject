@@ -2,6 +2,8 @@
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
+using _Project.Develop.Runtime.UI;
+using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
@@ -32,8 +34,21 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateWalletService);
             container.RegisterAsSingle(CreatePlayerDataProvider);
             container.RegisterAsSingle(CreateStatisticService);
+            container.RegisterAsSingle(CreateViewFactory);
+            container.RegisterAsSingle(CreateProjectPresentersFactory);
 
             container.Initialize();
+        }
+
+        private static ProjectPresentersFactory CreateProjectPresentersFactory(DIContainer c)
+        {
+            return new ProjectPresentersFactory(c);
+        }
+
+        private static ViewsFactory CreateViewFactory(DIContainer c)
+        {
+            ResourcesAssetsLoader resources = c.Resolve<ResourcesAssetsLoader>();
+            return new ViewsFactory(resources);
         }
 
         private static StatisticService CreateStatisticService(DIContainer c)
