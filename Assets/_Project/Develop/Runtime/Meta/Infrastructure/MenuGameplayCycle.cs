@@ -6,6 +6,7 @@ using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Logic.LevelStartManagement;
 using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
@@ -65,18 +66,10 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
         }
 
         private int GetResetPrice()
-        {
-            MarketConfig marketConfig = _container.Resolve<ConfigsProviderService>().GetConfig<MarketConfig>();
-            return marketConfig.GetPrice(ProductName.StatisticReset);
-        }
+            => _container.Resolve<MarketService>().GetPrice(ProductName.StatisticReset);
 
         private void StartLevel(StringGeneratorType stringStringGeneratorType)
-        {
-            SceneSwitcherService sceneSwitcherService = _container.Resolve<SceneSwitcherService>();
-            ICoroutinesPerformer coroutinesPerformer  = _container.Resolve<ICoroutinesPerformer>();
-
-            coroutinesPerformer.StartPerform(sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.Level, new GameplayInputArgs(stringStringGeneratorType)));
-        }
+            => _container.Resolve<LevelStarterService>().StartLevel(stringStringGeneratorType);
 
         private void PrintStatistic()
         {

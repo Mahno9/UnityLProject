@@ -32,5 +32,7 @@ namespace _Project.Develop.Runtime.Meta.Logic.MarketManagement
             item.Apply();
             return true;
         }
+
+        public int GetPrice(ProductName product) => _config.GetPrice(product);
     }
 }

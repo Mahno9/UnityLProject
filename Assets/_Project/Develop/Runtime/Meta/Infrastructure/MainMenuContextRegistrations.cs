@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.Configs.Meta.Market;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Logic.LevelStartManagement;
 using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 using _Project.Develop.Runtime.UI;
@@ -7,6 +8,8 @@ using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.MainMenu;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 
 using UnityEngine;
 
@@ -19,6 +22,7 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             Debug.Log("Процесс регистрации сервисов на сцене меню");
 
             container.RegisterAsSingle(CreateGameplayCycle);
+            container.RegisterAsSingle(CreateLevelStarterService);
             container.RegisterAsSingle(CreateMarketService);
             container.RegisterAsSingle(CreateProductItemsFactory);
             container.RegisterAsSingle(CreateMainMenuUIRoot).NonLazy();
@@ -27,6 +31,13 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
             container.RegisterAsSingle(CreateMainMenuPopupService);
 
             container.Initialize();
+        }
+
+        private static LevelStarterService CreateLevelStarterService(DIContainer c)
+        {
+            SceneSwitcherService sceneSwitcherService = c.Resolve<SceneSwitcherService>();
+            ICoroutinesPerformer coroutinesPerformer  = c.Resolve<ICoroutinesPerformer>();
+            return new LevelStarterService(sceneSwitcherService, coroutinesPerformer);
         }
 
         private static MenuGameplayCycle CreateGameplayCycle(DIContainer c)
