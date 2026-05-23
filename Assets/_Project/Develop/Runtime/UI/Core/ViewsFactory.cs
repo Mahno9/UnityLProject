@@ -17,6 +17,7 @@ namespace _Project.Develop.Runtime.UI.Core
             {ViewIDs.MainMenuScreen, R.UI.MainMenu.MainMenuScreenView },
             {ViewIDs.TestPopup, "UI/TestPopup" },
             {ViewIDs.MetricView, R.UI.Statistic.MetricView },
+            {ViewIDs.MainMenuItems, R.UI.MainMenu.MenuItemsView },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

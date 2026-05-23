@@ -58,6 +58,7 @@ public static class R
         {
             public const string MainMenuScreenView = "UI/MainMenu/MainMenuScreenView";
             public const string MainMenuUIRoot = "UI/MainMenu/MainMenuUIRoot";
+            public const string MenuItemsView = "UI/MainMenu/MenuItemsView";
         }
         public static class Statistic
         {

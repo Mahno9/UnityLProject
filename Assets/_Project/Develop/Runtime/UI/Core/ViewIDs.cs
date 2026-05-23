@@ -8,5 +8,6 @@
         public const string LevelTile       = nameof(LevelTile);
         public const string LevelsMenuPopup = nameof(LevelsMenuPopup);
         public const string MetricView      = nameof(MetricView);
+        public const string MainMenuItems   = nameof(MainMenuItems);
     }
 }

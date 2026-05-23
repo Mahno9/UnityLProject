@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Wallet;
+
 using System.Collections.Generic;
 
 using _Project.Develop.Runtime.UI.Statistic;
@@ -8,30 +9,32 @@ namespace _Project.Develop.Runtime.UI.MainMenu
 {
     public class MainMenuScreenPresenter : IPresenter
     {
-        private readonly MainMenuScreenView _screen;
+        private readonly MainMenuScreenView        _screen;
+        private readonly ProjectPresentersFactory  _projectPresentersFactory;
+        private readonly MainMenuPopupService      _popupService;
+        private readonly MainMenuPresentersFactory _mainMenuPresentersFactory;
 
-        private readonly ProjectPresentersFactory _projectPresentersFactory;
-
-        private readonly MainMenuPopupService _popupService;
-
-        private readonly List<IPresenter> _childPresenters = new();
+        private readonly List<IPresenter>          _childPresenters = new();
 
         public MainMenuScreenPresenter(
-            MainMenuScreenView screen,
+            MainMenuScreenView       screen,
             ProjectPresentersFactory projectPresentersFactory,
-            MainMenuPopupService popupService)
+            MainMenuPopupService     popupService,
+            MainMenuPresentersFactory mainMenuPresentersFactory)
         {
             _screen = screen;
             _projectPresentersFactory = projectPresentersFactory;
             _popupService = popupService;
+            _mainMenuPresentersFactory = mainMenuPresentersFactory;
         }
 
         public void Initialize()
         {
-            _screen.OpenLevelsMenuButtonClicked += OnOpenLevelsMenuButtonClicked;
+            // _screen.OpenLevelsMenuButtonClicked += OnOpenLevelsMenuButtonClicked;
 
             CreateStatistic();
             CreateWallet();
+            CreateMenuItems();
 
             foreach (IPresenter presenter in _childPresenters)
                 presenter.Initialize();
@@ -39,7 +42,7 @@ namespace _Project.Develop.Runtime.UI.MainMenu
 
         public void Dispose()
         {
-            _screen.OpenLevelsMenuButtonClicked -= OnOpenLevelsMenuButtonClicked;
+            // _screen.OpenLevelsMenuButtonClicked -= OnOpenLevelsMenuButtonClicked;
 
             foreach (IPresenter presenter in _childPresenters)
                 presenter.Dispose();
@@ -61,9 +64,16 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _childPresenters.Add(statisticPresenter);
         }
 
-        private void OnOpenLevelsMenuButtonClicked()
+        private void CreateMenuItems()
         {
-            // _popupService.OpenLevelsMenuPopup();
+            MainMenuItemsPresenter mainMenuItems = _mainMenuPresentersFactory.CreateMainMenuItems(_screen.MenuItemsView);
+
+            _childPresenters.Add(mainMenuItems);
         }
+
+        // private void OnOpenLevelsMenuButtonClicked()
+        // {
+        //     // _popupService.OpenLevelsMenuPopup();
+        // }
     }
 }

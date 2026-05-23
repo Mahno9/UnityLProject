@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2323826786108988044}
   - component: {fileID: 8574536827716025172}
   - component: {fileID: 6973867273756889352}
+  - component: {fileID: 1855973160578535616}
   m_Layer: 0
   m_Name: StatisticView
   m_TagString: Untagged
@@ -76,3 +77,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!222 &1855973160578535616
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536467128772639554}
+  m_CullTransparentMesh: 1
