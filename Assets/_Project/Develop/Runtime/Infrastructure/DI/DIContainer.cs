@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using UnityEngine;
+
 namespace _Project.Develop.Runtime.Infrastructure.DI
 {
     public class DIContainer

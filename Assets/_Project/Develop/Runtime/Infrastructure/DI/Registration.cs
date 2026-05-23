@@ -2,6 +2,10 @@
 
 using _Project.Develop.Runtime.Infrastructure.DI;
 
+using Unity.VisualScripting;
+
+using UnityEngine;
+
 namespace _Project.Develop.Runtime.Infrastructure.DI
 {
     public class Registration : IRegistrationOptions
@@ -34,7 +38,7 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             if (_cachedInstance is IInitializable initializable)
                 initializable.Initialize();
             else
-                throw new InvalidOperationException("Instance expect to be initialized. Consider to register with NonLazy()");
+                Debug.Log($"NonLazy created instance of {_cachedInstance.GetType()} was called to be initialized, but does not inherit IInitializable.");
         }
 
         public void OnDispose()
