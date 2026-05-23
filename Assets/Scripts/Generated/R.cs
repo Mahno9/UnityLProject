@@ -21,6 +21,7 @@ public static class R
             }
             public static class Statistic
             {
+                public const string MetricsIconsConfig = "Configs/Meta/Statistic/MetricsIconsConfig";
                 public const string StartStatisticConfig = "Configs/Meta/Statistic/StartStatisticConfig";
             }
             public static class Wallet
@@ -44,6 +45,8 @@ public static class R
     public static class Sprites
     {
         public const string GoldCointIcon = "Sprites/GoldCointIcon";
+        public const string LoseIcon = "Sprites/LoseIcon";
+        public const string WinIcon = "Sprites/WinIcon";
     }
     public static class Style_Sheets
     {
@@ -55,6 +58,11 @@ public static class R
         {
             public const string MainMenuScreenView = "UI/MainMenu/MainMenuScreenView";
             public const string MainMenuUIRoot = "UI/MainMenu/MainMenuUIRoot";
+        }
+        public static class Statistic
+        {
+            public const string MetricView = "UI/Statistic/MetricView";
+            public const string StatisticView = "UI/Statistic/StatisticView";
         }
         public static class Wallet
         {

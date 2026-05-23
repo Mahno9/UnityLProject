@@ -14,11 +14,9 @@ namespace _Project.Develop.Runtime.UI.Core
 
         private readonly Dictionary<string, string> _viewIDToResourcesPath = new Dictionary<string, string>()
         {
-            {ViewIDs.CurrencyView, "UI/Wallet/CurrencyView" },
             {ViewIDs.MainMenuScreen, R.UI.MainMenu.MainMenuScreenView },
             {ViewIDs.TestPopup, "UI/TestPopup" },
-            {ViewIDs.LevelTile, "UI/LevelsMenuPopup/LevelTile" },
-            {ViewIDs.LevelsMenuPopup, "UI/LevelsMenuPopup/LevelsMenuPopup" }
+            {ViewIDs.MetricView, R.UI.Statistic.MetricView },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)
@@ -29,10 +27,10 @@ namespace _Project.Develop.Runtime.UI.Core
         public TView Create<TView>(string viewID, Transform parent = null) where TView : MonoBehaviour, IView
         {
             if (_viewIDToResourcesPath.TryGetValue(viewID, out string resourcePath) == false)
-                throw new ArgumentException($"You didn;t set reource path for {typeof(TView)}, searched id: {viewID}");
+                throw new ArgumentException($"You didn't set resource path for {typeof(TView)}, searched id: {viewID}");
 
-            GameObject prefap = _resourcesAssetsLoader.Load<GameObject>(resourcePath);
-            GameObject instance = Object.Instantiate(prefap, parent);
+            GameObject prefab = _resourcesAssetsLoader.Load<GameObject>(resourcePath);
+            GameObject instance = Object.Instantiate(prefab, parent);
             TView view = instance.GetComponent<TView>();
 
             if (view == null)
