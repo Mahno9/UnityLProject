@@ -2,6 +2,8 @@
 using _Project.Develop.Runtime.UI.Wallet;
 using System.Collections.Generic;
 
+using _Project.Develop.Runtime.UI.Statistic;
+
 namespace _Project.Develop.Runtime.UI.MainMenu
 {
     public class MainMenuScreenPresenter : IPresenter
@@ -28,6 +30,7 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         {
             _screen.OpenLevelsMenuButtonClicked += OnOpenLevelsMenuButtonClicked;
 
+            CreateStatistic();
             CreateWallet();
 
             foreach (IPresenter presenter in _childPresenters)
@@ -49,6 +52,13 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             WalletPresenter walletPresenter = _projectPresentersFactory.CreateWalletPresenter(_screen.WalletView);
 
             _childPresenters.Add(walletPresenter);
+        }
+
+        private void CreateStatistic()
+        {
+            StatisticPresenter statisticPresenter = _projectPresentersFactory.CreateStatisticPresenter(_screen.StatisticView);
+
+            _childPresenters.Add(statisticPresenter);
         }
 
         private void OnOpenLevelsMenuButtonClicked()
