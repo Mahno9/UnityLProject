@@ -82,7 +82,7 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
         {
             StatisticService statisticService = _container.Resolve<StatisticService>();
             WalletService    walletService    = _container.Resolve<WalletService>();
-            Debug.Log($"Статистика. Побед: {statisticService.GetWins().Value} | Поражений: {statisticService.GetLoses().Value} | Деняк: {walletService.GetGold().Value}");
+            Debug.Log($"Статистика. Побед: {statisticService.GetMetric(StatisticMetricType.Win).Value} | Поражений: {statisticService.GetMetric(StatisticMetricType.Lose).Value} | Деняк: {walletService.GetGold().Value}");
         }
     }
 }

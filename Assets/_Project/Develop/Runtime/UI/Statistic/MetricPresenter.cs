@@ -1,30 +1,30 @@
 using System;
 
 using _Project.Develop.Runtime.Configs.Meta.Statistic;
+using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.Utilities.Reactive;
-
-using UnityEngine;
 
 namespace _Project.Develop.Runtime.UI.Statistic
 {
     public class MetricPresenter : IPresenter
     {
         private readonly IReadOnlyVariable<int> _statValue;
-        private readonly Sprite                 _icon;
+        private readonly UnityEngine.Sprite     _icon;
         private readonly IconTextView           _view;
 
         private IDisposable _subscription;
 
         public MetricPresenter(
-            IReadOnlyVariable<int> statValue,
-            Sprite                 icon,
-            IconTextView           view)
+            StatisticMetricType metricType,
+            StatisticService    statisticService,
+            MetricsIconsConfig  iconsConfig,
+            IconTextView        view)
         {
-            _statValue = statValue;
-            _icon = icon;
-            _view = view;
+            _statValue = statisticService.GetMetric(metricType);
+            _icon      = iconsConfig.GetSprite(metricType);
+            _view      = view;
         }
 
         public IconTextView View => _view;

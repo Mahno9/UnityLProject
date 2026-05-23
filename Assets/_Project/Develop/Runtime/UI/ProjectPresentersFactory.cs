@@ -10,11 +10,8 @@ using _Project.Develop.Runtime.UI.Statistic;
 using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
-using _Project.Develop.Runtime.Utilities.Reactive;
 
 using Assets._Project.Develop.Runtime.UI.CommonViews;
-
-using UnityEngine;
 
 namespace _Project.Develop.Runtime.UI
 {
@@ -27,17 +24,20 @@ namespace _Project.Develop.Runtime.UI
             _container = container;
         }
 
-        public MetricPresenter CreateMetricPresenter(IReadOnlyVariable<int> metricVariable, Sprite metricIcon, IconTextView view)
+        public MetricPresenter CreateMetricPresenter(StatisticMetricType metricType, IconTextView view)
         {
-            return new MetricPresenter(metricVariable, metricIcon, view);
+            return new MetricPresenter(
+                metricType,
+                _container.Resolve<StatisticService>(),
+                _container.Resolve<ConfigsProviderService>().GetConfig<MetricsIconsConfig>(),
+                view
+            );
         }
 
         public StatisticPresenter CreateStatisticPresenter(IconTextListView view)
         {
             return new StatisticPresenter(
                 _container.Resolve<ProjectPresentersFactory>(),
-                _container.Resolve<ConfigsProviderService>().GetConfig<MetricsIconsConfig>(),
-                _container.Resolve<StatisticService>(),
                 _container.Resolve<ViewsFactory>(),
                 view
             );
