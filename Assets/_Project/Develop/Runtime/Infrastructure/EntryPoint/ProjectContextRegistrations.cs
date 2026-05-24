@@ -82,7 +82,6 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         private static SceneSwitcherService CreateSceneSwitcherService(DIContainer c)
         {
             return new SceneSwitcherService(
-                c.Resolve<SceneLoaderService>(),
                 c.Resolve<ILoadingScreen>(),
                 c);
         }

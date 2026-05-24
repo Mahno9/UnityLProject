@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
+using _Project.Develop.Runtime.Gameplay.Logic.GameStateManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagement;
@@ -29,8 +30,20 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateLevelUIRoot);
             container.RegisterAsSingle(CreateGameplayPresentersFactory);
             container.RegisterAsSingle(CreateLevelScreenPresenter).NonLazy();
+            container.RegisterAsSingle(CreateGameStateFactory);
+            container.RegisterAsSingle(CreateGameStateService).NonLazy();
 
             container.Initialize();
+        }
+
+        private static GameStateFactory CreateGameStateFactory(DIContainer c)
+            => new(c);
+
+        private static GameStateService CreateGameStateService(DIContainer c)
+        {
+            return new GameStateService(
+                c.Resolve<GameStateFactory>()
+            );
         }
 
         private static StringGeneratorFactory CreateStringGeneratorFactory(DIContainer _) => new();
@@ -43,7 +56,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         }
 
         private static GameplayCycle CreateGameplayCycle(DIContainer c)
-            => new(c, c.Resolve<StringMatcherService>());
+        {
+            return new GameplayCycle(
+                c.Resolve<GameStateService>(),
+                c.Resolve<ICoroutinesPerformer>()
+            );
+        }
 
         private static TypingInputService CreateTypingInputService(DIContainer _) => new();
 
