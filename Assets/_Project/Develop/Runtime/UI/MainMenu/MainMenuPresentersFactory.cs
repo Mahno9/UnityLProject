@@ -1,6 +1,7 @@
 ﻿using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Logic.LevelStartManagement;
 using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
+using _Project.Develop.Runtime.UI.Core;
 
 namespace _Project.Develop.Runtime.UI.MainMenu
 {
@@ -13,10 +14,13 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _container = container;
         }
 
-        public MainMenuScreenPresenter CreateMainMenuScreen(MainMenuScreenView view)
+        public MainMenuScreenPresenter CreateMainMenuScreen()
         {
+            MainMenuUIRoot     uiRoot       = _container.Resolve<MainMenuUIRoot>();
+            MainMenuScreenView mainMenuView = _container.Resolve<ViewsFactory>().Create<MainMenuScreenView>(ViewIDs.MainMenuScreen, uiRoot.HUDLayer);
+
             return new MainMenuScreenPresenter(
-                view,
+                mainMenuView,
                 _container.Resolve<ProjectPresentersFactory>(),
                 _container.Resolve<MainMenuPopupService>(),
                 _container.Resolve<MainMenuPresentersFactory>()
@@ -31,12 +35,5 @@ namespace _Project.Develop.Runtime.UI.MainMenu
                 _container.Resolve<MarketService>()
             );
         }
-
-
-        // public MainMenuItemsPresenter CreateMainMenuItems()
-        // {
-        //     return new MainMenuItemsPresenter(
-        //         )
-        // }
     }
 }

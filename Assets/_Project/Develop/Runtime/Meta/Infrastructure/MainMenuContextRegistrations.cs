@@ -51,20 +51,15 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
         private static MainMenuUIRoot CreateMainMenuUIRoot(DIContainer c)
         {
-            MainMenuUIRoot rootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<MainMenuUIRoot>(R.UI.MainMenu.MainMenuUIRoot);
-            return Object.Instantiate(rootPrefab);
+            MainMenuUIRoot uiRootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<MainMenuUIRoot>(R.UI.MainMenu.MainMenuUIRoot);
+            return Object.Instantiate(uiRootPrefab);
         }
 
         private static MainMenuPresentersFactory CreateMainMenuPresentersFactory(DIContainer c)
             => new(c);
 
         private static MainMenuScreenPresenter CreateMainMenuScreenPresenter(DIContainer c)
-        {
-            MainMenuUIRoot     uiRoot       = c.Resolve<MainMenuUIRoot>();
-            MainMenuScreenView mainMenuView = c.Resolve<ViewsFactory>().Create<MainMenuScreenView>(ViewIDs.MainMenuScreen, uiRoot.HUDLayer);
-
-            return c.Resolve<MainMenuPresentersFactory>().CreateMainMenuScreen(mainMenuView);
-        }
+            => c.Resolve<MainMenuPresentersFactory>().CreateMainMenuScreen();
 
         private static MainMenuPopupService CreateMainMenuPopupService(DIContainer c)
         {
