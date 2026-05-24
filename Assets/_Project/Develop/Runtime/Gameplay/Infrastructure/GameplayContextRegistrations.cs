@@ -4,6 +4,10 @@ using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.UI;
+using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.Level;
+using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 
 using UnityEngine;
@@ -22,6 +26,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateTypingInputService);
             container.RegisterAsSingle(CreateWaitForKeyService);
             container.RegisterAsSingle(c => CreateGameplayInputArgsService(c, args));
+            container.RegisterAsSingle(CreateLevelUIRoot);
+            container.RegisterAsSingle(CreateGameplayPresentersFactory);
+            container.RegisterAsSingle(CreateLevelScreenPresenter).NonLazy();
 
             container.Initialize();
         }
@@ -44,5 +51,18 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c.Resolve<ICoroutinesPerformer>());
 
         private static GameplayInputArgsService CreateGameplayInputArgsService(DIContainer c, GameplayInputArgs args) => new(args);
+
+        private static LevelUIRoot CreateLevelUIRoot(DIContainer c)
+        {
+            LevelUIRoot uiRootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<LevelUIRoot>(R.UI.Gameplay.LevelUIRoot);
+
+            return Object.Instantiate(uiRootPrefab);
+        }
+
+        private static GameplayPresentersFactory CreateGameplayPresentersFactory(DIContainer c)
+            => new(c);
+
+        private static LevelScreenPresenter CreateLevelScreenPresenter(DIContainer c)
+            => c.Resolve<GameplayPresentersFactory>().CreateLevelScreenPresenter();
     }
 }

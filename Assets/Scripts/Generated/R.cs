@@ -54,6 +54,11 @@ public static class R
     }
     public static class UI
     {
+        public static class Gameplay
+        {
+            public const string LevelScreenView = "UI/Gameplay/LevelScreenView";
+            public const string LevelUIRoot = "UI/Gameplay/LevelUIRoot";
+        }
         public static class MainMenu
         {
             public const string MainMenuScreenView = "UI/MainMenu/MainMenuScreenView";
