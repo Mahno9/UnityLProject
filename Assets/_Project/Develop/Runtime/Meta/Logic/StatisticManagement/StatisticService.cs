@@ -1,3 +1,5 @@
+using System;
+
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Utilities.DataManagement.DataProviders;
 using _Project.Develop.Runtime.Utilities.Reactive;
@@ -15,8 +17,12 @@ namespace _Project.Develop.Runtime.Meta.Logic.StatisticManagement
             playerDataProvider.RegisterReader(this);
         }
 
-        public IReadOnlyVariable<int> GetWins() => _wins;
-        public IReadOnlyVariable<int> GetLoses() => _loses;
+        public IReadOnlyVariable<int> GetMetric(StatisticMetricType type) => type switch
+        {
+            StatisticMetricType.Win  => _wins,
+            StatisticMetricType.Lose => _loses,
+            _                        => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
 
         public void RegisterWin() => _wins.Value++;
 

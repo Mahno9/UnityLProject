@@ -1,5 +1,11 @@
 ﻿using System;
 
+using _Project.Develop.Runtime.Infrastructure.DI;
+
+using Unity.VisualScripting;
+
+using UnityEngine;
+
 namespace _Project.Develop.Runtime.Infrastructure.DI
 {
     public class Registration : IRegistrationOptions
@@ -24,7 +30,18 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             return _cachedInstance;
         }
 
-        public void Dispose()
+        public void OnInitialize()
+        {
+            if (_cachedInstance is null)
+                return;
+
+            if (_cachedInstance is IInitializable initializable)
+                initializable.Initialize();
+            else
+                Debug.Log($"NonLazy created instance of {_cachedInstance.GetType()} was called to be initialized, but does not inherit IInitializable.");
+        }
+
+        public void OnDispose()
         {
             if (_cachedInstance is IDisposable disposableInstance)
                 disposableInstance.Dispose();
