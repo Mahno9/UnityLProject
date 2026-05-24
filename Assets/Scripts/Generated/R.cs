@@ -56,6 +56,7 @@ public static class R
     {
         public static class Gameplay
         {
+            public const string LevelInterface = "UI/Gameplay/LevelInterface";
             public const string LevelScreenView = "UI/Gameplay/LevelScreenView";
             public const string LevelUIRoot = "UI/Gameplay/LevelUIRoot";
         }

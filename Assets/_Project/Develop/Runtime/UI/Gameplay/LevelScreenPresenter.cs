@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using _Project.Develop.Runtime.UI.Core;
@@ -28,6 +29,7 @@ namespace _Project.Develop.Runtime.UI.Level
         {
             CreateStatistic();
             CreateWallet();
+            CreateLevelInterface();
 
             foreach (IPresenter presenter in _childPresenters)
                 presenter.Initialize();
@@ -54,6 +56,22 @@ namespace _Project.Develop.Runtime.UI.Level
             StatisticPresenter statisticPresenter = _projectPresentersFactory.CreateStatisticPresenter(_screen.StatisticView);
 
             _childPresenters.Add(statisticPresenter);
+        }
+
+        private void CreateLevelInterface()
+        {
+            LevelInterfacePresenter levelInterfacePresenter = _gameplayPresentersFactory.CreateLevelInterfacePresenter(_screen.LevelInterfaceView);
+
+            _childPresenters.Add(levelInterfacePresenter);
+        }
+
+        public T GetPresenter<T>() where T : IPresenter
+        {
+            foreach (IPresenter childPresenter in _childPresenters)
+                if (childPresenter is T presenter)
+                    return presenter;
+
+            throw new ArgumentException($"Unable to find presenter of type {typeof(T)} on current screen");
         }
     }
 }
