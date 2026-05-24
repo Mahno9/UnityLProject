@@ -6,6 +6,28 @@ public static class R
     public const string LineBreaking_Following_Characters = "LineBreaking Following Characters";
     public const string LineBreaking_Leading_Characters = "LineBreaking Leading Characters";
     public const string TMP_Settings = "TMP Settings";
+    public static class Configs
+    {
+        public static class Meta
+        {
+            public static class Market
+            {
+                public const string MarketConfig = "Configs/Meta/Market/MarketConfig";
+            }
+            public static class Progression
+            {
+                public const string ProgressionConfig = "Configs/Meta/Progression/ProgressionConfig";
+            }
+            public static class Statistic
+            {
+                public const string StartStatisticConfig = "Configs/Meta/Statistic/StartStatisticConfig";
+            }
+            public static class Wallet
+            {
+                public const string StartWalletConfig = "Configs/Meta/Wallet/StartWalletConfig";
+            }
+        }
+    }
     public static class Fonts___Materials
     {
         public const string LiberationSans_SDF = "Fonts & Materials/LiberationSans SDF";

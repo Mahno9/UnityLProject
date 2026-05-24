@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 using UnityEditor;
 
-namespace Editor
+namespace _Project.Develop.Editor
 {
     [InitializeOnLoad]
     public static class ResourcesReferenceGenerator

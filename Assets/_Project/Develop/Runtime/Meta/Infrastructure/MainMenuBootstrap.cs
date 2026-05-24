@@ -5,8 +5,6 @@ using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
-using LProject.Assets._Project.Develop.Runtime.Meta.Infrastructure;
-
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Meta.Infrastructure
@@ -31,8 +29,7 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
         public override void Run()
         {
-            ICoroutinesPerformer coroutinesPerformer = _container.Resolve<ICoroutinesPerformer>();
-            coroutinesPerformer.StartPerform(_container.Resolve<MenuGameplayCycle>().Update());
+            _container.Resolve<MenuGameplayCycle>().Start();
         }
     }
 }

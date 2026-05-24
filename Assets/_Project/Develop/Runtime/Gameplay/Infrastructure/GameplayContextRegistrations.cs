@@ -1,6 +1,7 @@
-﻿using _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement;
+﻿using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
+using _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagment;
+using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagement;
 using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
@@ -21,6 +22,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateTypingInputService);
             container.RegisterAsSingle(CreateWaitForKeyService);
             container.RegisterAsSingle(c => CreateGameplayInputArgsService(c, args));
+
+            container.Initialize();
         }
 
         private static StringGeneratorFactory CreateStringGeneratorFactory(DIContainer _) => new();
