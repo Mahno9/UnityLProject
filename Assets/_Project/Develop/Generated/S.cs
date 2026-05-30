@@ -11,6 +11,7 @@ public static class S
             public const string GameEntryPoint = "GameEntryPoint";
             public const string Level = "Level";
             public const string MainMenu = "MainMenu";
+            public const string MovingGameplayScene = "MovingGameplayScene";
         }
     }
 }

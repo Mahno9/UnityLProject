@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 
 using _Project.Develop.Runtime.Data.PlayerData;
+using _Project.Develop.Runtime.Gameplay.Infrastructure.MovingGameplayInputArgsManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
@@ -48,7 +49,10 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             Debug.Log("Завершается инициализация сервисов");
             loadingScreen.Hide();
 
-            yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu);
+            // DEV TOGGLE: boot straight into MovingGameplayScene through the full project bootstrap.
+            // Revert to the MainMenu line below before shipping.
+            yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MovingGameplayScene, new MovingGameplayInputArgs());
+            // yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu);
         }
 
         private static IEnumerator LoadPlayerData(DIContainer container)
