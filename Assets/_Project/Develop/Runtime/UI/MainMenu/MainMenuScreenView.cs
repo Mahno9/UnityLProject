@@ -3,7 +3,7 @@ using _Project.Develop.Runtime.UI.Core;
 
 using System;
 
-using Assets._Project.Develop.Runtime.UI.CommonViews;
+using _Project.Develop.Runtime.UI.CommonViews;
 
 using UnityEngine;
 using UnityEngine.UI;
