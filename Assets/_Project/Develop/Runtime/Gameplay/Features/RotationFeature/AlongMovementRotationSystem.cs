@@ -23,6 +23,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         {
             Vector3 targetLookDirection = _moveDirection.Value.normalized;
 
+            if (targetLookDirection == Vector3.zero)
+                return;
+
             Quaternion toRotation = Quaternion.LookRotation(targetLookDirection);
             float      step       = _rotationSpeed.Value * deltaTime;
 

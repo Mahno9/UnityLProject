@@ -33,7 +33,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddMoveDirection()
                 .AddMoveSpeed(new ReactiveVariable<float>(10))
-                .AddRotation()
+                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.identity))
                 .AddRotationSpeed(new ReactiveVariable<float>(700))
                 ;
 
