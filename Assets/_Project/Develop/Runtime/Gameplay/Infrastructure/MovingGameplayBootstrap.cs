@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.MovingGameplayInputArgsManagement;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
@@ -11,7 +13,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
     public class MovingGameplayBootstrap : SceneBootstrap
     {
-        private DIContainer _container;
+        [SerializeField] private TestGameplay _testGameplay;
+
+        private DIContainer         _container;
+        private EntitiesLifeContext _entitiesLifeContext;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -24,12 +29,23 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         {
             Debug.Log("Инициализация сцены геймплея движения");
 
+            _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+
+            _testGameplay.Initialize(_container);
+
             yield break;
         }
 
         public override void Run()
         {
-            _container.Resolve<MovingGameplayCycle>().Start();
+            Debug.Log("Старт геймплейной сцены");
+
+            _testGameplay.Run();
+        }
+
+        private void Update()
+        {
+            _entitiesLifeContext?.Update(Time.deltaTime);
         }
     }
 }

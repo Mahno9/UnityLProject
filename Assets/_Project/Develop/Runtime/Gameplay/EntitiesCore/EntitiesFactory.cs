@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Reactive;
 
@@ -10,7 +11,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 {
     public class EntitiesFactory
     {
-        private readonly DIContainer _container;
+        private readonly DIContainer         _container;
         private readonly EntitiesLifeContext _entitiesLifeContext;
 
         private readonly MonoEntitiesFactory _monoEntitiesFactory;
@@ -26,13 +27,19 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, "Entities/TestEntity");
+            MonoEntity newEntity = _monoEntitiesFactory.Create(entity, position, R.Prefabs.MovementCharacter);
+            Debug.Log($"New entity {newEntity.name} created.");
 
             entity
                 .AddMoveDirection()
-                .AddMoveSpeed(new ReactiveVariable<float>(10));
+                .AddMoveSpeed(new ReactiveVariable<float>(10))
+                .AddRotation()
+                .AddRotationSpeed(new ReactiveVariable<float>(700))
+                ;
 
             entity.AddSystem(new RigidbodyMovementSystem());
+            entity.AddSystem(new AlongMovementRotationSystem());
+            entity.AddSystem(new RigidbodyRotationApplierSystem());
 
             _entitiesLifeContext.Add(entity);
 
