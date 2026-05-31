@@ -10,7 +10,7 @@ namespace _Project.Develop.Editor
     [InitializeOnLoad]
     public static class ResourcesReferenceGenerator
     {
-        private const string OutputPath = "Assets/Scripts/Generated/R.cs";
+        private const string OutputPath = "Assets/_Project/Develop/Generated/R.cs";
 
         static ResourcesReferenceGenerator()
         {
