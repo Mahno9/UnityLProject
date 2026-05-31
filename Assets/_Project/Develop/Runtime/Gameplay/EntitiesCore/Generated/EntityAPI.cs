@@ -58,6 +58,15 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.RotationSpeed() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Common.CharacterControllerComponent CharacterControllerC => GetComponent<_Project.Develop.Runtime.Gameplay.Common.CharacterControllerComponent>();
+
+		public UnityEngine.CharacterController CharacterController => CharacterControllerC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCharacterController(UnityEngine.CharacterController value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Common.CharacterControllerComponent() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Common.RigidbodyComponent RigidbodyC => GetComponent<_Project.Develop.Runtime.Gameplay.Common.RigidbodyComponent>();
 
 		public UnityEngine.Rigidbody Rigidbody => RigidbodyC.Value;

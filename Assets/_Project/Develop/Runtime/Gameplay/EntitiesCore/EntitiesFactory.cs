@@ -1,4 +1,4 @@
-﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Reactive;
@@ -23,11 +23,11 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _monoEntitiesFactory = _container.Resolve<MonoEntitiesFactory>();
         }
 
-        public Entity CreateTestEntity(Vector3 position)
+        public Entity CreateRigidbodyTestEntity(Vector3 position)
         {
             Entity entity = CreateEmpty();
 
-            MonoEntity newEntity = _monoEntitiesFactory.Create(entity, position, R.Prefabs.MovementCharacter);
+            MonoEntity newEntity = _monoEntitiesFactory.Create(entity, position, R.Prefabs.RigidbodyMovementCharacter);
             Debug.Log($"New entity {newEntity.name} created.");
 
             entity
@@ -40,6 +40,29 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity.AddSystem(new RigidbodyMovementSystem());
             entity.AddSystem(new AlongMovementRotationSystem());
             entity.AddSystem(new RigidbodyRotationApplierSystem());
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+
+        public Entity CreateCharacterControllerTestEntity(Vector3 position)
+        {
+            Entity entity = CreateEmpty();
+
+            MonoEntity newEntity = _monoEntitiesFactory.Create(entity, position, R.Prefabs.CharacterControllerMovementCharacter);
+            Debug.Log($"New entity {newEntity.name} created.");
+
+            entity
+                .AddMoveDirection()
+                .AddMoveSpeed(new ReactiveVariable<float>(10))
+                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.identity))
+                .AddRotationSpeed(new ReactiveVariable<float>(700))
+                ;
+
+            entity.AddSystem(new CharacterControllerMovementSystem());
+            entity.AddSystem(new AlongMovementRotationSystem());
+            entity.AddSystem(new CharacterControllerRotationApplierSystem());
 
             _entitiesLifeContext.Add(entity);
 

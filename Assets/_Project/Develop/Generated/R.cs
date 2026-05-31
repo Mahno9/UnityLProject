@@ -40,7 +40,8 @@ public static class R
     }
     public static class Prefabs
     {
-        public const string MovementCharacter = "Prefabs/MovementCharacter";
+        public const string CharacterControllerMovementCharacter = "Prefabs/CharacterControllerMovementCharacter";
+        public const string RigidbodyMovementCharacter = "Prefabs/RigidbodyMovementCharacter";
     }
     public static class Sprite_Assets
     {

@@ -1,12 +1,7 @@
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 
-using System;
-
-using _Project.Develop.Runtime.UI.CommonViews;
-
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Develop.Runtime.UI.MainMenu
 {
