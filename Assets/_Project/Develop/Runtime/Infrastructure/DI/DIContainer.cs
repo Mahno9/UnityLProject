@@ -11,6 +11,8 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
 
         private readonly List<Type> _requests = new();
 
+        private bool _isInitialized;
+
         private readonly DIContainer _parent;
 
         public DIContainer() : this(null)
@@ -51,7 +53,14 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             try
             {
                 if (_container.TryGetValue(typeof(T), out Registration registration))
-                    return (T)registration.CreateInstanceFrom(this);
+                {
+                    T instance = (T)registration.CreateInstanceFrom(this);
+
+                    if (_isInitialized)
+                        registration.OnInitialize();
+
+                    return instance;
+                }
 
                 if (_parent != null)
                     return _parent.Resolve<T>();
@@ -73,6 +82,8 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
 
                 registration.OnInitialize();
             }
+
+            _isInitialized = true;
         }
 
         public void Dispose()

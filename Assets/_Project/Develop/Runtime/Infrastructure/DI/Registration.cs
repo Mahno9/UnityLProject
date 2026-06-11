@@ -2,16 +2,13 @@
 
 using _Project.Develop.Runtime.Infrastructure.DI;
 
-using Unity.VisualScripting;
-
-using UnityEngine;
-
 namespace _Project.Develop.Runtime.Infrastructure.DI
 {
     public class Registration : IRegistrationOptions
     {
         private readonly Func<DIContainer, object> _creator;
         private          object                    _cachedInstance;
+        private          bool                      _isInitializeCalled;
 
         public bool IsNonLazy { get; private set; }
 
@@ -32,13 +29,13 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
 
         public void OnInitialize()
         {
-            if (_cachedInstance is null)
+            if (_cachedInstance is null || _isInitializeCalled)
                 return;
+
+            _isInitializeCalled = true;
 
             if (_cachedInstance is IInitializable initializable)
                 initializable.Initialize();
-            else
-                Debug.Log($"NonLazy created instance of {_cachedInstance.GetType()} was called to be initialized, but does not inherit IInitializable.");
         }
 
         public void OnDispose()
