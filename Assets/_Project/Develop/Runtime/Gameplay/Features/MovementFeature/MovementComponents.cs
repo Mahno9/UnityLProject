@@ -26,11 +26,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         public ICompositeCondition Value;
     }
 
-    public class RotationDirection : IEntityComponent
-    {
-        public ReactiveVariable<Vector3> Value;
-    }
-
     public class CanRotate : IEntityComponent
     {
         public ICompositeCondition Value;

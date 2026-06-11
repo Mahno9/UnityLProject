@@ -19,7 +19,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.RotationFeature
 
         public void OnUpdate(float deltaTime)
         {
-            _rigidbody.rotation = _rotation.Value;
+            if (_rotation.Value == Quaternion.identity)
+                return;
+
+            _rigidbody.rotation = Quaternion.Normalize(_rotation.Value);
         }
     }
 }

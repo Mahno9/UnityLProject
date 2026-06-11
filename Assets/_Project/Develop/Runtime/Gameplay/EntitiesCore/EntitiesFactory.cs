@@ -35,13 +35,13 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, "Entities/Hero");
+            _monoEntitiesFactory.Create(entity, position, R.Entities.Hero);
 
             entity
                 .AddMoveDirection()
                 .AddMoveSpeed(new ReactiveVariable<float>(10))
                 .AddIsMoving()
-                .AddRotationDirection()
+                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.identity))
                 .AddRotationSpeed(new ReactiveVariable<float>(900))
                 .AddMaxHealth(new ReactiveVariable<float>(100))
                 .AddCurrentHealth(new ReactiveVariable<float>(100))
@@ -126,13 +126,13 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, "Entities/Ghost");
+            _monoEntitiesFactory.Create(entity, position, R.Entities.Ghost);
 
             entity
                 .AddMoveDirection()
                 .AddMoveSpeed(new ReactiveVariable<float>(10))
                 .AddIsMoving()
-                .AddRotationDirection()
+                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.identity))
                 .AddRotationSpeed(new ReactiveVariable<float>(900))
                 .AddMaxHealth(new ReactiveVariable<float>(100))
                 .AddCurrentHealth(new ReactiveVariable<float>(100))
@@ -192,14 +192,14 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, "Entities/Projectile");
+            _monoEntitiesFactory.Create(entity, position, R.Entities.Projectile);
 
             entity
                 // movement
                 .AddMoveDirection(new ReactiveVariable<Vector3>(direction))
                 .AddMoveSpeed(new ReactiveVariable<float>(10))
                 .AddIsMoving()
-                .AddRotationDirection(new ReactiveVariable<Vector3>(direction))
+                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.LookRotation(direction)))
                 .AddRotationSpeed(new ReactiveVariable<float>(9999))
 
                 // collision
