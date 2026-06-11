@@ -2,7 +2,7 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement
+namespace _Project.Develop.Runtime.Gameplay.Features.StringGenerationManagement
 {
     public class RandomLettersStringGeneratorService : ITypeStringGenerator
     {

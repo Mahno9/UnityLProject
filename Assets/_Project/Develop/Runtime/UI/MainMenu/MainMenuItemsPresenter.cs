@@ -1,5 +1,5 @@
 using _Project.Develop.Runtime.Configs.Meta.Market;
-using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
+using _Project.Develop.Runtime.Gameplay.Features.StringGenerationManagement;
 using _Project.Develop.Runtime.Meta.Logic.LevelStartManagement;
 using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
 using _Project.Develop.Runtime.UI.Core;

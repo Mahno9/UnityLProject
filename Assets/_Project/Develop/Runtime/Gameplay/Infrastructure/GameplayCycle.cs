@@ -1,6 +1,6 @@
 using System;
 
-using _Project.Develop.Runtime.Gameplay.Logic.GameStateManagement;
+using _Project.Develop.Runtime.Gameplay.Features.GameStateManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 

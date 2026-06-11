@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using _Project.Develop.Runtime.Gameplay.Features.GameStateManagement.GameStates;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Utilities.Reactive;
 
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.GameStateManagement
+namespace _Project.Develop.Runtime.Gameplay.Features.GameStateManagement
 {
     public class GameStateService : IInitializable
     {

@@ -1,10 +1,11 @@
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
-using _Project.Develop.Runtime.Gameplay.Infrastructure.MovingGameplayInputArgsManagement;
+using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 
 using UnityEngine;
+
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
@@ -15,11 +16,15 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log("Процесс регистрации сервисов на сцене геймплея движения");
 
             container.RegisterAsSingle(CreateEntitiesLifeContext);
+            container.RegisterAsSingle(CreateColliderRegistryService);
             container.RegisterAsSingle(CreateEntitiesFactory);
             container.RegisterAsSingle(CreateMonoEntitiesFactory);
 
             container.Initialize();
         }
+
+        private static CollidersRegistryService CreateColliderRegistryService(DIContainer c)
+            => new();
 
         private static EntitiesLifeContext CreateEntitiesLifeContext(DIContainer c)
             => new();
@@ -31,7 +36,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         {
             return new MonoEntitiesFactory(
                 c.Resolve<ResourcesAssetsLoader>(),
-                c.Resolve<EntitiesLifeContext>()
+                c.Resolve<EntitiesLifeContext>(),
+                c.Resolve<CollidersRegistryService>()
             );
         }
     }

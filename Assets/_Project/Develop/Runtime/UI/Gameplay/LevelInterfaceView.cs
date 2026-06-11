@@ -1,13 +1,10 @@
-using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
 using _Project.Develop.Runtime.UI.Core;
 
 using TMPro;
 
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace _Project.Develop.Runtime.UI.Level
+namespace _Project.Develop.Runtime.UI.Gameplay
 {
     public class LevelInterfaceView : MonoBehaviour, IView
     {

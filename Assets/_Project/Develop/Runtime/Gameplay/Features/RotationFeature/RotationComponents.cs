@@ -3,7 +3,7 @@ using _Project.Develop.Runtime.Utilities.Reactive;
 
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
+namespace _Project.Develop.Runtime.Gameplay.Features.RotationFeature
 {
     public class Rotation : IEntityComponent
     {

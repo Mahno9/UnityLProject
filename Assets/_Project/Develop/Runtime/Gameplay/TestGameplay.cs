@@ -1,5 +1,6 @@
-using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Infrastructure.DI;
+
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay
@@ -9,8 +10,7 @@ namespace _Project.Develop.Runtime.Gameplay
         private DIContainer _container;
         private EntitiesFactory _entitiesFactory;
 
-        private Entity _rigidbodyEntity;
-        private Entity _ccEntity;
+        private Entity _entity;
 
         private bool _isRunning;
 
@@ -22,8 +22,8 @@ namespace _Project.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            _rigidbodyEntity = _entitiesFactory.CreateRigidbodyTestEntity(new Vector3(3, 0, 0));
-            _ccEntity        = _entitiesFactory.CreateCharacterControllerTestEntity(new Vector3(-3, 0, 0));
+            _entity = _entitiesFactory.CreateHero(Vector3.zero);
+            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
 
             _isRunning = true;
         }
@@ -33,10 +33,16 @@ namespace _Project.Develop.Runtime.Gameplay
             if (_isRunning == false)
                 return;
 
+            if (Input.GetKeyDown(KeyCode.Space))
+                _entity.TakeDamageRequest.Invoke(50);
+
+            if (Input.GetKeyDown(KeyCode.R))
+                _entity.StartAttackRequest.Invoke();
+
             Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-            _rigidbodyEntity.MoveDirection.Value = input;
-            _ccEntity.MoveDirection.Value        = input;
+            _entity.MoveDirection.Value = input;
+            _entity.RotationDirection.Value = input;
         }
     }
 }

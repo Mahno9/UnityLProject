@@ -5,7 +5,7 @@ using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.Statistic;
 using _Project.Develop.Runtime.UI.Wallet;
 
-namespace _Project.Develop.Runtime.UI.Level
+namespace _Project.Develop.Runtime.UI.Gameplay
 {
     public class LevelScreenPresenter : IPresenter
     {

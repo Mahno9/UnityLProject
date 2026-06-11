@@ -5,9 +5,9 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
 {
     public class ReactiveVariable<T> : IReadOnlyVariable<T> where T : IEquatable<T>
     {
-        private readonly List<Subscription<T, T>> _subscribers = new();
-        private readonly List<Subscription<T, T>> _toAdd = new();
-        private readonly List<Subscription<T, T>> _toRemove = new();
+        private readonly List<Subscriber<T, T>> _subscribers = new();
+        private readonly List<Subscriber<T, T>> _toAdd = new();
+        private readonly List<Subscriber<T, T>> _toRemove = new();
 
         private T _value;
 
@@ -31,12 +31,12 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
 
         public IDisposable Subscribe(Action<T, T> action)
         {
-            Subscription<T, T> subscription = new Subscription<T, T>(action, Remove);
-            _toAdd.Add(subscription);
-            return subscription;
+            Subscriber<T, T> subscriber = new Subscriber<T, T>(action, Remove);
+            _toAdd.Add(subscriber);
+            return subscriber;
         }
 
-        private void Remove(Subscription<T, T> subscription) => _toRemove.Add(subscription);
+        private void Remove(Subscriber<T, T> subscriber) => _toRemove.Add(subscriber);
 
         private void Invoke(T oldValue, T newValue)
         {
@@ -48,14 +48,14 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
 
             if(_toRemove.Count > 0)
             {
-                foreach (Subscription<T, T> subscription in _toRemove)
-                    _subscribers.Remove(subscription);
+                foreach (Subscriber<T, T> subscriber in _toRemove)
+                    _subscribers.Remove(subscriber);
 
                 _toRemove.Clear();
             }
 
-            foreach (Subscription<T, T> subscription in _subscribers)
-                subscription.Invoke(oldValue, newValue);
+            foreach (Subscriber<T, T> subscriber in _subscribers)
+                subscriber.Invoke(oldValue, newValue);
         }
     }
 }

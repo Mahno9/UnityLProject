@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor;
-using UnityEngine;
 using System.Reflection;
+using System.Text;
 
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 
-namespace Assets._Project.Develop.Editor
+using UnityEditor;
+
+using UnityEngine;
+
+namespace _Project.Develop.Editor
 {
     public class EntityAPIGenerator
     {
