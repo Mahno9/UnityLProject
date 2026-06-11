@@ -18,7 +18,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEntitiesLifeContext);
             container.RegisterAsSingle(CreateColliderRegistryService);
             container.RegisterAsSingle(CreateEntitiesFactory);
-            container.RegisterAsSingle(CreateMonoEntitiesFactory);
+            container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
 
             container.Initialize();
         }

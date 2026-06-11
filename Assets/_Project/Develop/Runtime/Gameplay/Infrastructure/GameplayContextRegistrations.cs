@@ -11,12 +11,11 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         public static void Process(DIContainer container, GameplayInputArgs args)
         {
             container.RegisterAsSingle(CreateEntitiesFactory);
-
             container.RegisterAsSingle(CreateEntitiesLifeContext);
-
             container.RegisterAsSingle(CreateCollidersRegistryService);
-
             container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
+
+            container.Initialize();
         }
 
         private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c)
