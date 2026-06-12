@@ -250,6 +250,15 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.PreviousBodyPosition PreviousBodyPositionC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.PreviousBodyPosition>();
+
+		public UnityEngine.Vector3 PreviousBodyPosition => PreviousBodyPositionC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddPreviousBodyPosition(UnityEngine.Vector3 value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.PreviousBodyPosition() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth CurrentHealthC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> CurrentHealth => CurrentHealthC.Value;

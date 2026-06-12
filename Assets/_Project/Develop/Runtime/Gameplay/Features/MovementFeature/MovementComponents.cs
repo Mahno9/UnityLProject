@@ -45,4 +45,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
     {
         public ReactiveEvent Value;
     }
+
+    public class PreviousBodyPosition : IEntityComponent
+    {
+        public Vector3 Value;
+    }
 }

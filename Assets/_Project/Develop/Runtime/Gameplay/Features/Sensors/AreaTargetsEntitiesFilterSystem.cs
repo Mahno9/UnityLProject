@@ -26,6 +26,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
 
         public void OnUpdate(float deltaTime)
         {
+            if (_targets.Count == 0)
+                return;
+
             _targetsEntities.Count = 0;
 
             for (int i = 0; i < _targets.Count; i++)
@@ -34,7 +37,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
 
                 Entity targetEntity = _collidersRegistryService.GetBy(collider);
 
-                if(targetEntity != null)
+                if (targetEntity != null)
                 {
                     _targetsEntities.Items[_targetsEntities.Count] = targetEntity;
                     _targetsEntities.Count++;

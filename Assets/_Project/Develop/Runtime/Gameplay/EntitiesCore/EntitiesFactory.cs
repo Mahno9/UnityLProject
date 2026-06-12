@@ -282,6 +282,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTargetsCollidersBuffer(new Buffer<Collider>(64))
                 .AddTargetsEntitiesBuffer(new Buffer<Entity>(64))
                 .AddAreaTargetsCollectRequest()
+                .AddPreviousBodyPosition(Vector3.zero)
 
                 .AddMaxHealth(new ReactiveVariable<float>(100))
                 .AddCurrentHealth(new ReactiveVariable<float>(100))
@@ -316,6 +317,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 // movement
                 .AddSystem(new RigidbodyTeleportSystem())
+                .AddSystem(new TeleportHappenedEventSystem())
 
                 // collision
                 .AddSystem(new BodyContactsDetectingSystem())
