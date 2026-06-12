@@ -24,7 +24,7 @@ namespace _Project.Develop.Runtime.Gameplay
         {
             _playerCharacter = _entitiesFactory.CreateTeleportEnemy("TeleportEnemy", Vector3.zero, 20);
 
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 3; i++)
                 _entitiesFactory.CreateGhost(
                     "Ghost " + (i + 1),
                     new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5))

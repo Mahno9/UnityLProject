@@ -43,8 +43,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
             if (_canMove.Evaluate() == false)
                 return;
 
-            Vector2 randomPoint = Random.insideUnitCircle * _teleportRadius.Value;
-            _rigidbody.position += new Vector3(randomPoint.x, 0, randomPoint.y);
+            // Vector2 randomPoint = Random.insideUnitCircle * _teleportRadius.Value;
+            // _rigidbody.position += new Vector3(randomPoint.x, 0, randomPoint.y);
+
+            _rigidbody.position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
 
             _teleportPlannedEvent?.Invoke();
         }
