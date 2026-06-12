@@ -7,10 +7,10 @@ namespace _Project.Develop.Runtime.Gameplay
 {
     public class TestGameplay : MonoBehaviour
     {
-        private DIContainer _container;
+        private DIContainer     _container;
         private EntitiesFactory _entitiesFactory;
 
-        private Entity _entity;
+        private Entity _playerCharacter;
 
         private bool _isRunning;
 
@@ -22,8 +22,13 @@ namespace _Project.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            _entity = _entitiesFactory.CreateHero(Vector3.zero);
-            _entitiesFactory.CreateGhost(Vector3.zero + Vector3.forward * 5);
+            _playerCharacter = _entitiesFactory.CreateTeleportEnemy("TeleportEnemy", Vector3.zero, 20);
+
+            for (int i = 0; i < 1; i++)
+                _entitiesFactory.CreateGhost(
+                    "Ghost " + (i + 1),
+                    new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5))
+                );
 
             _isRunning = true;
         }
@@ -34,14 +39,9 @@ namespace _Project.Develop.Runtime.Gameplay
                 return;
 
             if (Input.GetKeyDown(KeyCode.Space))
-                _entity.TakeDamageRequest.Invoke(50);
-
-            if (Input.GetKeyDown(KeyCode.R))
-                _entity.StartAttackRequest.Invoke();
-
-            Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-
-            _entity.MoveDirection.Value = input;
+            {
+                _playerCharacter.TeleportRequest.Invoke();
+            }
         }
     }
 }

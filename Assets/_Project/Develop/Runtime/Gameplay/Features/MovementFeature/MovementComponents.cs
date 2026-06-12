@@ -21,6 +21,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         public ReactiveVariable<bool> Value;
     }
 
+    public class TeleportRadius : IEntityComponent
+    {
+        public ReactiveVariable<float> Value;
+    }
+
     public class CanMove : IEntityComponent
     {
         public ICompositeCondition Value;
@@ -29,5 +34,15 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
     public class CanRotate : IEntityComponent
     {
         public ICompositeCondition Value;
+    }
+
+    public class TeleportRequest : IEntityComponent
+    {
+        public ReactiveEvent Value;
+    }
+
+    public class OnTeleportEvent : IEntityComponent
+    {
+        public ReactiveEvent Value;
     }
 }

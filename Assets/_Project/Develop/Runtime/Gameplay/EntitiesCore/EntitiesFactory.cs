@@ -1,6 +1,7 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Attack;
+using _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot;
 using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
@@ -122,13 +123,14 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public Entity CreateGhost(Vector3 position)
+        public Entity CreateGhost(string name, Vector3 position)
         {
             Entity entity = CreateEmpty();
 
             _monoEntitiesFactory.Create(entity, position, R.Entities.Ghost);
 
             entity
+                .AddName(name)
                 .AddMoveDirection()
                 .AddMoveSpeed(new ReactiveVariable<float>(10))
                 .AddIsMoving()
@@ -250,6 +252,87 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 // death
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+
+            _entitiesLifeContext.Add(entity);
+
+            return entity;
+        }
+
+        public Entity CreateTeleportEnemy(string name, Vector3 position, float damage)
+        {
+            Entity entity = CreateEmpty();
+
+            _monoEntitiesFactory.Create(entity, position, R.Entities.TeleporterEnemy);
+
+            entity.AddName(name)
+                // movement
+                .AddTeleportRadius(new ReactiveVariable<float>(10))
+                .AddTeleportRequest()
+                .AddOnTeleportEvent()
+
+                // collision
+                .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
+                .AddContactCollidersBuffer(new Buffer<Collider>(64))
+                .AddContactEntitiesBuffer(new Buffer<Entity>(64))
+
+                // damage
+                .AddAreaAttackDamage(new ReactiveVariable<float>(20))
+                .AddTargetsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
+                .AddTargetsCollidersBuffer(new Buffer<Collider>(64))
+                .AddTargetsEntitiesBuffer(new Buffer<Entity>(64))
+                .AddAreaTargetsCollectRequest()
+
+                .AddMaxHealth(new ReactiveVariable<float>(100))
+                .AddCurrentHealth(new ReactiveVariable<float>(100))
+                .AddTakeDamageRequest()
+                .AddTakeDamageEvent()
+
+                // death
+                .AddIsDead()
+                .AddInDeathProcess()
+                .AddDeathProcessInitialTime(new ReactiveVariable<float>(2))
+                .AddDeathProcessCurrentTime()
+                ;
+
+            ICompositeCondition canMove = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            ICompositeCondition mustDie = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
+
+            ICompositeCondition mustSelfRelease = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value));
+
+            ICompositeCondition canApplyDamage = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
+            entity
+                .AddCanMove(canMove)
+                .AddMustDie(mustDie)
+                .AddMustSelfRelease(mustSelfRelease)
+                .AddCanApplyDamage(canApplyDamage);
+
+            entity
+                // movement
+                .AddSystem(new RigidbodyTeleportSystem())
+
+                // collision
+                .AddSystem(new BodyContactsDetectingSystem())
+                .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
+
+                // damage
+                .AddSystem(new ApplyDamageSystem())
+
+                .AddSystem(new DealDamageOnTeleportSystem())
+                .AddSystem(new AreaTargetsSelectorSystem(true))
+                .AddSystem(new AreaTargetsEntitiesFilterSystem(_collidersRegistryService))
+                .AddSystem(new InstantAreaDamageSystem())
+
+                // death
+                .AddSystem(new DeathSystem())
+                .AddSystem(new DisableCollidersOnDeathSystem())
+                .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
             _entitiesLifeContext.Add(entity);

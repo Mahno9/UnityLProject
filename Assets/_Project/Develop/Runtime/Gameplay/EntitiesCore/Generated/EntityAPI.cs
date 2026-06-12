@@ -61,6 +61,56 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.IsTouchDeathMask() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.Sensors.AreaAttackCollider AreaAttackColliderC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Sensors.AreaAttackCollider>();
+
+		public UnityEngine.Collider AreaAttackCollider => AreaAttackColliderC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAreaAttackCollider(UnityEngine.Collider value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.AreaAttackCollider() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsDetectingMask TargetsDetectingMaskC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsDetectingMask>();
+
+		public UnityEngine.LayerMask TargetsDetectingMask => TargetsDetectingMaskC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTargetsDetectingMask(UnityEngine.LayerMask value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsDetectingMask() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsCollidersBuffer TargetsCollidersBufferC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsCollidersBuffer>();
+
+		public _Project.Develop.Runtime.Utilities.Buffer<UnityEngine.Collider> TargetsCollidersBuffer => TargetsCollidersBufferC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTargetsCollidersBuffer(_Project.Develop.Runtime.Utilities.Buffer<UnityEngine.Collider> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsCollidersBuffer() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsEntitiesBuffer TargetsEntitiesBufferC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsEntitiesBuffer>();
+
+		public _Project.Develop.Runtime.Utilities.Buffer<_Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> TargetsEntitiesBuffer => TargetsEntitiesBufferC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTargetsEntitiesBuffer(_Project.Develop.Runtime.Utilities.Buffer<_Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.TargetsEntitiesBuffer() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Sensors.AreaTargetsCollectRequest AreaTargetsCollectRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Sensors.AreaTargetsCollectRequest>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent AreaTargetsCollectRequest => AreaTargetsCollectRequestC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAreaTargetsCollectRequest()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.AreaTargetsCollectRequest() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAreaTargetsCollectRequest(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.AreaTargetsCollectRequest() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.Rotation RotationC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.Rotation>();
 
 		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Quaternion> Rotation => RotationC.Value;
@@ -87,6 +137,15 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationSpeed(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Naming.Name NameC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Naming.Name>();
+
+		public System.String Name => NameC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddName(System.String value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Naming.Name() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.MoveDirection MoveDirectionC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.MoveDirection>();
@@ -131,6 +190,20 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.IsMoving() {Value = value}); 
 		}
 
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRadius TeleportRadiusC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRadius>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> TeleportRadius => TeleportRadiusC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRadius()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRadius() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRadius(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRadius() {Value = value}); 
+		}
+
 		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanMove CanMoveC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanMove>();
 
 		public _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanMove => CanMoveC.Value;
@@ -147,6 +220,34 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanRotate(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanRotate() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest TeleportRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent TeleportRequest => TeleportRequestC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRequest()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRequest(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent OnTeleportEventC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent OnTeleportEvent => OnTeleportEventC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddOnTeleportEvent()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddOnTeleportEvent(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth CurrentHealthC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth>();
@@ -486,6 +587,20 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInAttackCooldown(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Boolean> value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.InAttackCooldown() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage.AreaAttackDamage AreaAttackDamageC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage.AreaAttackDamage>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> AreaAttackDamage => AreaAttackDamageC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAreaAttackDamage()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage.AreaAttackDamage() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddAreaAttackDamage(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage.AreaAttackDamage() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.ApplyDamage.TakeDamageRequest TakeDamageRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.ApplyDamage.TakeDamageRequest>();

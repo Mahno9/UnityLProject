@@ -19,9 +19,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ApplyDamage
         private ICompositeCondition _canApplyDamage;
 
         private IDisposable _requestDisposable;
+        private string      _name;
 
         public void OnInit(Entity entity)
         {
+            _name = entity.Name;
+
             _damageRequest = entity.TakeDamageRequest;
             _damageEvent = entity.TakeDamageEvent;
 
@@ -47,7 +50,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.ApplyDamage
 
             _health.Value = MathF.Max(_health.Value - damage, 0);
             _damageEvent.Invoke(damage);
-            Debug.Log($"Я получил урон! Здоровье: {_health.Value}");
+            Debug.Log($"{_name} получил урон! Здоровье: {_health.Value}");
         }
     }
 }

@@ -37,6 +37,7 @@ public static class R
         public const string Ghost = "Entities/Ghost";
         public const string Hero = "Entities/Hero";
         public const string Projectile = "Entities/Projectile";
+        public const string TeleporterEnemy = "Entities/TeleporterEnemy";
     }
     public static class Fonts___Materials
     {

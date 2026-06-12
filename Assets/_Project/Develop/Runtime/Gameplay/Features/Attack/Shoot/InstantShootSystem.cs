@@ -15,7 +15,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot
         private ReactiveEvent _attackDelayEndEvent;
 
         private ReactiveVariable<float> _damage;
-        private Transform _shootPoint;
+        private Transform               _shootPoint;
 
         private IDisposable _attackDelayEndDisposable;
 

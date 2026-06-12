@@ -35,4 +35,29 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
     {
         public ReactiveVariable<bool> Value;
     }
+
+    public class AreaAttackCollider : IEntityComponent
+    {
+        public Collider Value;
+    }
+
+    public class TargetsDetectingMask : IEntityComponent
+    {
+        public LayerMask Value;
+    }
+
+    public class TargetsCollidersBuffer : IEntityComponent
+    {
+        public Buffer<Collider> Value;
+    }
+
+    public class TargetsEntitiesBuffer : IEntityComponent
+    {
+        public Buffer<Entity> Value;
+    }
+
+    public class AreaTargetsCollectRequest : IEntityComponent
+    {
+        public ReactiveEvent Value;
+    }
 }
