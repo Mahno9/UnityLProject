@@ -18,15 +18,17 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
 
         private ICompositeCondition _canMove;
         private ReactiveEvent       _teleportRequest;
+        private ReactiveEvent       _teleportPlannedEvent;
 
         private IDisposable _onTeleportRequestSubscription;
 
         public void OnInit(Entity entity)
         {
-            _teleportRadius  = entity.TeleportRadius;
+            _teleportRadius = entity.TeleportRadius;
             _teleportRequest = entity.TeleportRequest;
-            _rigidbody       = entity.Rigidbody;
-            _canMove         = entity.CanMove;
+            _rigidbody = entity.Rigidbody;
+            _canMove = entity.CanMove;
+            _teleportPlannedEvent = entity.TeleportPlannedEvent;
 
             _onTeleportRequestSubscription = _teleportRequest.Subscribe(OnTeleportRequest);
         }
@@ -43,6 +45,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
 
             Vector2 randomPoint = Random.insideUnitCircle * _teleportRadius.Value;
             _rigidbody.position += new Vector3(randomPoint.x, 0, randomPoint.y);
+
+            _teleportPlannedEvent?.Invoke();
         }
     }
 }

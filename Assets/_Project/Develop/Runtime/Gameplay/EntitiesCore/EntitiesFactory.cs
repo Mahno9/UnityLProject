@@ -4,6 +4,7 @@ using _Project.Develop.Runtime.Gameplay.Features.Attack;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot;
 using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
+using _Project.Develop.Runtime.Gameplay.Features.Energy;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Gameplay.Features.RotationFeature;
@@ -269,7 +270,16 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 // movement
                 .AddTeleportRadius(new ReactiveVariable<float>(10))
                 .AddTeleportRequest()
-                .AddOnTeleportEvent()
+                .AddTeleportPlannedEvent()
+                .AddTeleportHappenedEvent()
+
+                .AddTeleportEnergyCost(10)
+
+                // energy
+                .AddEnergy(new ReactiveVariable<int>(100))
+                .AddInitialEnergy(new ReactiveVariable<int>(100))
+                .AddEnergyRegenerateCooldown(new ReactiveVariable<float>(3))
+                .AddRestTimeToEnergyRegenerate(new ReactiveVariable<float>(0))
 
                 // collision
                 .AddContactsDetectingMask(1 << LayerMask.NameToLayer("Characters"))
@@ -297,7 +307,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 ;
 
             ICompositeCondition canMove = new CompositeCondition()
-                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+                .Add(new FuncCondition(() => entity.IsDead.Value == false))
+                .Add(new FuncCondition(() => entity.Energy.Value > entity.TeleportEnergyCost));
 
             ICompositeCondition mustDie = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
@@ -319,6 +330,10 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new RigidbodyTeleportSystem())
                 .AddSystem(new TeleportHappenedEventSystem())
 
+                // energy
+                .AddSystem(new RegenerateEnergySystem())
+                .AddSystem(new SpendEnergySystem(entity.TeleportEnergyCost, entity.TeleportPlannedEvent))
+
                 // collision
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
@@ -327,7 +342,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new ApplyDamageSystem())
 
                 .AddSystem(new DealDamageOnTeleportSystem())
-                .AddSystem(new AreaTargetsSelectorSystem(false))
+                .AddSystem(new AreaTargetsSelectorSystem())
                 .AddSystem(new AreaTargetsEntitiesFilterSystem(_collidersRegistryService))
                 .AddSystem(new InstantAreaDamageSystem())
 

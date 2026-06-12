@@ -236,18 +236,32 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent OnTeleportEventC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent>();
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportPlannedEvent TeleportPlannedEventC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportPlannedEvent>();
 
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent OnTeleportEvent => OnTeleportEventC.Value;
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent TeleportPlannedEvent => TeleportPlannedEventC.Value;
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddOnTeleportEvent()
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportPlannedEvent()
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportPlannedEvent() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddOnTeleportEvent(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportPlannedEvent(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.OnTeleportEvent() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportPlannedEvent() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportHappenedEvent TeleportHappenedEventC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportHappenedEvent>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent TeleportHappenedEvent => TeleportHappenedEventC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportHappenedEvent()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportHappenedEvent() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportHappenedEvent(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportHappenedEvent() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.PreviousBodyPosition PreviousBodyPositionC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.PreviousBodyPosition>();
@@ -257,6 +271,15 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddPreviousBodyPosition(UnityEngine.Vector3 value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.PreviousBodyPosition() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportEnergyCost TeleportEnergyCostC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportEnergyCost>();
+
+		public System.Int32 TeleportEnergyCost => TeleportEnergyCostC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportEnergyCost(System.Int32 value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportEnergyCost() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth CurrentHealthC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth>();
@@ -373,6 +396,62 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDisableCollidersOnDeath(System.Collections.Generic.List<UnityEngine.Collider> value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LifeCycle.DisableCollidersOnDeath() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Energy.Energy EnergyC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Energy.Energy>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> Energy => EnergyC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEnergy()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.Energy() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEnergy(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.Energy() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Energy.InitialEnergy InitialEnergyC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Energy.InitialEnergy>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> InitialEnergy => InitialEnergyC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInitialEnergy()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.InitialEnergy() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddInitialEnergy(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Int32> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.InitialEnergy() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Energy.EnergyRegenerateCooldown EnergyRegenerateCooldownC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Energy.EnergyRegenerateCooldown>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> EnergyRegenerateCooldown => EnergyRegenerateCooldownC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEnergyRegenerateCooldown()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.EnergyRegenerateCooldown() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddEnergyRegenerateCooldown(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.EnergyRegenerateCooldown() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.Energy.RestTimeToEnergyRegenerate RestTimeToEnergyRegenerateC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Energy.RestTimeToEnergyRegenerate>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> RestTimeToEnergyRegenerate => RestTimeToEnergyRegenerateC.Value;
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRestTimeToEnergyRegenerate()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.RestTimeToEnergyRegenerate() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRestTimeToEnergyRegenerate(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Energy.RestTimeToEnergyRegenerate() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage.BodyContactDamage BodyContactDamageC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage.BodyContactDamage>();

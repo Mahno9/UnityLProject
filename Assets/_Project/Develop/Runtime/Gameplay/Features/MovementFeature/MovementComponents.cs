@@ -41,7 +41,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         public ReactiveEvent Value;
     }
 
-    public class OnTeleportEvent : IEntityComponent
+    public class TeleportPlannedEvent : IEntityComponent
+    {
+        public ReactiveEvent Value;
+    }
+
+    public class TeleportHappenedEvent : IEntityComponent
     {
         public ReactiveEvent Value;
     }
@@ -49,5 +54,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
     public class PreviousBodyPosition : IEntityComponent
     {
         public Vector3 Value;
+    }
+
+    public class TeleportEnergyCost : IEntityComponent
+    {
+        public int Value;
     }
 }

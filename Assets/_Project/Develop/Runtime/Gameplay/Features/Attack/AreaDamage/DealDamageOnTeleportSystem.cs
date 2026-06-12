@@ -14,7 +14,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage
 
         public void OnInit(Entity entity)
         {
-            _onTeleportEvent = entity.OnTeleportEvent;
+            _onTeleportEvent = entity.TeleportHappenedEvent;
             _targetsCollectRequest = entity.AreaTargetsCollectRequest;
 
             _subscription = _onTeleportEvent.Subscribe(() =>
