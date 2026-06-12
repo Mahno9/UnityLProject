@@ -10,7 +10,7 @@ namespace _Project.Develop.Editor
     [InitializeOnLoad]
     public static class ScenesReferenceGenerator
     {
-        private const string OutputPath = "Assets/Scripts/Generated/S.cs";
+        private const string OutputPath = "Assets/_Project/Develop/Generated/S.cs";
 
         static ScenesReferenceGenerator()
         {

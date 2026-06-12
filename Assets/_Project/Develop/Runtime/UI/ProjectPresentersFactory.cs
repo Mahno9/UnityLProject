@@ -11,8 +11,6 @@ using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 
-using Assets._Project.Develop.Runtime.UI.CommonViews;
-
 namespace _Project.Develop.Runtime.UI
 {
     public class ProjectPresentersFactory

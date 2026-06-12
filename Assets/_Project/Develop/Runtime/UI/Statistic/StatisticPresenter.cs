@@ -5,8 +5,6 @@ using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 
-using Assets._Project.Develop.Runtime.UI.CommonViews;
-
 namespace _Project.Develop.Runtime.UI.Statistic
 {
     public class StatisticPresenter : IPresenter

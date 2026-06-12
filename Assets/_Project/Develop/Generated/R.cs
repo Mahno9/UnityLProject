@@ -38,6 +38,11 @@ public static class R
         public const string LiberationSans_SDF___Fallback = "Fonts & Materials/LiberationSans SDF - Fallback";
         public const string LiberationSans_SDF___Outline = "Fonts & Materials/LiberationSans SDF - Outline";
     }
+    public static class Prefabs
+    {
+        public const string CharacterControllerMovementCharacter = "Prefabs/CharacterControllerMovementCharacter";
+        public const string RigidbodyMovementCharacter = "Prefabs/RigidbodyMovementCharacter";
+    }
     public static class Sprite_Assets
     {
         public const string EmojiOne = "Sprite Assets/EmojiOne";

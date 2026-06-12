@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Level.unity
     guid: 08b378deabf0f1645a4d9999b2b05e5d
+  - enabled: 1
+    path: Assets/_Project/Scenes/MovingGameplayScene.unity
+    guid: 27929aa5d17fedd48b4c1db385478b71
   m_configObjects: {}

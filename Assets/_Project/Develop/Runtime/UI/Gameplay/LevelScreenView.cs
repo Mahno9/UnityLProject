@@ -1,8 +1,6 @@
 using _Project.Develop.Runtime.UI.CommonViews;
 using _Project.Develop.Runtime.UI.Core;
 
-using Assets._Project.Develop.Runtime.UI.CommonViews;
-
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.UI.Level
