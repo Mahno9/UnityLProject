@@ -3,6 +3,7 @@
 
 public static class R
 {
+    public const string DOTweenSettings = "DOTweenSettings";
     public const string LineBreaking_Following_Characters = "LineBreaking Following Characters";
     public const string LineBreaking_Leading_Characters = "LineBreaking Leading Characters";
     public const string TMP_Settings = "TMP Settings";
@@ -20,10 +21,12 @@ public static class R
             }
             public static class Statistic
             {
+                public const string MetricsIconsConfig = "Configs/Meta/Statistic/MetricsIconsConfig";
                 public const string StartStatisticConfig = "Configs/Meta/Statistic/StartStatisticConfig";
             }
             public static class Wallet
             {
+                public const string CurrencyIconsConfig = "Configs/Meta/Wallet/CurrencyIconsConfig";
                 public const string StartWalletConfig = "Configs/Meta/Wallet/StartWalletConfig";
             }
         }
@@ -39,9 +42,39 @@ public static class R
     {
         public const string EmojiOne = "Sprite Assets/EmojiOne";
     }
+    public static class Sprites
+    {
+        public const string GoldCointIcon = "Sprites/GoldCointIcon";
+        public const string LoseIcon = "Sprites/LoseIcon";
+        public const string WinIcon = "Sprites/WinIcon";
+    }
     public static class Style_Sheets
     {
         public const string Default_Style_Sheet = "Style Sheets/Default Style Sheet";
+    }
+    public static class UI
+    {
+        public static class Gameplay
+        {
+            public const string LevelInterface = "UI/Gameplay/LevelInterface";
+            public const string LevelScreenView = "UI/Gameplay/LevelScreenView";
+            public const string LevelUIRoot = "UI/Gameplay/LevelUIRoot";
+        }
+        public static class MainMenu
+        {
+            public const string MainMenuScreenView = "UI/MainMenu/MainMenuScreenView";
+            public const string MainMenuUIRoot = "UI/MainMenu/MainMenuUIRoot";
+            public const string MenuItemsView = "UI/MainMenu/MenuItemsView";
+        }
+        public static class Statistic
+        {
+            public const string MetricView = "UI/Statistic/MetricView";
+            public const string StatisticView = "UI/Statistic/StatisticView";
+        }
+        public static class Wallet
+        {
+            public const string WalletView = "UI/Wallet/WalletView";
+        }
     }
     public static class Utilities
     {

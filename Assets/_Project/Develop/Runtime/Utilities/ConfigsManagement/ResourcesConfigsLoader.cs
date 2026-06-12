@@ -22,6 +22,8 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
             {typeof(StartStatisticConfig), R.Configs.Meta.Statistic.StartStatisticConfig},
             {typeof(ProgressionConfig), R.Configs.Meta.Progression.ProgressionConfig},
             {typeof(MarketConfig), R.Configs.Meta.Market.MarketConfig},
+            {typeof(CurrencyIconsConfig), R.Configs.Meta.Wallet.CurrencyIconsConfig},
+            {typeof(MetricsIconsConfig), R.Configs.Meta.Statistic.MetricsIconsConfig},
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

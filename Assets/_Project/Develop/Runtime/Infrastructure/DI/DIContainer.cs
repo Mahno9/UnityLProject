@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using UnityEngine;
+
 namespace _Project.Develop.Runtime.Infrastructure.DI
 {
     public class DIContainer
@@ -68,13 +70,15 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             {
                 if (registration.IsNonLazy)
                     registration.CreateInstanceFrom(this);
+
+                registration.OnInitialize();
             }
         }
 
-        public void DisposeCurrent()
+        public void Dispose()
         {
             foreach (KeyValuePair<Type, Registration> registration in _container)
-                registration.Value.Dispose();
+                registration.Value.OnDispose();
         }
     }
 }
