@@ -20,8 +20,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
 
         public void OnInit(Entity entity)
         {
-            _targets = entity.ContactCollidersBuffer;
-            _targetsEntities = entity.ContactEntitiesBuffer;
+            _targets = entity.TargetsCollidersBuffer;
+            _targetsEntities = entity.TargetsEntitiesBuffer;
         }
 
         public void OnUpdate(float deltaTime)
@@ -32,11 +32,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
             {
                 Collider collider = _targets.Items[i];
 
-                Entity contactEntity = _collidersRegistryService.GetBy(collider);
+                Entity targetEntity = _collidersRegistryService.GetBy(collider);
 
-                if(contactEntity != null)
+                if(targetEntity != null)
                 {
-                    _targetsEntities.Items[_targetsEntities.Count] = contactEntity;
+                    _targetsEntities.Items[_targetsEntities.Count] = targetEntity;
                     _targetsEntities.Count++;
                 }
             }

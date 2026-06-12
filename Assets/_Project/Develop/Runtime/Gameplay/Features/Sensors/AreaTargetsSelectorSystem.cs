@@ -14,6 +14,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage
         private readonly bool _excludeSelf;
 
         private Collider         _areaCollider;
+        private Collider         _selfCollider;
         private Buffer<Collider> _targets;
         private LayerMask        _mask;
         private ReactiveEvent    _collectRequest;
@@ -30,6 +31,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage
             _targets = entity.TargetsCollidersBuffer;
             _mask = entity.TargetsDetectingMask;
             _areaCollider = entity.AreaAttackCollider;
+            _selfCollider = entity.BodyCollider;
             _collectRequest = entity.AreaTargetsCollectRequest;
 
             _collectRequestSubscription = _collectRequest.Subscribe(OnCollectRequest);
@@ -57,7 +59,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage
             int idx = -1;
             for (int i = 0; i < _targets.Count; i++)
             {
-                if (_targets.Items[i] != _areaCollider)
+                if (_targets.Items[i] != _selfCollider)
                     continue;
 
                 idx = i;

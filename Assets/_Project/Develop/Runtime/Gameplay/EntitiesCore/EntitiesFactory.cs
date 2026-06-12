@@ -325,7 +325,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddSystem(new ApplyDamageSystem())
 
                 .AddSystem(new DealDamageOnTeleportSystem())
-                .AddSystem(new AreaTargetsSelectorSystem(true))
+                .AddSystem(new AreaTargetsSelectorSystem(false))
                 .AddSystem(new AreaTargetsEntitiesFilterSystem(_collidersRegistryService))
                 .AddSystem(new InstantAreaDamageSystem())
 

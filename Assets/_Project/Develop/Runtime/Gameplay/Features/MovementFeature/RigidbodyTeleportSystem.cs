@@ -46,6 +46,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
 
             Vector2 randomPoint = Random.insideUnitCircle * _teleportRadius.Value;
             _rigidbody.position += new Vector3(randomPoint.x, 0, randomPoint.y);
+            Physics.SyncTransforms();
 
             _onTeleportEvent?.Invoke();
         }
