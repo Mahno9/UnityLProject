@@ -40,6 +40,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
                     _targetsEntities.Count++;
                 }
             }
+
+            _targets.Count = 0;
         }
     }
 }
