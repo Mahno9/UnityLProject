@@ -1,5 +1,7 @@
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using _Project.Develop.Runtime.Gameplay.Features.AI;
+using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
@@ -18,10 +20,24 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEntitiesLifeContext);
             container.RegisterAsSingle(CreateColliderRegistryService);
             container.RegisterAsSingle(CreateEntitiesFactory);
+            container.RegisterAsSingle(CreateAIBrainsContext);
+            container.RegisterAsSingle(CreateBrainsFactory);
+            container.RegisterAsSingle<IInputService>(CreateDesktopInput);
             container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
 
             container.Initialize();
         }
+
+        private static DesktopInput CreateDesktopInput(DIContainer c)
+        {
+            return new DesktopInput();
+        }
+
+        private static AIBrainsContext CreateAIBrainsContext(DIContainer c)
+            => new();
+
+        private static BrainsFactory CreateBrainsFactory(DIContainer c)
+            => new(c);
 
         private static CollidersRegistryService CreateColliderRegistryService(DIContainer c)
             => new();

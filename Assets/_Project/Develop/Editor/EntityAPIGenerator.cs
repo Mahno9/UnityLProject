@@ -1,15 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-
-using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-
+using System.Threading.Tasks;
 using UnityEditor;
-
 using UnityEngine;
+using System.Reflection;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 
 namespace _Project.Develop.Editor
 {
@@ -52,6 +50,18 @@ namespace _Project.Develop.Editor
                 {
                     // Свойство для получения поля из компонента
                     sb.AppendLine($"\t\tpublic {GetValidTypeName(field.FieldType)} {componentName} => {modifiedComponentName}.{field.Name};");
+                    sb.AppendLine();
+
+                    //метод TryGet 
+                    sb.AppendLine($"\t\tpublic bool TryGet{componentName}(out {GetValidTypeName(field.FieldType)} {GetVariableNameFrom(field.Name)})");
+                    sb.AppendLine("\t\t{");
+                    sb.AppendLine($"\t\t\tbool result = TryGetComponent(out {fullTypeName} component);");
+                    sb.AppendLine($"\t\t\tif(result)");
+                    sb.AppendLine($"\t\t\t\t{GetVariableNameFrom(field.Name)} = component.{field.Name};");
+                    sb.AppendLine($"\t\t\telse");
+                    sb.AppendLine($"\t\t\t\t{GetVariableNameFrom(field.Name)} = default({GetValidTypeName(field.FieldType)});");
+                    sb.AppendLine($"\t\t\treturn result;");
+                    sb.AppendLine("\t\t}");
                     sb.AppendLine();
 
                     //метод add если есть одно поле с пустым конструктором

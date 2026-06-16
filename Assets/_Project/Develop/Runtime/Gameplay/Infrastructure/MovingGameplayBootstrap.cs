@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
@@ -17,6 +18,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         private DIContainer         _container;
         private EntitiesLifeContext _entitiesLifeContext;
+        private AIBrainsContext     _brainsContext;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -30,6 +32,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             Debug.Log("Инициализация сцены геймплея движения");
 
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _brainsContext = _container.Resolve<AIBrainsContext>();
 
             _testGameplay.Initialize(_container);
 
@@ -46,6 +49,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private void Update()
         {
             _entitiesLifeContext?.Update(Time.deltaTime);
+            _brainsContext?.Update(Time.deltaTime);
         }
     }
 }
