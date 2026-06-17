@@ -1,4 +1,5 @@
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
 
 using UnityEngine;
@@ -10,7 +11,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         public ReactiveVariable<float> Value;
     }
 
-    public class TeleportRequest : IEntityComponent
+    public class RandomTeleportRequest : IEntityComponent
+    {
+        public ReactiveEvent Value;
+    }
+
+    public class TeleportToTargetRequest : IEntityComponent
     {
         public ReactiveEvent Value;
     }
@@ -48,5 +54,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
     public class TeleportCooldownDoneEvent : IEntityComponent
     {
         public ReactiveEvent Value;
+    }
+
+    public class CanTeleportToTarget : IEntityComponent
+    {
+        public ICompositeCondition Value;
     }
 }

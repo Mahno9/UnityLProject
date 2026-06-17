@@ -11,42 +11,42 @@ using Random = UnityEngine.Random;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
 {
-    public class RigidbodyTeleportSystem : IInitializableSystem, IDisposableSystem
+    public class RigidbodyRandomTeleportSystem : IInitializableSystem, IDisposableSystem
     {
         private ReactiveVariable<float> _teleportRadius;
         private Rigidbody               _rigidbody;
 
         private ICompositeCondition _canMove;
-        private ReactiveEvent       _teleportRequest;
+        private ReactiveEvent       _randomTeleportRequest;
         private ReactiveEvent       _teleportPlannedEvent;
 
-        private IDisposable _onTeleportRequestSubscription;
+        private IDisposable _onRandomTeleportRequestSubscription;
 
         public void OnInit(Entity entity)
         {
             _teleportRadius = entity.TeleportRadius;
-            _teleportRequest = entity.TeleportRequest;
+            _randomTeleportRequest = entity.RandomTeleportRequest;
             _rigidbody = entity.Rigidbody;
             _canMove = entity.CanMove;
             _teleportPlannedEvent = entity.TeleportPlannedEvent;
 
-            _onTeleportRequestSubscription = _teleportRequest.Subscribe(OnTeleportRequest);
+            _onRandomTeleportRequestSubscription = _randomTeleportRequest.Subscribe(OnRandomTeleportRequest);
         }
 
         public void OnDispose()
         {
-            _onTeleportRequestSubscription.Dispose();
+            _onRandomTeleportRequestSubscription.Dispose();
         }
 
-        private void OnTeleportRequest()
+        private void OnRandomTeleportRequest()
         {
             if (_canMove.Evaluate() == false)
                 return;
 
-            // Vector2 randomPoint = Random.insideUnitCircle * _teleportRadius.Value;
-            // _rigidbody.position += new Vector3(randomPoint.x, 0, randomPoint.y);
+            Vector2 randomPoint = Random.insideUnitCircle * _teleportRadius.Value;
+            _rigidbody.position += new Vector3(randomPoint.x, 0, randomPoint.y);
 
-            _rigidbody.position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+            // _rigidbody.position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
 
             _teleportPlannedEvent?.Invoke();
         }

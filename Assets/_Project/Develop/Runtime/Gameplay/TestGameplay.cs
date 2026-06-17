@@ -13,8 +13,9 @@ namespace _Project.Develop.Runtime.Gameplay
         private BrainsFactory   _brainsFactory;
 
         private Entity _playerCharacter;
+        private Entity _teleporter;
 
-        private bool _isRunning;
+        private bool   _isRunning;
 
         public void Initialize(DIContainer container)
         {
@@ -27,8 +28,8 @@ namespace _Project.Develop.Runtime.Gameplay
         {
             _playerCharacter = _entitiesFactory.CreateHero(Vector3.zero);
 
-            Entity teleporter = _entitiesFactory.CreateTeleportEnemy("TeleportEnemy", Vector3.left * 2, 20);
-            _brainsFactory.CreateTeleporterBrain(teleporter);
+            _teleporter = _entitiesFactory.CreateTeleportEnemy("TeleportEnemy", Vector3.left * 2, 20);
+            _brainsFactory.CreateTeleporterBrain(_teleporter);
 
             const int   n         = 3;
             const float range     = 10;
@@ -48,9 +49,21 @@ namespace _Project.Develop.Runtime.Gameplay
             if (_isRunning == false)
                 return;
 
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                _teleporter.TeleporterBehaviourVariant.Value = TeleporterBehaviourVariants.RandomTeleportation;
+                Debug.Log($"Switch to DEFAULT teleportation behaviour");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                _teleporter.TeleporterBehaviourVariant.Value = TeleporterBehaviourVariants.LowestHpOn40PlusEnergyTeleportation;
+                Debug.Log($"Switch to INTELLIGENT teleportation behaviour");
+            }
+
             // if (Input.GetKeyDown(KeyCode.Space))
             // {
-            //     _playerCharacter.TeleportRequest.Invoke();
+            //     _playerCharacter.RandomTeleportRequest.Invoke();
             // }
         }
     }

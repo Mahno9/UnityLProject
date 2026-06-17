@@ -3,19 +3,19 @@ using _Project.Develop.Runtime.Utilities.StateMachineCore;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
-    public class TeleportRechargeState : UpdatableState
+    public class TeleportToTargetState : UpdatableState
     {
         private readonly Entity _entity;
 
-        public TeleportRechargeState(Entity entity)
+        public TeleportToTargetState(Entity entity)
         {
             _entity = entity;
         }
 
-        public override void Enter()
+        public override void Update(float deltaTime)
         {
-            base.Enter();
-            _entity.TeleportCooldownTimer.Value = _entity.InitialTeleportCooldownTimer;
+            base.Update(deltaTime);
+            _entity.TeleportToTargetRequest.Invoke();
         }
     }
 }

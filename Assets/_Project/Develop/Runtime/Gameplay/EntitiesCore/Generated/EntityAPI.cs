@@ -422,13 +422,13 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRadius() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest TeleportRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest>();
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.RandomTeleportRequest RandomTeleportRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.RandomTeleportRequest>();
 
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent TeleportRequest => TeleportRequestC.Value;
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent RandomTeleportRequest => RandomTeleportRequestC.Value;
 
-		public bool TryGetTeleportRequest(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public bool TryGetRandomTeleportRequest(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
 		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.MovementFeature.RandomTeleportRequest component);
 			if(result)
 				value = component.Value;
 			else
@@ -436,14 +436,38 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return result;
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRequest()
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRandomTeleportRequest()
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.RandomTeleportRequest() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportRequest(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRandomTeleportRequest(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRequest() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.RandomTeleportRequest() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportToTargetRequest TeleportToTargetRequestC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportToTargetRequest>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent TeleportToTargetRequest => TeleportToTargetRequestC.Value;
+
+		public bool TryGetTeleportToTargetRequest(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportToTargetRequest component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportToTargetRequest()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportToTargetRequest() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportToTargetRequest(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportToTargetRequest() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportPlannedEvent TeleportPlannedEventC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportPlannedEvent>();
@@ -597,6 +621,25 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleportCooldownDoneEvent(_Project.Develop.Runtime.Utilities.Reactive.ReactiveEvent value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportCooldownDoneEvent() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanTeleportToTarget CanTeleportToTargetC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanTeleportToTarget>();
+
+		public _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanTeleportToTarget => CanTeleportToTargetC.Value;
+
+		public bool TryGetCanTeleportToTarget(out _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanTeleportToTarget component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanTeleportToTarget(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanTeleportToTarget() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth CurrentHealthC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.LifeCycle.CurrentHealth>();
@@ -1407,6 +1450,30 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCurrentTarget(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<_Project.Develop.Runtime.Gameplay.EntitiesCore.Entity> value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.AI.CurrentTarget() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariant TeleporterBehaviourVariantC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariant>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<_Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariants> TeleporterBehaviourVariant => TeleporterBehaviourVariantC.Value;
+
+		public bool TryGetTeleporterBehaviourVariant(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<_Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariants> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariant component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<_Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariants>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleporterBehaviourVariant()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariant() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<_Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariants>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddTeleporterBehaviourVariant(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<_Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariants> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.AI.TeleporterBehaviourVariant() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Common.CharacterControllerComponent CharacterControllerC => GetComponent<_Project.Develop.Runtime.Gameplay.Common.CharacterControllerComponent>();

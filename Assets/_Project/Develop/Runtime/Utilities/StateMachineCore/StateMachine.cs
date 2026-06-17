@@ -28,6 +28,12 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 
         public void AddState(TState state) => _states.Add(new StateNode<TState>(state));
 
+        public void AddStates(params TState[] states)
+        {
+            foreach (TState state in states)
+                AddState(state);
+        }
+
         public void AddTransition(TState fromState, TState toState, ICondition condition)
         {
             StateNode<TState> from = _states.First(stateNode => stateNode.State == fromState);

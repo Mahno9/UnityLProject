@@ -3,11 +3,11 @@ using _Project.Develop.Runtime.Utilities.StateMachineCore;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
-    public class TeleportState : UpdatableState
+    public class RandomTeleportState : UpdatableState
     {
         private readonly Entity _entity;
 
-        public TeleportState(Entity entity)
+        public RandomTeleportState(Entity entity)
         {
             _entity = entity;
         }
@@ -15,7 +15,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-            _entity.TeleportRequest.Invoke();
+            _entity.RandomTeleportRequest.Invoke();
         }
     }
 }

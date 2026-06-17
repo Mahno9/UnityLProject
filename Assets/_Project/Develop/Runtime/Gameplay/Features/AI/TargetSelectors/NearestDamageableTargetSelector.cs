@@ -9,8 +9,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 {
     public class NearestDamageableTargetSelector : ITargetSelector
     {
-        private Entity _source;
-        private Transform _sourceTransform;
+        private readonly Entity    _source;
+        private readonly Transform _sourceTransform;
 
         public NearestDamageableTargetSelector(Entity entity)
         {
@@ -38,7 +38,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
                 return null;
 
             Entity closestTarget = selectedTargets.First();
-            float minDistance = GetDistanceTo(closestTarget);
+            float  minDistance   = GetDistanceTo(closestTarget);
 
             foreach (Entity target in selectedTargets)
             {

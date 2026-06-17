@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
+using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.ApplyDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Attack;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage;
@@ -270,13 +271,16 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity.AddName(name)
                 // movement
                 .AddTeleportRadius(new ReactiveVariable<float>(10))
-                .AddTeleportRequest()
+                .AddTeleporterBehaviourVariant(new ReactiveVariable<TeleporterBehaviourVariants>(TeleporterBehaviourVariants.LowestHpOn40PlusEnergyTeleportation))
+                .AddRandomTeleportRequest()
+                .AddTeleportToTargetRequest()
+                .AddCurrentTarget()
                 .AddTeleportPlannedEvent()
                 .AddTeleportDoneEvent()
 
                 .AddTeleportEnergyCost(10)
 
-                .AddInitialTeleportCooldownTimer(0.1f)
+                .AddInitialTeleportCooldownTimer(1f)
                 .AddTeleportCooldownTimer()
                 .AddTeleportCooldownDoneEvent()
 
@@ -313,7 +317,10 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             ICompositeCondition canMove = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false))
-                .Add(new FuncCondition(() => entity.Energy.Value > entity.TeleportEnergyCost));
+                .Add(new FuncCondition(() => entity.Energy.Value >= entity.TeleportEnergyCost));
+
+            ICompositeCondition canTeleportToTarget = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.CurrentTarget.Value is not null && entity.Rigidbody.position != entity.CurrentTarget.Value.Rigidbody.position));
 
             ICompositeCondition mustDie = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
@@ -326,13 +333,15 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddCanMove(canMove)
+                .AddCanTeleportToTarget(canTeleportToTarget)
                 .AddMustDie(mustDie)
                 .AddMustSelfRelease(mustSelfRelease)
                 .AddCanApplyDamage(canApplyDamage);
 
             entity
                 // movement
-                .AddSystem(new RigidbodyTeleportSystem())
+                .AddSystem(new RigidbodyRandomTeleportSystem())
+                .AddSystem(new RigidbodyTeleportToTargetSystem())
                 .AddSystem(new TeleportHappenedEventSystem())
                 .AddSystem(new TeleportCooldownSystem(false))
 
