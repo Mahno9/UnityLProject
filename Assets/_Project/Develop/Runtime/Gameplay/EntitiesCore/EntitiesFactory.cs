@@ -51,6 +51,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddInDeathProcess()
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(2))
                 .AddDeathProcessCurrentTime()
+                .AddName("Hero")
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
                 .AddAttackProcessInitialTime(new ReactiveVariable<float>(3))
@@ -271,9 +272,13 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTeleportRadius(new ReactiveVariable<float>(10))
                 .AddTeleportRequest()
                 .AddTeleportPlannedEvent()
-                .AddTeleportHappenedEvent()
+                .AddTeleportDoneEvent()
 
                 .AddTeleportEnergyCost(10)
+
+                .AddInitialTeleportCooldownTimer(0.1f)
+                .AddTeleportCooldownTimer()
+                .AddTeleportCooldownDoneEvent()
 
                 // energy
                 .AddEnergy(new ReactiveVariable<int>(100))
@@ -329,6 +334,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 // movement
                 .AddSystem(new RigidbodyTeleportSystem())
                 .AddSystem(new TeleportHappenedEventSystem())
+                .AddSystem(new TeleportCooldownSystem(false))
 
                 // energy
                 .AddSystem(new RegenerateEnergySystem())

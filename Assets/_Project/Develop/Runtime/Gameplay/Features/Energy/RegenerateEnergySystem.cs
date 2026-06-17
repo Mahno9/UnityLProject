@@ -1,9 +1,7 @@
 using System;
-using System.ComponentModel;
 
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
-using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Utilities.Reactive;
 
 using UnityEngine;
@@ -23,6 +21,13 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Energy
             _initialEnergy = entity.InitialEnergy;
             _regenerateCooldown = entity.EnergyRegenerateCooldown;
             _timeTilRegeneration = entity.RestTimeToEnergyRegenerate;
+
+            _energy.Subscribe(LogEnergyRegen);
+        }
+
+        private void LogEnergyRegen(int _, int newEnergyValue)
+        {
+            Debug.Log($"Energy new value: {newEnergyValue}");
         }
 
         public void OnUpdate(float deltaTime)
@@ -34,8 +39,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Energy
                 float energyToRegenerate = _initialEnergy.Value * 0.1f;
                 _energy.Value = (int)MathF.Min(_initialEnergy.Value, _energy.Value + energyToRegenerate);
                 _timeTilRegeneration.Value = _regenerateCooldown.Value;
-
-                Debug.Log($"Регенерировано {energyToRegenerate} энергии. Теперь энергии: {_energy.Value}");
             }
         }
     }

@@ -15,4 +15,11 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 
         public virtual void Exit() => _exited.Invoke();
     }
+
+    public abstract class UpdatableState : State, IUpdatableState
+    {
+        public virtual void Update(float deltaTime)
+        {
+        }
+    }
 }

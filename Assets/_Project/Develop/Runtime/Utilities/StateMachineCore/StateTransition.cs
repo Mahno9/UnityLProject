@@ -10,7 +10,15 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
             Condition = condition;
         }
 
-        public StateNode<TState> ToState { get; }
-        public ICondition Condition { get; }
+        public virtual void Charge()
+        {
+        }
+
+        public virtual void Discharge()
+        {
+        }
+
+        public StateNode<TState> ToState   { get; }
+        public ICondition        Condition { get; protected set; }
     }
 }

@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using _Project.Develop.Runtime.Utilities.Reactive;
+
+using UnityEngine;
+
 namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 {
     public abstract class StateMachine<TState> : State, IDisposable, IUpdatableState where TState : class, IState
@@ -30,6 +34,14 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
             StateNode<TState> to = _states.First(stateNode => stateNode.State == toState);
 
             from.AddTransition(new StateTransition<TState>(to, condition));
+        }
+
+        public void AddTransition(TState fromState, TState toState, ReactiveEvent triggerEvent)
+        {
+            StateNode<TState> from = _states.First(stateNode => stateNode.State == fromState);
+            StateNode<TState> to = _states.First(stateNode => stateNode.State == toState);
+
+            from.AddTransition(new StateTransitionOnEvent<TState>(to, triggerEvent));
         }
 
         public void Update(float deltaTime)
@@ -88,9 +100,23 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 
         private void SwitchState(StateNode<TState> nextState)
         {
-            _currentState?.State.Exit();
+            if (_currentState is not null)
+            {
+                _currentState.State.Exit();
+                foreach (StateTransition<TState> currentStateTransition in _currentState.Transitions)
+                    currentStateTransition.Discharge();
+
+                Debug.Log($"State change: {_currentState.State.GetType().Name} -> {nextState.State.GetType().Name}");
+            }
+            else
+            {
+                Debug.Log($"State init: {nextState.State.GetType().Name}");
+            }
+
             _currentState = nextState;
             _currentState.State.Enter();
+            foreach (StateTransition<TState> currentStateTransition in _currentState.Transitions)
+                currentStateTransition.Charge();
         }
     }
 }

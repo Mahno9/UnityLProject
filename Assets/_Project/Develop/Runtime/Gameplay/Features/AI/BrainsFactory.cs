@@ -5,18 +5,22 @@ using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
 using _Project.Develop.Runtime.Utilities.Timer;
+
 using System;
 using System.Collections.Generic;
+
+using _Project.Develop.Runtime.Utilities.StateMachineCore;
+
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI
 {
     public class BrainsFactory
     {
-        private readonly DIContainer _container;
+        private readonly DIContainer         _container;
         private readonly TimerServiceFactory _timerServiceFactory;
-        private readonly AIBrainsContext _brainsContext;
-        private readonly IInputService _inputService;
+        private readonly AIBrainsContext     _brainsContext;
+        private readonly IInputService       _inputService;
         private readonly EntitiesLifeContext _entitiesLifeContext;
 
         public BrainsFactory(DIContainer container)
@@ -26,6 +30,26 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             _brainsContext = _container.Resolve<AIBrainsContext>();
             _inputService = _container.Resolve<IInputService>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+        }
+
+        public StateMachineBrain CreateTeleporterBrain(Entity entity)
+        {
+            AIStateMachine        behaviour       = new();
+            TeleportRechargeState rechargeState   = new(entity);
+            TeleportState         teleporterState = new(entity);
+            behaviour.AddState(rechargeState);
+            behaviour.AddState(teleporterState);
+            behaviour.AddTransition(rechargeState, teleporterState, entity.TeleportCooldownDoneEvent);
+            behaviour.AddTransition(teleporterState, rechargeState, entity.TeleportDoneEvent);
+
+            // Root
+            AIStateMachine rootStateMachine = new();
+            rootStateMachine.AddState(new AIParallelState(behaviour));
+
+            StateMachineBrain brain = new(rootStateMachine);
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
         }
 
         public StateMachineBrain CreateMainHeroBrain(Entity entity, ITargetSelector targetSelector)
@@ -53,7 +77,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             behaviour.AddTransition(combatState, movementState, fromCombatToMovementStateCondition);
 
             FindTargetState findTargetState = new FindTargetState(targetSelector, _entitiesLifeContext, entity);
-            AIParallelState parallelState = new AIParallelState(findTargetState, behaviour);
+            AIParallelState parallelState   = new AIParallelState(findTargetState, behaviour);
 
             AIStateMachine rootStateMachine = new AIStateMachine();
             rootStateMachine.AddState(parallelState);
@@ -66,8 +90,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
         public StateMachineBrain CreateGhostBrain(Entity entity)
         {
-            AIStateMachine stateMachine = CreateRandomMovementStateMachine(entity);
-            StateMachineBrain brain = new StateMachineBrain(stateMachine);
+            AIStateMachine    stateMachine = CreateRandomMovementStateMachine(entity);
+            StateMachineBrain brain        = new StateMachineBrain(stateMachine);
 
             _brainsContext.SetFor(entity, brain);
 
@@ -91,7 +115,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             disposables.Add(emptyState.Entered.Subscribe(idleTimer.Restart));
 
             FuncCondition movementTimerEndedCondition = new FuncCondition(() => movementTimer.IsOver);
-            FuncCondition idleTimerEndedCondition = new FuncCondition(() => idleTimer.IsOver);
+            FuncCondition idleTimerEndedCondition     = new FuncCondition(() => idleTimer.IsOver);
 
             AIStateMachine stateMachine = new AIStateMachine(disposables);
 
@@ -110,8 +134,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
 
             AttackTriggerState attackTriggerState = new AttackTriggerState(entity);
 
-            ICondition canAttack = entity.CanStartAttack;
-            Transform transform = entity.Transform;
+            ICondition               canAttack     = entity.CanStartAttack;
+            Transform                transform     = entity.Transform;
             ReactiveVariable<Entity> currentTarget = entity.CurrentTarget;
 
             ICompositeCondition fromRotateToAttackCondition = new CompositeCondition()
