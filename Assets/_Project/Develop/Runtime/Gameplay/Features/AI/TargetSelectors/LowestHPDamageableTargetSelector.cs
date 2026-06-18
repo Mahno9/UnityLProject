@@ -41,7 +41,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 
             foreach (Entity target in enumerable)
             {
-                float currentHealth = resultTarget.CurrentHealth.Value;
+                float currentHealth = target.CurrentHealth.Value;
 
                 if(currentHealth < minHealth)
                 {
