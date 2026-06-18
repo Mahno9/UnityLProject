@@ -40,21 +40,29 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             _monoEntitiesFactory.Create(entity, position, R.Entities.Hero);
 
-            entity
+            entity.AddName("Hero")
+
+                // movement
                 .AddMoveDirection()
+                .AddRotationDirection()
                 .AddMoveSpeed(new ReactiveVariable<float>(10))
                 .AddIsMoving()
-                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.identity))
                 .AddRotationSpeed(new ReactiveVariable<float>(900))
-                .AddMaxHealth(new ReactiveVariable<float>(100))
-                .AddCurrentHealth(new ReactiveVariable<float>(100))
+
+                // damage
+                .AddMaxHealth(new ReactiveVariable<float>(200))
+                .AddCurrentHealth(new ReactiveVariable<float>(200))
+                .AddTakeDamageRequest()
+                .AddTakeDamageEvent()
+
+                // death
                 .AddIsDead()
                 .AddInDeathProcess()
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(2))
                 .AddDeathProcessCurrentTime()
-                .AddName("Hero")
-                .AddTakeDamageRequest()
-                .AddTakeDamageEvent()
+
+                // attack
+                .AddCurrentTarget()
                 .AddAttackProcessInitialTime(new ReactiveVariable<float>(3))
                 .AddAttackProcessCurrentTime()
                 .AddInAttackProcess()
@@ -107,7 +115,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new AlongMovementRotationSystem())
-                .AddSystem(new RigidbodyRotationApplierSystem())
+                .AddSystem(new RigidbodyRotationSystem())
                 .AddSystem(new AttackCancelSystem())
                 .AddSystem(new StartAttackSystem())
                 .AddSystem(new AttackProcessTimerSystem())
@@ -135,9 +143,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddName(name)
                 .AddMoveDirection()
+                .AddRotationDirection()
                 .AddMoveSpeed(new ReactiveVariable<float>(10))
                 .AddIsMoving()
-                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.identity))
                 .AddRotationSpeed(new ReactiveVariable<float>(900))
                 .AddMaxHealth(new ReactiveVariable<float>(100))
                 .AddCurrentHealth(new ReactiveVariable<float>(100))
@@ -178,7 +186,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new AlongMovementRotationSystem())
-                .AddSystem(new RigidbodyRotationApplierSystem())
+                .AddSystem(new RigidbodyRotationSystem())
                 .AddSystem(new BodyContactsDetectingSystem())
                 .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
                 .AddSystem(new DealDamageOnContactSystem())
@@ -202,9 +210,9 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             entity
                 // movement
                 .AddMoveDirection(new ReactiveVariable<Vector3>(direction))
+                .AddRotationDirection(new ReactiveVariable<Vector3>(direction))
                 .AddMoveSpeed(new ReactiveVariable<float>(10))
                 .AddIsMoving()
-                .AddRotation(new ReactiveVariable<Quaternion>(Quaternion.LookRotation(direction)))
                 .AddRotationSpeed(new ReactiveVariable<float>(9999))
 
                 // collision
@@ -242,7 +250,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 // movement
                 .AddSystem(new RigidbodyMovementSystem())
                 .AddSystem(new AlongMovementRotationSystem())
-                .AddSystem(new RigidbodyRotationApplierSystem())
+                .AddSystem(new RigidbodyRotationSystem())
 
                 // collision
                 .AddSystem(new BodyContactsDetectingSystem())
@@ -277,9 +285,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddCurrentTarget()
                 .AddTeleportPlannedEvent()
                 .AddTeleportDoneEvent()
-
                 .AddTeleportEnergyCost(10)
-
                 .AddInitialTeleportCooldownTimer(1f)
                 .AddTeleportCooldownTimer()
                 .AddTeleportCooldownDoneEvent()
@@ -302,7 +308,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddTargetsEntitiesBuffer(new Buffer<Entity>(64))
                 .AddAreaTargetsCollectRequest()
                 .AddPreviousBodyPosition(Vector3.zero)
-
                 .AddMaxHealth(new ReactiveVariable<float>(100))
                 .AddCurrentHealth(new ReactiveVariable<float>(100))
                 .AddTakeDamageRequest()
@@ -355,7 +360,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
                 // damage
                 .AddSystem(new ApplyDamageSystem())
-
                 .AddSystem(new DealDamageOnTeleportSystem())
                 .AddSystem(new AreaTargetsSelectorSystem())
                 .AddSystem(new AreaTargetsEntitiesFilterSystem(_collidersRegistryService))

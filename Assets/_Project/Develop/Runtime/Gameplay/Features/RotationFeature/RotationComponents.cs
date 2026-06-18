@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.RotationFeature
 {
-    public class Rotation : IEntityComponent
+    public class RotationDirection : IEntityComponent
     {
-        public ReactiveVariable<Quaternion> Value;
+        public ReactiveVariable<Vector3> Value;
     }
 
     public class RotationSpeed : IEntityComponent

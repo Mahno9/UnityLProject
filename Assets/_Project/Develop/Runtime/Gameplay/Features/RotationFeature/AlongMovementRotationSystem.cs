@@ -1,6 +1,5 @@
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Systems;
-using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.Reactive;
 
 using UnityEngine;
@@ -9,33 +8,19 @@ namespace _Project.Develop.Runtime.Gameplay.Features.RotationFeature
 {
     public class AlongMovementRotationSystem : IInitializableSystem, IUpdatableSystem
     {
-        private ReactiveVariable<Vector3>    _moveDirection;
-        private ReactiveVariable<float>      _rotationSpeed;
-        private ReactiveVariable<Quaternion> _rotation;
-        private ICompositeCondition          _canRotate;
+        private ReactiveVariable<Vector3> _moveDirection;
+        private ReactiveVariable<Vector3> _rotationDirection;
 
         public void OnInit(Entity entity)
         {
-            _moveDirection = entity.MoveDirection;
-            _rotationSpeed = entity.RotationSpeed;
-            _rotation = entity.Rotation;
-            _canRotate = entity.CanRotate;
+            _moveDirection     = entity.MoveDirection;
+            _rotationDirection = entity.RotationDirection;
         }
 
         public void OnUpdate(float deltaTime)
         {
-            if (_canRotate.Evaluate() == false)
-                return;
-
-            Vector3 targetLookDirection = _moveDirection.Value.normalized;
-
-            if (targetLookDirection == Vector3.zero)
-                return;
-
-            Quaternion toRotation = Quaternion.LookRotation(targetLookDirection);
-            float      step       = _rotationSpeed.Value * deltaTime;
-
-            _rotation.Value = Quaternion.RotateTowards(_rotation.Value, toRotation, step);
+            if (_moveDirection.Value != Vector3.zero)
+                _rotationDirection.Value = _moveDirection.Value;
         }
     }
 }

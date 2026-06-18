@@ -221,28 +221,28 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.AreaTargetsCollectRequest() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.Rotation RotationC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.Rotation>();
+		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection RotationDirectionC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection>();
 
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Quaternion> Rotation => RotationC.Value;
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> RotationDirection => RotationDirectionC.Value;
 
-		public bool TryGetRotation(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Quaternion> value)
+		public bool TryGetRotationDirection(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
 		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.RotationFeature.Rotation component);
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection component);
 			if(result)
 				value = component.Value;
 			else
-				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Quaternion>);
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>);
 			return result;
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotation()
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationDirection()
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.Rotation() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Quaternion>() }); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>() }); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotation(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Quaternion> value)
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationDirection(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
 		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.Rotation() {Value = value}); 
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed RotationSpeedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed>();
