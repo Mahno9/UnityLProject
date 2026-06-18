@@ -88,6 +88,27 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             return behaviour;
         }
 
+        public StateMachineBrain CreateMainHeroManualCombatBrain(Entity entity)
+        {
+            PlayerInputMovementState movementState = new(entity, _inputService);
+            PlayerManualAimingState  aimingState   = new(entity, _inputService);
+            EmptyState               attackState   = new();
+
+            AIStateMachine behaviour = new();
+            behaviour.AddStates(movementState, aimingState, attackState);
+
+            behaviour.AddTransition(movementState, aimingState, new FuncCondition(() => _inputService.Direction == Vector3.zero));
+            behaviour.AddTransition(aimingState, movementState, new FuncCondition(() => _inputService.Direction != Vector3.zero));
+            behaviour.AddTransition(aimingState, attackState, new FuncCondition(() => entity.InAttackProcess.Value));
+            behaviour.AddTransition(attackState, aimingState, new FuncCondition(() => entity.InAttackProcess.Value == false));
+            behaviour.AddTransition(attackState, movementState, new FuncCondition(() => _inputService.Direction != Vector3.zero));
+
+            StateMachineBrain brain = new(behaviour);
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
+        }
+
         public StateMachineBrain CreateMainHeroBrain(Entity entity, ITargetSelector targetSelector)
         {
             AIStateMachine combatState = CreateAutoAttackStateMachine(entity);

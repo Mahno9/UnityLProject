@@ -20,7 +20,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
             float cooldownBetweenDirectionGeneration)
         {
             _movementDirection = entity.MoveDirection;
-            // _rotationDirection = entity.RotationDirection; // TODO
+            _rotationDirection = entity.RotationDirection;
 
             _cooldownBetweenDirectionGeneration = cooldownBetweenDirectionGeneration;
         }

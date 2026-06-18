@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
+using _Project.Develop.Runtime.Gameplay.Features.AI.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
 
 using UnityEngine;
@@ -27,6 +28,8 @@ namespace _Project.Develop.Runtime.Gameplay
         public void Run()
         {
             _playerCharacter = _entitiesFactory.CreateHero(Vector3.zero);
+            // _brainsFactory.CreateMainHeroBrain(_playerCharacter, new NearestDamageableTargetSelector(_playerCharacter));
+            _brainsFactory.CreateMainHeroManualCombatBrain(_playerCharacter);
 
             _teleporter = _entitiesFactory.CreateTeleportEnemy("TeleportEnemy", Vector3.left * 2, 20);
             _brainsFactory.CreateTeleporterBrain(_teleporter);

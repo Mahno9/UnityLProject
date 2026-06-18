@@ -14,7 +14,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
 
         public RotateToTargetState(Entity entity) : base()
         {
-            // _rotationDirection = entity.RotationDirection; // TODO
+            _rotationDirection = entity.RotationDirection;
             _currentTarget = entity.CurrentTarget;
             _transform = entity.Transform;
         }
