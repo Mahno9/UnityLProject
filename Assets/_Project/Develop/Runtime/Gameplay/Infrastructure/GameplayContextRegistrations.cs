@@ -1,58 +1,84 @@
-﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
-using _Project.Develop.Runtime.Gameplay.Features.AI;
-using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+﻿using _Project.Develop.Runtime.Gameplay.Features.GameStateManagement;
+using _Project.Develop.Runtime.Gameplay.Features.KeyInputManagement;
+using _Project.Develop.Runtime.Gameplay.Features.StringGenerationManagement;
+using _Project.Develop.Runtime.Gameplay.Features.StringMatchingManagement;
+using _Project.Develop.Runtime.Gameplay.Features.TypingInputManagement;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
+
+using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
-    public class GameplayContextRegistrations
+    public static class GameplayContextRegistrations
     {
         public static void Process(DIContainer container, GameplayInputArgs args)
         {
-            container.RegisterAsSingle(CreateEntitiesFactory);
-            container.RegisterAsSingle(CreateEntitiesLifeContext);
-            container.RegisterAsSingle(CreateCollidersRegistryService);
-            container.RegisterAsSingle(CreateMonoEntitiesFactory).NonLazy();
-            container.RegisterAsSingle(CreateBrainsFactory);
-            container.RegisterAsSingle(CreateAIBrainsContext);
-            container.RegisterAsSingle<IInputService>(CreateDesktopInput);
+            Debug.Log("Процесс регистрации сервисов на сцене геймплея");
+
+            container.RegisterAsSingle(CreateStringGeneratorFactory);
+            container.RegisterAsSingle(CreateStringMatcherService);
+            container.RegisterAsSingle(CreateGameplayCycle);
+            container.RegisterAsSingle(CreateTypingInputService);
+            container.RegisterAsSingle(CreateWaitForKeyService);
+            container.RegisterAsSingle(c => CreateGameplayInputArgsService(c, args));
+            container.RegisterAsSingle(CreateLevelUIRoot);
+            container.RegisterAsSingle(CreateGameplayPresentersFactory);
+            container.RegisterAsSingle(CreateLevelScreenPresenter).NonLazy();
+            container.RegisterAsSingle(CreateGameStateFactory);
+            container.RegisterAsSingle(CreateGameStateService).NonLazy();
 
             container.Initialize();
         }
 
-        private static DesktopInput CreateDesktopInput(DIContainer c)
-            => new();
-
-        private static AIBrainsContext CreateAIBrainsContext(DIContainer c)
-            => new();
-
-        private static BrainsFactory CreateBrainsFactory(DIContainer c)
+        private static GameStateFactory CreateGameStateFactory(DIContainer c)
             => new(c);
 
-        private static CollidersRegistryService CreateCollidersRegistryService(DIContainer c)
+        private static GameStateService CreateGameStateService(DIContainer c)
         {
-            return new CollidersRegistryService();
+            return new GameStateService(
+                c.Resolve<GameStateFactory>()
+            );
         }
 
-        private static MonoEntitiesFactory CreateMonoEntitiesFactory(DIContainer c)
+        private static StringGeneratorFactory CreateStringGeneratorFactory(DIContainer _) => new();
+
+        private static StringMatcherService CreateStringMatcherService(DIContainer c)
         {
-            return new MonoEntitiesFactory(
-                c.Resolve<ResourcesAssetsLoader>(),
-                c.Resolve<EntitiesLifeContext>(),
-                c.Resolve<CollidersRegistryService>());
+            GameplayInputArgsService inputArgsService = c.Resolve<GameplayInputArgsService>();
+            ITypeStringGenerator     stringGenerator  = c.Resolve<StringGeneratorFactory>().Create(inputArgsService.Get().StringGeneratorType);
+            return new StringMatcherService(stringGenerator.Generate());
         }
 
-        private static EntitiesLifeContext CreateEntitiesLifeContext(DIContainer c)
+        private static GameplayCycle CreateGameplayCycle(DIContainer c)
         {
-            return new EntitiesLifeContext();
+            return new GameplayCycle(
+                c.Resolve<GameStateService>(),
+                c.Resolve<ICoroutinesPerformer>()
+            );
         }
 
-        private static EntitiesFactory CreateEntitiesFactory(DIContainer c)
+        private static TypingInputService CreateTypingInputService(DIContainer _) => new();
+
+        private static WaitForKeyService CreateWaitForKeyService(DIContainer c)
+            => new(c.Resolve<ICoroutinesPerformer>());
+
+        private static GameplayInputArgsService CreateGameplayInputArgsService(DIContainer c, GameplayInputArgs args) => new(args);
+
+        private static LevelUIRoot CreateLevelUIRoot(DIContainer c)
         {
-            return new EntitiesFactory(c);
+            LevelUIRoot uiRootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<LevelUIRoot>(R.UI.Gameplay.LevelUIRoot);
+
+            return Object.Instantiate(uiRootPrefab);
         }
+
+        private static GameplayPresentersFactory CreateGameplayPresentersFactory(DIContainer c)
+            => new(c);
+
+        private static LevelScreenPresenter CreateLevelScreenPresenter(DIContainer c)
+            => c.Resolve<GameplayPresentersFactory>().CreateLevelScreenPresenter();
     }
 }
