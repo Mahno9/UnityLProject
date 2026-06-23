@@ -38,9 +38,11 @@ namespace _Project.Develop.Runtime.Meta.Infrastructure
 
         private static LevelStarterService CreateLevelStarterService(DIContainer c)
         {
-            SceneSwitcherService sceneSwitcherService = c.Resolve<SceneSwitcherService>();
-            ICoroutinesPerformer coroutinesPerformer  = c.Resolve<ICoroutinesPerformer>();
-            return new LevelStarterService(sceneSwitcherService, coroutinesPerformer);
+            return new LevelStarterService(
+                c.Resolve<SceneSwitcherService>(),
+                c.Resolve<ICoroutinesPerformer>(),
+                c.Resolve<ConfigsProviderService>()
+            );
         }
 
         private static MenuGameplayCycle CreateGameplayCycle(DIContainer c)

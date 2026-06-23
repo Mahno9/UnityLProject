@@ -52,11 +52,11 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             // DEV TOGGLE: boot straight into MovingGameplayScene through the full project bootstrap.
             // Revert to the MainMenu line below before shipping.
-            yield return sceneSwitcherService.ProcessSwitchTo(
-                S._Project.Scenes.MovingGameplayScene,
-                new MovingGameplayInputArgs(GetRandomLevelNum(container))
-            );
-            // yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu);
+            // yield return sceneSwitcherService.ProcessSwitchTo(
+            //     S._Project.Scenes.MovingGameplayScene,
+            //     new MovingGameplayInputArgs(GetRandomLevelNum(container))
+            // );
+            yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu);
         }
 
         private int GetRandomLevelNum(DIContainer c)

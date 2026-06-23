@@ -24,6 +24,7 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _view.StartLettersGameClicked += OnStartLettersGameClicked;
             _view.StartNumbersGameClicked += OnStartNumbersGameClicked;
             _view.ResetStatisticClicked += OnResetStatisticClicked;
+            _view.StartMovingGameClicked += OnStartMovingGameClicked;
 
             _view.SetResetPrice(_marketService.GetPrice(ProductName.StatisticReset));
         }
@@ -33,7 +34,11 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _view.StartLettersGameClicked -= OnStartLettersGameClicked;
             _view.StartNumbersGameClicked -= OnStartNumbersGameClicked;
             _view.ResetStatisticClicked -= OnResetStatisticClicked;
+            _view.StartMovingGameClicked -= OnStartMovingGameClicked;
         }
+
+        private void OnStartMovingGameClicked()
+            => _levelStarter.StartRandomLevelMovingGameplay();
 
         private void OnStartLettersGameClicked()
             => _levelStarter.StartLevel(StringGeneratorType.RandomLetters);
