@@ -1,4 +1,5 @@
 ﻿using _Project.Develop.Runtime.Configs.Meta.Market;
+using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Logic.LevelStartManagement;
 using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
@@ -10,6 +11,8 @@ using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
+
+using Assets._Project.Develop.Runtime.Meta.Features.LevelsProgression;
 
 using UnityEngine;
 

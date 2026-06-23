@@ -72,7 +72,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.GameStateManagement.GameSta
 
         private void SaveProgress()
             => _coroutinesPerformer.StartPerform(
-                _playerDataProvider.Save()
+                _playerDataProvider.SaveAsync()
             );
     }
 }

@@ -60,4 +60,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Sensors
     {
         public ReactiveEvent Value;
     }
+    public class IsTouchAnotherTeam : IEntityComponent
+    {
+        public ReactiveVariable<bool> Value;
+    }
 }

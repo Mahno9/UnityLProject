@@ -4,6 +4,11 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsMana
 {
     public class MovingGameplayInputArgs : IInputSceneArgs
     {
-        // add scene parameters here as the mechanic needs them
+        public MovingGameplayInputArgs(int levelNumber)
+        {
+            LevelNumber = levelNumber;
+        }
+
+        public int LevelNumber { get; }
     }
 }

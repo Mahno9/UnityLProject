@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
@@ -51,8 +52,17 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
 
             // DEV TOGGLE: boot straight into MovingGameplayScene through the full project bootstrap.
             // Revert to the MainMenu line below before shipping.
-            yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MovingGameplayScene, new MovingGameplayInputArgs());
+            yield return sceneSwitcherService.ProcessSwitchTo(
+                S._Project.Scenes.MovingGameplayScene,
+                new MovingGameplayInputArgs(GetRandomLevelNum(container))
+            );
             // yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu);
+        }
+
+        private int GetRandomLevelNum(DIContainer c)
+        {
+            const int indexToNumber = 1;
+            return Random.Range(0, c.Resolve<ConfigsProviderService>().GetConfig<LevelsListConfig>().Levels.Count) + indexToNumber;
         }
 
         private static IEnumerator LoadPlayerData(DIContainer container)
@@ -60,10 +70,10 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             PlayerDataProvider playerDataProvider     = container.Resolve<PlayerDataProvider>();
             bool               isPlayerDataSaveExists = false;
 
-            yield return playerDataProvider.Exists(result => isPlayerDataSaveExists = result);
+            yield return playerDataProvider.ExistsAsync(result => isPlayerDataSaveExists = result);
 
             if (isPlayerDataSaveExists)
-                yield return playerDataProvider.Load();
+                yield return playerDataProvider.LoadAsync();
             else
                 playerDataProvider.Reset();
         }

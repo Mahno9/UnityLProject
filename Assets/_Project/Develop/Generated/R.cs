@@ -9,6 +9,27 @@ public static class R
     public const string TMP_Settings = "TMP Settings";
     public static class Configs
     {
+        public static class Gameplay
+        {
+            public static class Entites
+            {
+                public static class Characters
+                {
+                    public const string GhostConfig = "Configs/Gameplay/Entites/Characters/GhostConfig";
+                    public const string HeroConfig = "Configs/Gameplay/Entites/Characters/HeroConfig";
+                }
+            }
+            public static class Levels
+            {
+                public const string LevelConfig = "Configs/Gameplay/Levels/LevelConfig";
+                public const string LevelConfig_1 = "Configs/Gameplay/Levels/LevelConfig 1";
+                public const string RunningLevelsListConfig = "Configs/Gameplay/Levels/RunningLevelsListConfig";
+            }
+            public static class Stages
+            {
+                public const string ClearAllEnemiesStage = "Configs/Gameplay/Stages/ClearAllEnemiesStage";
+            }
+        }
         public static class Meta
         {
             public static class Market
@@ -34,6 +55,7 @@ public static class R
     public static class Entities
     {
         public const string CharacterOriginal = "Entities/CharacterOriginal";
+        public const string ContactTrigger = "Entities/ContactTrigger";
         public const string Ghost = "Entities/Ghost";
         public const string Hero = "Entities/Hero";
         public const string Projectile = "Entities/Projectile";

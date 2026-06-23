@@ -15,6 +15,8 @@ using _Project.Develop.Runtime.Utilities.LoadingScreen;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 using _Project.Develop.Runtime.Utilities.Timer;
 
+using Assets._Project.Develop.Runtime.Meta.Features.LevelsProgression;
+
 using UnityEngine;
 
 using Object = UnityEngine.Object;
@@ -38,8 +40,14 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateViewFactory);
             container.RegisterAsSingle(CreateProjectPresentersFactory);
             container.RegisterAsSingle(CreateTimerService);
+            container.RegisterAsSingle(CreateLevelsProgressionService);
 
             container.Initialize();
+        }
+
+        private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
+        {
+            return new LevelsProgressionService(c.Resolve<PlayerDataProvider>());
         }
 
         private static TimerServiceFactory CreateTimerService(DIContainer c)
