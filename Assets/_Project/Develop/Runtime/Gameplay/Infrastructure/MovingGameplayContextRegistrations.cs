@@ -3,8 +3,10 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.Enemies;
+using _Project.Develop.Runtime.Gameplay.Features.Explosion;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
+using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.States;
@@ -26,15 +28,17 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEntitiesLifeContext);
             container.RegisterAsSingle(CreateColliderRegistryService);
             container.RegisterAsSingle(CreateEntitiesFactory);
+            container.RegisterAsSingle(CreateExplosionFactory);
+            container.RegisterAsSingle(CreatePlayerStructuresFactory);
             container.RegisterAsSingle(CreateAIBrainsContext);
             container.RegisterAsSingle(CreateBrainsFactory);
             container.RegisterAsSingle<IInputService>(CreateDesktopInput);
-            container.RegisterAsSingle(CreateMonoEntitiesFactory);  // TODO: nonlazy?
-            container.RegisterAsSingle((DIContainer c) => CreateGameplayStatesContext(c, args));
+            container.RegisterAsSingle(CreateMonoEntitiesFactory);
+            container.RegisterAsSingle((c) => CreateGameplayStatesContext(c, args));
             container.RegisterAsSingle(CreateGameplayStatesFactory);
-            container.RegisterAsSingle(CreateMainHeroHolderService); // TODO: nonlazy?
+            container.RegisterAsSingle(CreateMainHeroHolderService);
             container.RegisterAsSingle(CreatePreparationTriggerService);
-            container.RegisterAsSingle((DIContainer c) => CreateStageProviderService(c, args));
+            container.RegisterAsSingle((c) => CreateStageProviderService(c, args));
             container.RegisterAsSingle(CreateStagesFactory);
             container.RegisterAsSingle(CreateEnemiesFactory);
             container.RegisterAsSingle(CreateMainHeroFactory);
@@ -104,6 +108,12 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             => new();
 
         private static EntitiesFactory CreateEntitiesFactory(DIContainer c)
+            => new(c);
+
+        private static ExplosionFactory CreateExplosionFactory(DIContainer c)
+            => new(c);
+
+        private static PlayerStructuresFactory CreatePlayerStructuresFactory(DIContainer c)
             => new(c);
 
         private static MonoEntitiesFactory CreateMonoEntitiesFactory(DIContainer c)

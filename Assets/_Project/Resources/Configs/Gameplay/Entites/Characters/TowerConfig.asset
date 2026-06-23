@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4fe901a5e98ed044be62a8fdd1ccf88, type: 3}
-  m_Name: ClearAllEnemiesStage
+  m_Script: {fileID: 11500000, guid: 296978a6a5250aa41acdcc149bacb484, type: 3}
+  m_Name: TowerConfig
   m_EditorClassIdentifier: 
-  _enemyItems:
-  - <SpawnPosition>k__BackingField: {x: 0, y: 0, z: 8}
-    <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbd64e348b3863f4bb2ddbb2a5df892d, type: 2}
+  <PrefabPath>k__BackingField: Entities/Tower
+  <MaxHealth>k__BackingField: 300
+  <DeathProcessTime>k__BackingField: 2

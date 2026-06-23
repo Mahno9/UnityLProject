@@ -155,6 +155,25 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             return brain;
         }
 
+        public StateMachineBrain CreateZombieBrain(Entity entity)
+        {
+            FindTargetState findTargetState = new FindTargetState(
+                new NearestDamageableTargetSelector(entity), _entitiesLifeContext, entity);
+
+            MoveToTargetState moveToTargetState = new MoveToTargetState(entity);
+
+            AIParallelState parallelState = new AIParallelState(findTargetState, moveToTargetState);
+
+            AIStateMachine rootStateMachine = new AIStateMachine();
+            rootStateMachine.AddState(parallelState);
+
+            StateMachineBrain brain = new StateMachineBrain(rootStateMachine);
+
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
+        }
+
         private AIStateMachine CreateRandomMovementStateMachine(Entity entity)
         {
             List<IDisposable> disposables = new List<IDisposable>();

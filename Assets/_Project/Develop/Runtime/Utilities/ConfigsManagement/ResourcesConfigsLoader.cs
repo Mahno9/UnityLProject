@@ -27,6 +27,9 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
             { typeof(CurrencyIconsConfig), R.Configs.Meta.Wallet.CurrencyIconsConfig },
             { typeof(MetricsIconsConfig), R.Configs.Meta.Statistic.MetricsIconsConfig },
             { typeof(HeroConfig), R.Configs.Gameplay.Entites.Characters.HeroConfig },
+            { typeof(TowerConfig), R.Configs.Gameplay.Entites.Characters.TowerConfig },
+            { typeof(MineConfig), R.Configs.Gameplay.Entites.Characters.MineConfig },
+            { typeof(ExplosionConfig), R.Configs.Gameplay.Entites.Characters.ExplosionConfig },
             { typeof(LevelsListConfig), R.Configs.Gameplay.Levels.RunningLevelsListConfig },
         };
 

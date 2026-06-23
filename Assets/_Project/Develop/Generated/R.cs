@@ -15,8 +15,12 @@ public static class R
             {
                 public static class Characters
                 {
+                    public const string ExplosionConfig = "Configs/Gameplay/Entites/Characters/ExplosionConfig";
                     public const string GhostConfig = "Configs/Gameplay/Entites/Characters/GhostConfig";
                     public const string HeroConfig = "Configs/Gameplay/Entites/Characters/HeroConfig";
+                    public const string MineConfig = "Configs/Gameplay/Entites/Characters/MineConfig";
+                    public const string TowerConfig = "Configs/Gameplay/Entites/Characters/TowerConfig";
+                    public const string ZombieConfig = "Configs/Gameplay/Entites/Characters/ZombieConfig";
                 }
             }
             public static class Levels
@@ -56,10 +60,14 @@ public static class R
     {
         public const string CharacterOriginal = "Entities/CharacterOriginal";
         public const string ContactTrigger = "Entities/ContactTrigger";
+        public const string Explosion = "Entities/Explosion";
         public const string Ghost = "Entities/Ghost";
         public const string Hero = "Entities/Hero";
+        public const string Mine = "Entities/Mine";
         public const string Projectile = "Entities/Projectile";
         public const string TeleporterEnemy = "Entities/TeleporterEnemy";
+        public const string Tower = "Entities/Tower";
+        public const string Zombie = "Entities/Zombie";
     }
     public static class Fonts___Materials
     {

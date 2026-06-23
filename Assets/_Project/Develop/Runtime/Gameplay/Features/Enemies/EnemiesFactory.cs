@@ -1,6 +1,7 @@
 ﻿using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
+using _Project.Develop.Runtime.Gameplay.Features.Explosion;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Reactive;
@@ -16,6 +17,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Enemies
         private readonly EntitiesFactory _entitiesFactory;
         private readonly BrainsFactory _brainsFactory;
         private readonly EntitiesLifeContext _entitiesLifeContext;
+        private readonly ExplosionFactory _explosionFactory;
 
         public EnemiesFactory(DIContainer container)
         {
@@ -23,6 +25,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Enemies
             _entitiesFactory = _container.Resolve<EntitiesFactory>();
             _brainsFactory = _container.Resolve<BrainsFactory>();
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _explosionFactory = _container.Resolve<ExplosionFactory>();
         }
 
         public Entity Create(Vector3 position, EntityConfig config)
@@ -33,7 +36,21 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Enemies
             {
                 case GhostConfig ghostConfig:
                     entity = _entitiesFactory.CreateGhost("Ghost", position, ghostConfig);
+
                     _brainsFactory.CreateGhostBrain(entity);
+
+                    break;
+
+                case ZombieConfig zombieConfig:
+                    entity = _entitiesFactory.CreateZombie("Zombie", position, zombieConfig);
+
+                    _brainsFactory.CreateZombieBrain(entity);
+
+                    entity.AddSystem(new SpawnExplosionOnDeathSystem(
+                        _explosionFactory,
+                        zombieConfig.ExplosionDamage,
+                        () => entity.IsTouchTarget.Value));
+
                     break;
 
                 default:

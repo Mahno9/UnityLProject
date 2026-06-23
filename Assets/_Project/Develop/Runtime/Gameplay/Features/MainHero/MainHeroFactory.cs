@@ -38,7 +38,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
             entity
                 .AddCurrentTarget()
                 .AddIsMainHero()
-                .AddTeam(new ReactiveVariable<Teams>(Teams.MainHero));
+                .AddTeam(new ReactiveVariable<Teams>(Teams.Player));
 
             _brainsFactory.CreateMainHeroBrain(entity, new NearestDamageableTargetSelector(entity));
 
