@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PrefabPath>k__BackingField: Entities/Mine
   <DeathProcessTime>k__BackingField: 0.1
-  <ExplosionRadius>k__BackingField: 3
+  <Radius>k__BackingField: 2
   <ExplosionDamage>k__BackingField: 80

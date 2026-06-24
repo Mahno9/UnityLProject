@@ -405,12 +405,10 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             _monoEntitiesFactory.Create(entity, position, R.Entities.Explosion);
 
-            // The prefab's body capsule doubles as the area-attack collider; its radius is the blast radius.
-            entity.BodyCollider.radius = config.Radius;
+            AddAreaDetectionCollider(entity, config.Radius);
 
             entity
                 .AddName("Explosion")
-                .AddAreaAttackCollider(entity.BodyCollider)
                 .AddTargetsDetectingMask(Layers.CharactersMask)
                 .AddTargetsCollidersBuffer(new Buffer<Collider>(64))
                 .AddTargetsEntitiesBuffer(new Buffer<Entity>(64))
@@ -558,11 +556,14 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             _monoEntitiesFactory.Create(entity, position, R.Entities.Mine);
 
+            AddAreaDetectionCollider(entity, config.Radius);
+
             entity
                 .AddName("Mine")
-                .AddContactsDetectingMask(Layers.CharactersMask)
-                .AddContactCollidersBuffer(new Buffer<Collider>(64))
-                .AddContactEntitiesBuffer(new Buffer<Entity>(64))
+                .AddTargetsDetectingMask(Layers.CharactersMask)
+                .AddTargetsCollidersBuffer(new Buffer<Collider>(64))
+                .AddTargetsEntitiesBuffer(new Buffer<Entity>(64))
+                .AddAreaTargetsCollectRequest()
                 .AddIsTouchAnotherTeam()
                 .AddIsDead()
                 .AddInDeathProcess()
@@ -581,14 +582,24 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddMustSelfRelease(mustSelfRelease);
 
             entity
-                .AddSystem(new BodyContactsDetectingSystem())
-                .AddSystem(new BodyContactsEntitiesFilterSystem(_collidersRegistryService))
-                .AddSystem(new AnotherTeamTouchDetectorSystem())
+                .AddSystem(new AreaTargetsSelectorSystem(gizmoDuration: 0f))
+                .AddSystem(new ContinuousAreaTargetsCollectSystem())
+                .AddSystem(new AreaTargetsEntitiesFilterSystem(_collidersRegistryService))
+                .AddSystem(new AnotherTeamAreaTouchDetectorSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
                 .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
 
             return entity;
+        }
+
+        private void AddAreaDetectionCollider(Entity entity, float radius)
+        {
+            SphereCollider areaCollider = entity.Transform.gameObject.AddComponent<SphereCollider>();
+            areaCollider.isTrigger = true;
+            areaCollider.radius = radius;
+
+            entity.AddAreaAttackCollider(areaCollider);
         }
 
         private Entity CreateEmpty() => new Entity();
