@@ -6,7 +6,6 @@ namespace _Project.Develop.Runtime.Configs.Gameplay.Entities
     public class TowerConfig : EntityConfig
     {
         [field: SerializeField] public string PrefabPath { get; private set; } = "Entities/Tower";
-        [field: SerializeField, Min(0)] public float MaxHealth { get; private set; } = 300;
         [field: SerializeField, Min(0)] public float DeathProcessTime { get; private set; } = 2;
     }
 }

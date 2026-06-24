@@ -1,4 +1,4 @@
-using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
+using _Project.Develop.Runtime.Gameplay.Features.Mine;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 

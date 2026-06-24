@@ -1,8 +1,10 @@
 using System;
 
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
+using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
@@ -22,6 +24,8 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
         private readonly PlayerDataProvider       _playerDataProvider;
         private readonly SceneSwitcherService     _sceneSwitcherService;
         private readonly ICoroutinesPerformer     _coroutinesPerformer;
+        private readonly WalletService            _walletService;
+        private readonly LevelConfig              _levelConfig;
         private          IDisposable              _clickSubscription;
 
         public VictoryState(
@@ -30,7 +34,9 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             TowerDefenseInputArgs inputArgs,
             PlayerDataProvider playerDataProvider,
             SceneSwitcherService sceneSwitcherService,
-            ICoroutinesPerformer coroutinesPerformer)
+            ICoroutinesPerformer coroutinesPerformer,
+            WalletService walletService,
+            LevelConfig levelConfig)
         {
             _clickAreaService = clickAreaService;
             _levelsProgressionService = levelsProgressionService;
@@ -38,6 +44,8 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             _playerDataProvider = playerDataProvider;
             _sceneSwitcherService = sceneSwitcherService;
             _coroutinesPerformer = coroutinesPerformer;
+            _walletService = walletService;
+            _levelConfig = levelConfig;
         }
 
         public override void Enter()
@@ -47,6 +55,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             Debug.Log("ПОБЕДА!");
 
             _levelsProgressionService.CompleteLevel(_inputArgs.LevelNumber);
+            _walletService.AddGold(_levelConfig.WinGoldReward);
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
 
             _clickSubscription = _clickAreaService.Clicked.Subscribe(OnClicked);

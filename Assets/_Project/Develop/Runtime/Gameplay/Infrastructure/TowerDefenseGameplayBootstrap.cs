@@ -20,7 +20,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
     public class TowerDefenseGameplayBootstrap : SceneBootstrap
     {
-        [SerializeField] private Transform[]      _enemySpawnPoints;
         [SerializeField] private Transform        _towerPoint;
         [SerializeField] private Button           _startButton;
         [SerializeField] private LevelsListConfig _levelsList;
@@ -47,7 +46,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _clickAreaService = _container.Resolve<ClickAreaService>();
             _gameplayStatesContext = _container.Resolve<GameplayStatesContext>();
 
-            _container.Resolve<EnemyRandomPointSpawnService>().SetSpawnPoints(GetSpawnPositions());
+            LevelConfig levelConfig = _container.Resolve<LevelConfig>();
+
+            _container.Resolve<EnemyRandomPointSpawnService>()
+                .SetSpawnArea(_towerPoint.position, levelConfig.EnemySpawnRadius);
 
             Entity tower = _container.Resolve<PlayerStructuresFactory>().CreateTower(_towerPoint.position);
             _container.Resolve<TowerTrackingService>().Track(tower);
@@ -70,16 +72,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _brainsContext?.Update(Time.deltaTime);
             _clickAreaService?.Update(Time.deltaTime);
             _gameplayStatesContext?.Update(Time.deltaTime);
-        }
-
-        private Vector3[] GetSpawnPositions()
-        {
-            Vector3[] positions = new Vector3[_enemySpawnPoints.Length];
-
-            for (int i = 0; i < _enemySpawnPoints.Length; i++)
-                positions[i] = _enemySpawnPoints[i].position;
-
-            return positions;
         }
     }
 }

@@ -15,3 +15,5 @@ MonoBehaviour:
   _productPrices:
   - <Product>k__BackingField: 0
     <Price>k__BackingField: 5
+  - <Product>k__BackingField: 1
+    <Price>k__BackingField: 10

@@ -1,32 +1,36 @@
 using System;
 
+using _Project.Develop.Runtime.Configs.Meta.Market;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
+using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
+
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.PlayerStructures
+namespace _Project.Develop.Runtime.Gameplay.Features.Mine
 {
-    // Спавнит мину по клику в фазе подготовки. Пока БЕСПЛАТНО и без лимита.
+    // Покупает мину по клику в фазе подготовки через Market (ProductName.Mine).
+    // Нехватка золота -> TryBuy вернёт false, мина не ставится.
     //
-    // ponytail: минимальная заглушка под расстановку мин. TODO отдельными системами:
-    // - Система расстановки: валидация точки (зона застройки, без пересечения с
-    //   минами/башней), лимит количества, превью-«призрак», подтверждение, отмена.
-    // - Система покупки за валюту: стоимость из конфига, списание через Wallet/Market,
-    //   блок при нехватке средств, возврат при отмене.
+    // ponytail: расстановка без UI. TODO отдельной системой: валидация точки
+    // (зона застройки, без пересечения с минами/башней), лимит, превью-«призрак».
     public class MineSpawnService
     {
-        private readonly ClickAreaService _clickAreaService;
+        private readonly ClickAreaService        _clickAreaService;
         private readonly PlayerStructuresFactory _playerStructuresFactory;
+        private readonly MarketService           _marketService;
 
         private bool        _isEnabled;
         private IDisposable _clickSubscription;
 
         public MineSpawnService(
             ClickAreaService clickAreaService,
-            PlayerStructuresFactory playerStructuresFactory)
+            PlayerStructuresFactory playerStructuresFactory,
+            MarketService marketService)
         {
             _clickAreaService = clickAreaService;
             _playerStructuresFactory = playerStructuresFactory;
+            _marketService = marketService;
         }
 
         public void Enable()
@@ -49,7 +53,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.PlayerStructures
 
         private void OnClicked(Vector3 point)
         {
-            _playerStructuresFactory.CreateMine(point);
+            _marketService.TryBuy(ProductName.Mine, _playerStructuresFactory.CreateMineProductItem(point));
         }
     }
 }

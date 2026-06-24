@@ -19,16 +19,20 @@ namespace _Project.Develop.Runtime.Meta.Logic.MarketManagement
 
         public bool TryBuy(ProductName product)
         {
-            int resetPrice = _config.GetPrice(product);
+            return TryBuy(product, _productItemsFactory.CreateResetProgressAction());
+        }
 
-            if (!_wallet.EnoughGold(resetPrice))
-                return false;
-
-            _wallet.SpendGold(resetPrice);
-
-            IProductItem item = _productItemsFactory.CreateResetProgressAction();
+        public bool TryBuy(ProductName product, IProductItem item)
+        {
             if (item is null)
                 return false;
+
+            int price = _config.GetPrice(product);
+
+            if (_wallet.EnoughGold(price) == false)
+                return false;
+
+            _wallet.SpendGold(price);
 
             item.Apply();
             return true;

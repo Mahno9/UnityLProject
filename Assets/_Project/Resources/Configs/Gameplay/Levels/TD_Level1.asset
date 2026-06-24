@@ -15,3 +15,6 @@ MonoBehaviour:
   _stageConfigs:
   - {fileID: 11400000, guid: a2e675e263d47a2468009fe8eb1fc2aa, type: 2}
   - {fileID: 11400000, guid: 85fd9dbd4b8026040b1f4139d1f23db4, type: 2}
+  <TowerMaxHealth>k__BackingField: 300
+  <WinGoldReward>k__BackingField: 100
+  <EnemySpawnRadius>k__BackingField: 24

@@ -1,34 +1,34 @@
 using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
-using System;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Enemies
 {
-    // Спавнит врага в СЛУЧАЙНОЙ точке из списка. Точки отдаёт бутстрап (из эдитора).
+    // Спавнит врага в случайной точке на окружности заданного радиуса вокруг центра (башни).
     public class EnemyRandomPointSpawnService
     {
         private readonly EnemiesFactory _enemiesFactory;
 
-        private IReadOnlyList<Vector3> _spawnPoints;
+        private Vector3 _center;
+        private float   _radius;
 
         public EnemyRandomPointSpawnService(EnemiesFactory enemiesFactory)
         {
             _enemiesFactory = enemiesFactory;
         }
 
-        public void SetSpawnPoints(IReadOnlyList<Vector3> spawnPoints)
+        public void SetSpawnArea(Vector3 center, float radius)
         {
-            _spawnPoints = spawnPoints;
+            _center = center;
+            _radius = radius;
         }
 
         public Entity Spawn(EntityConfig enemyConfig)
         {
-            if (_spawnPoints == null || _spawnPoints.Count == 0)
-                throw new InvalidOperationException("Spawn points are not set");
+            float angle = Random.Range(0f, Mathf.PI * 2f);
 
-            Vector3 point = _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Count)];
+            Vector3 point = _center + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * _radius;
 
             return _enemiesFactory.Create(point, enemyConfig);
         }

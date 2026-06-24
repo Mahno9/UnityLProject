@@ -1,17 +1,22 @@
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Configs.Meta.Market;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore.Mono;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.Explosion;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.Mine;
 using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.States;
 using _Project.Develop.Runtime.Gameplay.States.TowerDefense;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
+using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
+using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 
 using UnityEngine;
 
@@ -34,6 +39,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateEnemiesFactory);
             container.RegisterAsSingle<IInputService>(CreateDesktopInput);
 
+            container.RegisterAsSingle((c) => levelsList.GetBy(args.LevelNumber)); // LevelConfig
+            container.RegisterAsSingle(CreateProductItemsFactory);
+            container.RegisterAsSingle(CreateMarketService);
+
             container.RegisterAsSingle(CreateClickAreaService);
             container.RegisterAsSingle(CreateTowerTrackingService);
             container.RegisterAsSingle(CreateWaveEnemyCounterService);
@@ -43,18 +52,26 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStartBattleService);
 
             container.RegisterAsSingle(CreateStagesFactory);
-            container.RegisterAsSingle((c) => CreateStageProviderService(c, args, levelsList));
+            container.RegisterAsSingle(CreateStageProviderService);
             container.RegisterAsSingle(CreateStatesFactory);
             container.RegisterAsSingle((c) => CreateGameplayStatesContext(c, args));
 
             container.Initialize();
         }
 
-        private static StageProviderService CreateStageProviderService(
-            DIContainer c, TowerDefenseInputArgs args, LevelsListConfig levelsList)
+        private static StageProviderService CreateStageProviderService(DIContainer c)
         {
-            return new StageProviderService(levelsList.GetBy(args.LevelNumber), c.Resolve<StagesFactory>());
+            return new StageProviderService(c.Resolve<LevelConfig>(), c.Resolve<StagesFactory>());
         }
+
+        private static ProductItemsFactory CreateProductItemsFactory(DIContainer c)
+            => new(c);
+
+        private static MarketService CreateMarketService(DIContainer c)
+            => new(
+                c.Resolve<WalletService>(),
+                c.Resolve<ConfigsProviderService>().GetConfig<MarketConfig>(),
+                c.Resolve<ProductItemsFactory>());
 
         private static GameplayStatesContext CreateGameplayStatesContext(DIContainer c, TowerDefenseInputArgs args)
         {
@@ -81,7 +98,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c.Resolve<EnemiesFactory>());
 
         private static MineSpawnService CreateMineSpawnService(DIContainer c)
-            => new(c.Resolve<ClickAreaService>(), c.Resolve<PlayerStructuresFactory>());
+            => new(c.Resolve<ClickAreaService>(), c.Resolve<PlayerStructuresFactory>(), c.Resolve<MarketService>());
 
         private static PlayerExplosionOnClickService CreatePlayerExplosionOnClickService(DIContainer c)
             => new(c.Resolve<ClickAreaService>(), c.Resolve<ExplosionFactory>());

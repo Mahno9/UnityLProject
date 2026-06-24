@@ -508,7 +508,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             return entity;
         }
 
-        public Entity CreateTower(Vector3 position, TowerConfig config)
+        public Entity CreateTower(Vector3 position, TowerConfig config, float maxHealth)
         {
             Entity entity = CreateEmpty();
 
@@ -516,8 +516,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
             entity
                 .AddName("Tower")
-                .AddMaxHealth(new ReactiveVariable<float>(config.MaxHealth))
-                .AddCurrentHealth(new ReactiveVariable<float>(config.MaxHealth))
+                .AddMaxHealth(new ReactiveVariable<float>(maxHealth))
+                .AddCurrentHealth(new ReactiveVariable<float>(maxHealth))
                 .AddTakeDamageRequest()
                 .AddTakeDamageEvent()
                 .AddIsDead()
