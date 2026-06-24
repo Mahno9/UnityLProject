@@ -1,0 +1,85 @@
+using System.Collections;
+
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
+using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+using _Project.Develop.Runtime.Gameplay.Features.AI;
+using _Project.Develop.Runtime.Gameplay.Features.Enemies;
+using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
+using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
+using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
+using _Project.Develop.Runtime.Gameplay.States;
+using _Project.Develop.Runtime.Infrastructure;
+using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
+
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure
+{
+    public class TowerDefenseGameplayBootstrap : SceneBootstrap
+    {
+        [SerializeField] private Transform[]      _enemySpawnPoints;
+        [SerializeField] private Transform        _towerPoint;
+        [SerializeField] private Button           _startButton;
+        [SerializeField] private LevelsListConfig _levelsList;
+
+        private DIContainer           _container;
+        private EntitiesLifeContext   _entitiesLifeContext;
+        private AIBrainsContext       _brainsContext;
+        private ClickAreaService      _clickAreaService;
+        private GameplayStatesContext _gameplayStatesContext;
+
+        public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
+        {
+            _container = container;
+
+            TowerDefenseContextRegistrations.Process(_container, sceneArgs as TowerDefenseInputArgs, _levelsList);
+        }
+
+        public override IEnumerator Initialize()
+        {
+            Debug.Log("Инициализация сцены tower-defense");
+
+            _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
+            _brainsContext = _container.Resolve<AIBrainsContext>();
+            _clickAreaService = _container.Resolve<ClickAreaService>();
+            _gameplayStatesContext = _container.Resolve<GameplayStatesContext>();
+
+            _container.Resolve<EnemyRandomPointSpawnService>().SetSpawnPoints(GetSpawnPositions());
+
+            Entity tower = _container.Resolve<PlayerStructuresFactory>().CreateTower(_towerPoint.position);
+            _container.Resolve<TowerTrackingService>().Track(tower);
+
+            _startButton.onClick.AddListener(_container.Resolve<StartBattleService>().Request);
+
+            yield break;
+        }
+
+        public override void Run()
+        {
+            Debug.Log("Старт сцены tower-defense");
+
+            _gameplayStatesContext.Run();
+        }
+
+        private void Update()
+        {
+            _entitiesLifeContext?.Update(Time.deltaTime);
+            _brainsContext?.Update(Time.deltaTime);
+            _clickAreaService?.Update(Time.deltaTime);
+            _gameplayStatesContext?.Update(Time.deltaTime);
+        }
+
+        private Vector3[] GetSpawnPositions()
+        {
+            Vector3[] positions = new Vector3[_enemySpawnPoints.Length];
+
+            for (int i = 0; i < _enemySpawnPoints.Length; i++)
+                positions[i] = _enemySpawnPoints[i].position;
+
+            return positions;
+        }
+    }
+}

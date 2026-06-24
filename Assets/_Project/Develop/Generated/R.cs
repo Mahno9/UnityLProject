@@ -28,10 +28,14 @@ public static class R
                 public const string LevelConfig = "Configs/Gameplay/Levels/LevelConfig";
                 public const string LevelConfig_1 = "Configs/Gameplay/Levels/LevelConfig 1";
                 public const string RunningLevelsListConfig = "Configs/Gameplay/Levels/RunningLevelsListConfig";
+                public const string TD_DefenseLevels = "Configs/Gameplay/Levels/TD_DefenseLevels";
+                public const string TD_Level1 = "Configs/Gameplay/Levels/TD_Level1";
             }
             public static class Stages
             {
                 public const string ClearAllEnemiesStage = "Configs/Gameplay/Stages/ClearAllEnemiesStage";
+                public const string TD_Stage1 = "Configs/Gameplay/Stages/TD_Stage1";
+                public const string TD_Stage2 = "Configs/Gameplay/Stages/TD_Stage2";
             }
         }
         public static class Meta

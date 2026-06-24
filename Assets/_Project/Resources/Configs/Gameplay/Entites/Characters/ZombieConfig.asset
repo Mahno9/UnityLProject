@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: ZombieConfig
   m_EditorClassIdentifier: 
   <PrefabPath>k__BackingField: Entities/Zombie
-  <MoveSpeed>k__BackingField: 9
+  <MoveSpeed>k__BackingField: 3
   <RotationSpeed>k__BackingField: 900
   <MaxHealth>k__BackingField: 100
   <DeathProcessTime>k__BackingField: 2
-  <ReachDistance>k__BackingField: 1.5
-  <ExplosionRadius>k__BackingField: 3
   <ExplosionDamage>k__BackingField: 50

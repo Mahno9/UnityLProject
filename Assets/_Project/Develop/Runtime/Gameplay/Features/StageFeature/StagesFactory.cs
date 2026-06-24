@@ -25,6 +25,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
                         _container.Resolve<EnemiesFactory>(),
                         _container.Resolve<EntitiesLifeContext>());
 
+                case ClearAllWavesStageConfig clearAllWavesStageConfig:
+                    return new ClearAllWavesStage(
+                        clearAllWavesStageConfig,
+                        _container.Resolve<EnemyRandomPointSpawnService>(),
+                        _container.Resolve<WaveEnemyCounterService>());
+
                 default:
                     throw new ArgumentException($"Not supported {stageConfig.GetType()} type config");
             }

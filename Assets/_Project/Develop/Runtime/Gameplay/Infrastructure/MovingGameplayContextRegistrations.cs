@@ -6,7 +6,6 @@ using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.Explosion;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.MainHero;
-using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.States;
@@ -29,7 +28,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateColliderRegistryService);
             container.RegisterAsSingle(CreateEntitiesFactory);
             container.RegisterAsSingle(CreateExplosionFactory);
-            container.RegisterAsSingle(CreatePlayerStructuresFactory);
             container.RegisterAsSingle(CreateAIBrainsContext);
             container.RegisterAsSingle(CreateBrainsFactory);
             container.RegisterAsSingle<IInputService>(CreateDesktopInput);
@@ -111,9 +109,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c);
 
         private static ExplosionFactory CreateExplosionFactory(DIContainer c)
-            => new(c);
-
-        private static PlayerStructuresFactory CreatePlayerStructuresFactory(DIContainer c)
             => new(c);
 
         private static MonoEntitiesFactory CreateMonoEntitiesFactory(DIContainer c)

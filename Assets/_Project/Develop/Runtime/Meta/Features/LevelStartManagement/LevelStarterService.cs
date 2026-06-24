@@ -38,6 +38,14 @@ namespace _Project.Develop.Runtime.Meta.Logic.LevelStartManagement
             );
         }
 
+        public void StartTowerDefense()
+        {
+            const int firstLevelNumber = 1;
+            _coroutinesPerformer.StartPerform(
+                _sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.TowerDefenseGameplayScene, new TowerDefenseInputArgs(firstLevelNumber))
+            );
+        }
+
         private int GetRandomLevelNum()
         {
             const int indexToNumber = 1;

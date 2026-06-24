@@ -50,12 +50,11 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             Debug.Log("Завершается инициализация сервисов");
             loadingScreen.Hide();
 
-            // DEV TOGGLE: boot straight into MovingGameplayScene through the full project bootstrap.
+            // DEV TOGGLE: boot straight into a gameplay scene through the full project bootstrap.
             // Revert to the MainMenu line below before shipping.
             // yield return sceneSwitcherService.ProcessSwitchTo(
-            //     S._Project.Scenes.MovingGameplayScene,
-            //     new MovingGameplayInputArgs(GetRandomLevelNum(container))
-            // );
+            //     S._Project.Scenes.TowerDefenseGameplayScene,
+            //     new TowerDefenseInputArgs(1));
             yield return sceneSwitcherService.ProcessSwitchTo(S._Project.Scenes.MainMenu);
         }
 

@@ -12,6 +12,7 @@ public static class S
             public const string Level = "Level";
             public const string MainMenu = "MainMenu";
             public const string MovingGameplayScene = "MovingGameplayScene";
+            public const string TowerDefenseGameplayScene = "TowerDefenseGameplayScene";
         }
     }
 }
