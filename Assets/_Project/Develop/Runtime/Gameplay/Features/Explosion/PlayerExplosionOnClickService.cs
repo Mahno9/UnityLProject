@@ -3,6 +3,7 @@ using System;
 using _Project.Develop.Runtime.Gameplay.Features.Explosion;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TeamsFeature;
+using _Project.Develop.Runtime.Utilities.Timer;
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.Explosion
@@ -10,20 +11,24 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Explosion
     // Создаёт взрыв игрока по клику в боевой фазе (перенос хука из MovingGameplayBootstrap).
     public class PlayerExplosionOnClickService
     {
-        private const float PLAYER_EXPLOSION_DAMAGE = 50f;
-
         private readonly ClickAreaService _clickAreaService;
         private readonly ExplosionFactory _explosionFactory;
+        private readonly float            _damage;
+        private readonly TimerService     _cooldownTimer;
 
         private bool        _isEnabled;
         private IDisposable _clickSubscription;
 
         public PlayerExplosionOnClickService(
             ClickAreaService clickAreaService,
-            ExplosionFactory explosionFactory)
+            ExplosionFactory explosionFactory,
+            float damage,
+            TimerService cooldownTimer)
         {
             _clickAreaService = clickAreaService;
             _explosionFactory = explosionFactory;
+            _damage = damage;
+            _cooldownTimer = cooldownTimer;
         }
 
         public void Enable()
@@ -46,7 +51,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Explosion
 
         private void OnClicked(Vector3 point)
         {
-            _explosionFactory.Create(point, PLAYER_EXPLOSION_DAMAGE, Teams.Player);
+            if (_cooldownTimer.IsOver == false)
+                return;
+
+            _explosionFactory.Create(point, _damage, Teams.Player);
+            _cooldownTimer.Restart();
         }
     }
 }

@@ -7,5 +7,7 @@ namespace _Project.Develop.Runtime.Configs.Gameplay.Entities
     {
         [field: SerializeField, Min(0)] public float Radius { get; private set; } = 3;
         [field: SerializeField, Min(0)] public float Lifetime { get; private set; } = 0.4f;
+        [field: SerializeField, Min(0)] public float CreationCooldown { get; private set; } = 0.5f;
+        [field: SerializeField, Min(0)] public float Damage { get; private set; } = 50f;
     }
 }

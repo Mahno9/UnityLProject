@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Radius>k__BackingField: 3
   <Lifetime>k__BackingField: 0.4
+  <CreationCooldown>k__BackingField: 0.5
+  <Damage>k__BackingField: 50

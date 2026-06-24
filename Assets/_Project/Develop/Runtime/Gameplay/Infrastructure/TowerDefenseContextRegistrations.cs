@@ -1,3 +1,4 @@
+using _Project.Develop.Runtime.Configs.Gameplay.Entities;
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Configs.Meta.Market;
 using _Project.Develop.Runtime.Gameplay.EntitiesCore;
@@ -18,6 +19,8 @@ using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
+using _Project.Develop.Runtime.Utilities.Timer;
 
 using UnityEngine;
 
@@ -102,7 +105,15 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             => new(c.Resolve<ClickAreaService>(), c.Resolve<PlayerStructuresFactory>(), c.Resolve<MarketService>());
 
         private static PlayerExplosionOnClickService CreatePlayerExplosionOnClickService(DIContainer c)
-            => new(c.Resolve<ClickAreaService>(), c.Resolve<ExplosionFactory>());
+        {
+            ExplosionConfig config = c.Resolve<ConfigsProviderService>().GetConfig<ExplosionConfig>();
+
+            return new PlayerExplosionOnClickService(
+                c.Resolve<ClickAreaService>(),
+                c.Resolve<ExplosionFactory>(),
+                config.Damage,
+                new TimerService(config.CreationCooldown, c.Resolve<ICoroutinesPerformer>()));
+        }
 
         private static StartBattleService CreateStartBattleService(DIContainer c)
             => new();
