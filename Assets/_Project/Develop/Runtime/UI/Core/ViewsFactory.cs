@@ -19,6 +19,7 @@ namespace _Project.Develop.Runtime.UI.Core
             {ViewIDs.MetricView, R.UI.Statistic.MetricView },
             {ViewIDs.MainMenuItems, R.UI.MainMenu.MenuItemsView },
             {ViewIDs.LevelScreen, R.UI.Gameplay.LevelScreenView },
+            {ViewIDs.TowerDefenseScreen, R.UI.TowerDefense.TowerDefenseScreenView },
         };
 
         public ViewsFactory(ResourcesAssetsLoader resourcesAssetsLoader)

@@ -7,22 +7,20 @@ using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
-using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.States;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.UI.TowerDefense;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 {
     public class TowerDefenseGameplayBootstrap : SceneBootstrap
     {
         [SerializeField] private Transform        _towerPoint;
-        [SerializeField] private Button           _startButton;
         [SerializeField] private LevelsListConfig _levelsList;
 
         private DIContainer           _container;
@@ -54,8 +52,6 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
             Entity tower = _container.Resolve<PlayerStructuresFactory>().CreateTower(_towerPoint.position);
             _container.Resolve<EntityTrackingService>().Track(tower);
-
-            _startButton.onClick.AddListener(_container.Resolve<StartBattleService>().Request);
 
             yield break;
         }

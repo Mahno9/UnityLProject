@@ -80,6 +80,13 @@ public static class R
         public const string LiberationSans_SDF___Fallback = "Fonts & Materials/LiberationSans SDF - Fallback";
         public const string LiberationSans_SDF___Outline = "Fonts & Materials/LiberationSans SDF - Outline";
     }
+    public static class Materials
+    {
+        public const string ExplosionMaterial = "Materials/ExplosionMaterial";
+        public const string GroundMaterial = "Materials/GroundMaterial";
+        public const string MineMaterial = "Materials/MineMaterial";
+        public const string ZombieMaterial = "Materials/ZombieMaterial";
+    }
     public static class Prefabs
     {
         public const string CharacterControllerMovementCharacter = "Prefabs/CharacterControllerMovementCharacter";
@@ -91,8 +98,10 @@ public static class R
     }
     public static class Sprites
     {
+        public const string EnemyWave = "Sprites/EnemyWave";
         public const string GoldCointIcon = "Sprites/GoldCointIcon";
         public const string LoseIcon = "Sprites/LoseIcon";
+        public const string TowerHealth = "Sprites/TowerHealth";
         public const string WinIcon = "Sprites/WinIcon";
     }
     public static class Style_Sheets
@@ -117,6 +126,12 @@ public static class R
         {
             public const string MetricView = "UI/Statistic/MetricView";
             public const string StatisticView = "UI/Statistic/StatisticView";
+        }
+        public static class TowerDefense
+        {
+            public const string HealthView = "UI/TowerDefense/HealthView";
+            public const string TowerDefenseScreenView = "UI/TowerDefense/TowerDefenseScreenView";
+            public const string WaveView = "UI/TowerDefense/WaveView";
         }
         public static class Wallet
         {

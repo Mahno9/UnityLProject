@@ -11,15 +11,21 @@ using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.Mine;
 using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
+using _Project.Develop.Runtime.Gameplay.Features.TowerDefensePhaseManagement;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.States;
 using _Project.Develop.Runtime.Gameplay.States.TowerDefense;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Logic.MarketManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
+using _Project.Develop.Runtime.UI;
+using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.Gameplay;
+using _Project.Develop.Runtime.UI.TowerDefense;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
+using _Project.Develop.Runtime.Utilities.SceneManagement;
 using _Project.Develop.Runtime.Utilities.Timer;
 
 using UnityEngine;
@@ -54,11 +60,16 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateMineSpawnService);
             container.RegisterAsSingle(CreatePlayerExplosionOnClickService);
             container.RegisterAsSingle(CreateStartBattleService);
+            container.RegisterAsSingle(CreateTowerDefensePhaseService);
 
             container.RegisterAsSingle(CreateStagesFactory);
             container.RegisterAsSingle(CreateStageProviderService);
             container.RegisterAsSingle(CreateStatesFactory);
             container.RegisterAsSingle((c) => CreateGameplayStatesContext(c, args));
+
+            container.RegisterAsSingle(CreateLevelUIRoot);
+            container.RegisterAsSingle(CreateTowerDefensePresentersFactory);
+            container.RegisterAsSingle(CreateTowerDefenseScreenPresenter).NonLazy();
 
             container.Initialize();
         }
@@ -66,6 +77,26 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private static StageProviderService CreateStageProviderService(DIContainer c)
         {
             return new StageProviderService(c.Resolve<LevelConfig>(), c.Resolve<StagesFactory>());
+        }
+
+        private static LevelUIRoot CreateLevelUIRoot(DIContainer c)
+        {
+            LevelUIRoot uiRootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<LevelUIRoot>(R.UI.Gameplay.LevelUIRoot);
+
+            return Object.Instantiate(uiRootPrefab);
+        }
+
+        private static TowerDefensePresentersFactory CreateTowerDefensePresentersFactory(DIContainer c)
+            => new(c);
+
+        private static TowerDefenseScreenPresenter CreateTowerDefenseScreenPresenter(DIContainer c)
+        {
+            LevelUIRoot uiRoot = c.Resolve<LevelUIRoot>();
+
+            TowerDefenseScreenView view = c.Resolve<ViewsFactory>()
+                .Create<TowerDefenseScreenView>(ViewIDs.TowerDefenseScreen, uiRoot.HUDLayer);
+
+            return new TowerDefenseScreenPresenter(view, c.Resolve<TowerDefensePresentersFactory>());
         }
 
         private static ProductItemsFactory CreateProductItemsFactory(DIContainer c)
@@ -116,6 +147,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         }
 
         private static StartBattleService CreateStartBattleService(DIContainer c)
+            => new();
+
+        private static TowerDefensePhaseService CreateTowerDefensePhaseService(DIContainer c)
             => new();
 
         private static EnemiesFactory CreateEnemiesFactory(DIContainer c)
