@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b23a24fa888711d4c83c4b2bac163f25, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,7 +145,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b23a24fa888711d4c83c4b2bac163f25, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,7 +177,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 62956036438060799, guid: 6866f045f7996a24bb1312cb86a91d79, type: 3}
       propertyPath: m_Name
-      value: Ghost
+      value: Zombie
       objectReference: {fileID: 0}
     - target: {fileID: 266444240801978367, guid: 6866f045f7996a24bb1312cb86a91d79, type: 3}
       propertyPath: m_LocalPosition.x
