@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
@@ -52,7 +53,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 .SetSpawnArea(_towerPoint.position, levelConfig.EnemySpawnRadius);
 
             Entity tower = _container.Resolve<PlayerStructuresFactory>().CreateTower(_towerPoint.position);
-            _container.Resolve<TowerTrackingService>().Track(tower);
+            _container.Resolve<EntityTrackingService>().Track(tower);
 
             _startButton.onClick.AddListener(_container.Resolve<StartBattleService>().Request);
 

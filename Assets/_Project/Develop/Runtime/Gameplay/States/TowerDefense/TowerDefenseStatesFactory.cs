@@ -2,6 +2,7 @@ using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Features.Explosion;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.Mine;
 using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
@@ -66,7 +67,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
         public GameplayStateMachine CreateGameplayStateMachine(TowerDefenseInputArgs inputArgs)
         {
             StageProviderService stageProviderService = _container.Resolve<StageProviderService>();
-            TowerTrackingService towerTrackingService = _container.Resolve<TowerTrackingService>();
+            EntityTrackingService entityTrackingService = _container.Resolve<EntityTrackingService>();
 
             GameplayStateMachine coreLoopState = CreateCoreLoopState();
 
@@ -74,7 +75,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             DefeatState defeatState = CreateDefeatState(inputArgs);
 
             ICompositeCondition coreLoopToDefeatCondition = new CompositeCondition()
-                .Add(new FuncCondition(() => towerTrackingService.IsTowerDead));
+                .Add(new FuncCondition(() => entityTrackingService.IsDead));
 
             ICompositeCondition coreLoopToVictoryCondition = new CompositeCondition()
                 .Add(new FuncCondition(() => stageProviderService.CurrentStageResult.Value == StageResults.Completed))

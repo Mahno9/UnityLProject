@@ -6,6 +6,7 @@ using _Project.Develop.Runtime.Gameplay.Features.AI;
 using _Project.Develop.Runtime.Gameplay.Features.Enemies;
 using _Project.Develop.Runtime.Gameplay.Features.Explosion;
 using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
+using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.Mine;
 using _Project.Develop.Runtime.Gameplay.Features.PlayerStructures;
 using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
@@ -44,7 +45,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateMarketService);
 
             container.RegisterAsSingle(CreateClickAreaService);
-            container.RegisterAsSingle(CreateTowerTrackingService);
+            container.RegisterAsSingle(CreateEntityTrackingService);
             container.RegisterAsSingle(CreateWaveEnemyCounterService);
             container.RegisterAsSingle(CreateEnemySpawnService);
             container.RegisterAsSingle(CreateMineSpawnService);
@@ -88,7 +89,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private static ClickAreaService CreateClickAreaService(DIContainer c)
             => new();
 
-        private static TowerTrackingService CreateTowerTrackingService(DIContainer c)
+        private static EntityTrackingService CreateEntityTrackingService(DIContainer c)
             => new();
 
         private static WaveEnemyCounterService CreateWaveEnemyCounterService(DIContainer c)
