@@ -48,6 +48,10 @@ public static class R
             {
                 public const string ProgressionConfig = "Configs/Meta/Progression/ProgressionConfig";
             }
+            public static class Rewards
+            {
+                public const string TD_Level1WinReward = "Configs/Meta/Rewards/TD_Level1WinReward";
+            }
             public static class Statistic
             {
                 public const string MetricsIconsConfig = "Configs/Meta/Statistic/MetricsIconsConfig";

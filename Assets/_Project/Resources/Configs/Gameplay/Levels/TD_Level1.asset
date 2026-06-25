@@ -16,5 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a2e675e263d47a2468009fe8eb1fc2aa, type: 2}
   - {fileID: 11400000, guid: 85fd9dbd4b8026040b1f4139d1f23db4, type: 2}
   <TowerMaxHealth>k__BackingField: 300
-  <WinGoldReward>k__BackingField: 100
+  <WinReward>k__BackingField: {fileID: 11400000, guid: e138676b156d175418e3f21be232617b, type: 2}
   <EnemySpawnRadius>k__BackingField: 24

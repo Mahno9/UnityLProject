@@ -1,7 +1,7 @@
 using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
-using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
+using _Project.Develop.Runtime.Meta.Logic.RewardManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 
@@ -18,7 +18,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
         private readonly TowerDefenseInputArgs    _inputArgs;
         private readonly PlayerDataProvider       _playerDataProvider;
         private readonly ICoroutinesPerformer     _coroutinesPerformer;
-        private readonly WalletService            _walletService;
+        private readonly RewardService            _rewardService;
         private readonly LevelConfig              _levelConfig;
 
         public VictoryState(
@@ -26,14 +26,14 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             TowerDefenseInputArgs inputArgs,
             PlayerDataProvider playerDataProvider,
             ICoroutinesPerformer coroutinesPerformer,
-            WalletService walletService,
+            RewardService rewardService,
             LevelConfig levelConfig)
         {
             _levelsProgressionService = levelsProgressionService;
             _inputArgs = inputArgs;
             _playerDataProvider = playerDataProvider;
             _coroutinesPerformer = coroutinesPerformer;
-            _walletService = walletService;
+            _rewardService = rewardService;
             _levelConfig = levelConfig;
         }
 
@@ -44,7 +44,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             Debug.Log("ПОБЕДА!");
 
             _levelsProgressionService.CompleteLevel(_inputArgs.LevelNumber);
-            _walletService.AddGold(_levelConfig.WinGoldReward);
+            _rewardService.Grant(_levelConfig.WinReward);
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
         }
 

@@ -12,7 +12,7 @@ using _Project.Develop.Runtime.Gameplay.Features.TowerDefensePhaseManagement;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Gameplay.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
+using _Project.Develop.Runtime.Meta.Logic.RewardManagement;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 
@@ -50,7 +50,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
                 inputArgs,
                 _container.Resolve<PlayerDataProvider>(),
                 _container.Resolve<ICoroutinesPerformer>(),
-                _container.Resolve<WalletService>(),
+                _container.Resolve<RewardService>(),
                 _container.Resolve<LevelConfig>());
         }
 
