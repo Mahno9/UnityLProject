@@ -17,6 +17,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
             _moveDirection = entity.MoveDirection;
             _currentTarget = entity.CurrentTarget;
             _transform = entity.Transform;
+
+            UpdateMoveDirection();
         }
 
         public override void Exit()
@@ -34,6 +36,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
                 return;
             }
 
+            UpdateMoveDirection();
+        }
+
+        private void UpdateMoveDirection()
+        {
             _moveDirection.Value = (_currentTarget.Value.Transform.position - _transform.position).normalized;
         }
     }

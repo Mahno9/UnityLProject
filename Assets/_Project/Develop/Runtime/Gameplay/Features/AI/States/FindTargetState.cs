@@ -18,9 +18,16 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
             _targetSelector = targetSelector;
             _entitiesLifeContext = entitiesLifeContext;
             _currentTarget = entity.CurrentTarget;
+
+            SelectCurrentTarget();
         }
 
         public void Update(float deltaTime)
+        {
+            SelectCurrentTarget();
+        }
+
+        private void SelectCurrentTarget()
         {
             _currentTarget.Value = _targetSelector.SelectTargetFrom(_entitiesLifeContext.Entities);
         }
