@@ -38,14 +38,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot
             _attackDelayEndDisposable = _attackDelayEndEvent.Subscribe(OnAttackDelayEnd);
         }
 
-        private void OnAttackDelayEnd()
-        {
-            _entitiesFactory.CreateProjectile(_shootPoint.position, _shootPoint.forward, _damage.Value, _entity);
-        }
-
         public void OnDispose()
         {
             _attackDelayEndDisposable.Dispose();
+        }
+
+        private void OnAttackDelayEnd()
+        {
+            _entitiesFactory.CreateProjectile(_shootPoint.position, _shootPoint.forward, _damage.Value, _entity);
         }
 
     }

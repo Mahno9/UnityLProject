@@ -6,14 +6,14 @@ namespace _Project.Develop.Runtime.Utilities.LoadingScreen
     {
         public bool IsShown => gameObject.activeSelf;
 
+        public void Hide() => gameObject.SetActive(false);
+
+        public void Show() => gameObject.SetActive(true);
+
         private void Awake()
         {
             Hide();
             DontDestroyOnLoad(this);
         }
-
-        public void Hide() => gameObject.SetActive(false);
-
-        public void Show() => gameObject.SetActive(true);
     }
 }

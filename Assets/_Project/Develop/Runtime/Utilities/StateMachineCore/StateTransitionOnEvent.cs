@@ -24,15 +24,15 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
             _triggerSubscription = _triggerEvent.Subscribe(OnTrigger);
         }
 
-        private void OnTrigger()
-        {
-            _isTriggered = true;
-            _triggerSubscription.Dispose();
-        }
-
         public override void Discharge()
         {
             base.Discharge();
+            _triggerSubscription.Dispose();
+        }
+
+        private void OnTrigger()
+        {
+            _isTriggered = true;
             _triggerSubscription.Dispose();
         }
     }

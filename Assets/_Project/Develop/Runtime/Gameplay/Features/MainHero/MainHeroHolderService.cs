@@ -26,6 +26,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
             _entitiesLifeContext.Added += OnEntityAdded;
         }
 
+        public void Dispose()
+        {
+            _entitiesLifeContext.Added -= OnEntityAdded;
+        }
+
         private void OnEntityAdded(Entity entity)
         {
             if (entity.HasComponent<IsMainHero>())
@@ -34,11 +39,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MainHero
                 _mainHero = entity;
                 _heroRegistred?.Invoke(_mainHero);
             }
-        }
-
-        public void Dispose()
-        {
-            _entitiesLifeContext.Added -= OnEntityAdded;
         }
     }
 }

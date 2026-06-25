@@ -22,16 +22,16 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
             _inputService.FireEvent.Subscribe(OnFireEvent);
         }
 
-        private void OnFireEvent()
-        {
-            _attackRequest.Invoke();
-        }
-
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
             _rotationDirection.Value = Quaternion.AngleAxis(_inputService.RotationDelta.y, Vector3.up) * _rotationDirection.Value;
+        }
+
+        private void OnFireEvent()
+        {
+            _attackRequest.Invoke();
         }
     }
 }

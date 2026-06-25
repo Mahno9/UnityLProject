@@ -51,11 +51,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
             _currentStage.Start();
         }
 
-        private void OnStageCompleted()
-        {
-            _currentStageResult.Value = StageResults.Completed;
-        }
-
         public void UpdateCurrent(float deltaTime) => _currentStage.Update(deltaTime);
 
         public void CleanupCurrent() => _currentStage.Cleanup();
@@ -64,6 +59,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.StagesFeature
         {
             _currentStage?.Dispose();
             _stageEndedDisposable?.Dispose();
+        }
+
+        private void OnStageCompleted()
+        {
+            _currentStageResult.Value = StageResults.Completed;
         }
     }
 }

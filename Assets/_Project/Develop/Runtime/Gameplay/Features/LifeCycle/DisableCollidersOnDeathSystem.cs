@@ -24,16 +24,16 @@ namespace _Project.Develop.Runtime.Gameplay.Features.LifeCycle
             _isDeadChangedDisposable = _isDead.Subscribe(OnIsDeadChanged);
         }
 
+        public void OnDispose()
+        {
+            _isDeadChangedDisposable.Dispose();
+        }
+
         private void OnIsDeadChanged(bool arg1, bool isDead)
         {
             if (isDead)
                 foreach (Collider collider in _colliders)
                     collider.enabled = false;
-        }
-
-        public void OnDispose()
-        {
-            _isDeadChangedDisposable.Dispose();
         }
     }
 }

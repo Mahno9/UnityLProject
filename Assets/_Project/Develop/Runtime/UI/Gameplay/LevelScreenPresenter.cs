@@ -43,6 +43,14 @@ namespace _Project.Develop.Runtime.UI.Gameplay
             _childPresenters.Clear();
         }
 
+        public T GetPresenter<T>() where T : IPresenter
+        {
+            foreach (IPresenter childPresenter in _childPresenters)
+                if (childPresenter is T presenter)
+                    return presenter;
+
+            throw new ArgumentException($"Unable to find presenter of type {typeof(T)} on current screen");
+        }
 
         private void CreateWallet()
         {
@@ -63,15 +71,6 @@ namespace _Project.Develop.Runtime.UI.Gameplay
             LevelInterfacePresenter levelInterfacePresenter = _gameplayPresentersFactory.CreateLevelInterfacePresenter(_screen.LevelInterfaceView);
 
             _childPresenters.Add(levelInterfacePresenter);
-        }
-
-        public T GetPresenter<T>() where T : IPresenter
-        {
-            foreach (IPresenter childPresenter in _childPresenters)
-                if (childPresenter is T presenter)
-                    return presenter;
-
-            throw new ArgumentException($"Unable to find presenter of type {typeof(T)} on current screen");
         }
     }
 }

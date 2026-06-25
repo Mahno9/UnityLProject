@@ -28,6 +28,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             _attackRequestDispose = _startAttackRequest.Subscribe(OnAttackRequest);
         }
 
+        public void OnDispose()
+        {
+            _attackRequestDispose.Dispose();
+        }
+
         private void OnAttackRequest()
         {
             if (_canStartAttack.Evaluate())
@@ -40,11 +45,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             {
                 Debug.Log("Не могу атаковать!");
             }
-        }
-
-        public void OnDispose()
-        {
-            _attackRequestDispose.Dispose();
         }
     }
 }
