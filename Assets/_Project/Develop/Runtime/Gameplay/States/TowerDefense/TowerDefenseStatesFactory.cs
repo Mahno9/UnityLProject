@@ -13,6 +13,7 @@ using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManageme
 using _Project.Develop.Runtime.Gameplay.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Logic.RewardManagement;
+using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 
@@ -51,14 +52,18 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
                 _container.Resolve<PlayerDataProvider>(),
                 _container.Resolve<ICoroutinesPerformer>(),
                 _container.Resolve<RewardService>(),
-                _container.Resolve<LevelConfig>());
+                _container.Resolve<LevelConfig>(),
+                _container.Resolve<StatisticService>());
         }
 
         public DefeatState CreateDefeatState(TowerDefenseInputArgs inputArgs)
         {
             return new DefeatState(
                 _container.Resolve<LevelsProgressionService>(),
-                inputArgs);
+                inputArgs,
+                _container.Resolve<StatisticService>(),
+                _container.Resolve<PlayerDataProvider>(),
+                _container.Resolve<ICoroutinesPerformer>());
         }
 
         public GameplayStateMachine CreateGameplayStateMachine(TowerDefenseInputArgs inputArgs)

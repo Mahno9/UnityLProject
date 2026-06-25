@@ -2,6 +2,7 @@ using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Meta.Logic.RewardManagement;
+using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 
@@ -20,6 +21,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
         private readonly ICoroutinesPerformer     _coroutinesPerformer;
         private readonly RewardService            _rewardService;
         private readonly LevelConfig              _levelConfig;
+        private readonly StatisticService         _statisticService;
 
         public VictoryState(
             LevelsProgressionService levelsProgressionService,
@@ -27,7 +29,8 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             PlayerDataProvider playerDataProvider,
             ICoroutinesPerformer coroutinesPerformer,
             RewardService rewardService,
-            LevelConfig levelConfig)
+            LevelConfig levelConfig,
+            StatisticService statisticService)
         {
             _levelsProgressionService = levelsProgressionService;
             _inputArgs = inputArgs;
@@ -35,6 +38,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             _coroutinesPerformer = coroutinesPerformer;
             _rewardService = rewardService;
             _levelConfig = levelConfig;
+            _statisticService = statisticService;
         }
 
         public override void Enter()
@@ -44,6 +48,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             Debug.Log("ПОБЕДА!");
 
             _levelsProgressionService.CompleteLevel(_inputArgs.LevelNumber);
+            _statisticService.RegisterWin();
             _rewardService.Grant(_levelConfig.WinReward);
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
         }
