@@ -1,10 +1,9 @@
-using _Project.Develop.Runtime.Configs.Meta.Market;
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
-namespace _Project.Develop.Runtime.Meta.Logic.MarketManagement
+namespace _Project.Develop.Runtime.Meta.Logic.MarketManagement.ProductItems
 {
     public class ResetProgressProductItem : IProductItem
     {

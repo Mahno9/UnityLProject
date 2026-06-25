@@ -1,4 +1,4 @@
-﻿using _Project.Develop.Runtime.Gameplay.Logic.StringGenerationManagement;
+﻿using _Project.Develop.Runtime.Gameplay.Features.StringGenerationManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
 namespace _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement

@@ -1,6 +1,7 @@
 using _Project.Develop.Runtime.Configs.Meta.Market;
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Logic.MarketManagement.ProductItems;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;

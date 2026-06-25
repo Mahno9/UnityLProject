@@ -1,6 +1,6 @@
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
-namespace _Project.Develop.Runtime.Gameplay.Infrastructure.MovingGameplayInputArgsManagement
+namespace _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement
 {
     public class MovingGameplayInputArgs : IInputSceneArgs
     {

@@ -31,6 +31,14 @@ public static class R
             }
         }
     }
+    public static class Entities
+    {
+        public const string CharacterOriginal = "Entities/CharacterOriginal";
+        public const string Ghost = "Entities/Ghost";
+        public const string Hero = "Entities/Hero";
+        public const string Projectile = "Entities/Projectile";
+        public const string TeleporterEnemy = "Entities/TeleporterEnemy";
+    }
     public static class Fonts___Materials
     {
         public const string LiberationSans_SDF = "Fonts & Materials/LiberationSans SDF";

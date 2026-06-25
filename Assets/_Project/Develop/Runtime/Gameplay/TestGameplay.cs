@@ -1,16 +1,16 @@
-using _Project.Develop.Runtime.Gameplay.EntitiesCore;
+﻿using _Project.Develop.Runtime.Gameplay.EntitiesCore;
 using _Project.Develop.Runtime.Infrastructure.DI;
+
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay
 {
     public class TestGameplay : MonoBehaviour
     {
-        private DIContainer _container;
+        private DIContainer     _container;
         private EntitiesFactory _entitiesFactory;
 
-        private Entity _rigidbodyEntity;
-        private Entity _ccEntity;
+        private Entity _playerCharacter;
 
         private bool _isRunning;
 
@@ -22,8 +22,13 @@ namespace _Project.Develop.Runtime.Gameplay
 
         public void Run()
         {
-            _rigidbodyEntity = _entitiesFactory.CreateRigidbodyTestEntity(new Vector3(3, 0, 0));
-            _ccEntity        = _entitiesFactory.CreateCharacterControllerTestEntity(new Vector3(-3, 0, 0));
+            _playerCharacter = _entitiesFactory.CreateTeleportEnemy("TeleportEnemy", Vector3.zero, 20);
+
+            for (int i = 0; i < 3; i++)
+                _entitiesFactory.CreateGhost(
+                    "Ghost " + (i + 1),
+                    new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5))
+                );
 
             _isRunning = true;
         }
@@ -33,10 +38,10 @@ namespace _Project.Develop.Runtime.Gameplay
             if (_isRunning == false)
                 return;
 
-            Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-
-            _rigidbodyEntity.MoveDirection.Value = input;
-            _ccEntity.MoveDirection.Value        = input;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _playerCharacter.TeleportRequest.Invoke();
+            }
         }
     }
 }

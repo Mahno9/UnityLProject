@@ -4,7 +4,7 @@ using _Project.Develop.Runtime.Utilities.Reactive;
 
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
+namespace _Project.Develop.Runtime.Gameplay.Features.RotationFeature
 {
     public class RigidbodyRotationApplierSystem : IInitializableSystem, IUpdatableSystem
     {
@@ -19,7 +19,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
 
         public void OnUpdate(float deltaTime)
         {
-            _rigidbody.rotation = _rotation.Value;
+            if (_rotation.Value == Quaternion.identity)
+                return;
+
+            _rigidbody.rotation = Quaternion.Normalize(_rotation.Value);
         }
     }
 }

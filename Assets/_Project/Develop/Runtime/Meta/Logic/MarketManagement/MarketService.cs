@@ -1,4 +1,5 @@
 using _Project.Develop.Runtime.Configs.Meta.Market;
+using _Project.Develop.Runtime.Meta.Logic.MarketManagement.ProductItems;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 
 namespace _Project.Develop.Runtime.Meta.Logic.MarketManagement

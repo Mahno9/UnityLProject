@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-
 using _Project.Develop.Runtime.Utilities.Reactive;
 
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement
+namespace _Project.Develop.Runtime.Gameplay.Features.TypingInputManagement
 {
     public class TypingInputService
     {

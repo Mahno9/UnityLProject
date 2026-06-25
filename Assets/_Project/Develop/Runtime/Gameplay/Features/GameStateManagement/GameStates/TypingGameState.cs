@@ -1,13 +1,13 @@
 using System;
 
 using _Project.Develop.Runtime.Configs.Meta.Progression;
-using _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
+using _Project.Develop.Runtime.Gameplay.Features.KeyInputManagement;
+using _Project.Develop.Runtime.Gameplay.Features.StringMatchingManagement;
+using _Project.Develop.Runtime.Gameplay.Features.TypingInputManagement;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.GameStateManagement
+namespace _Project.Develop.Runtime.Gameplay.Features.GameStateManagement.GameStates
 {
     public class TypingGameState : IGameState
     {

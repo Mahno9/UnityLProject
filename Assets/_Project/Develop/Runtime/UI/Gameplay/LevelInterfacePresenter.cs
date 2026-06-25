@@ -1,10 +1,10 @@
 using System;
 
-using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
+using _Project.Develop.Runtime.Gameplay.Features.StringMatchingManagement;
+using _Project.Develop.Runtime.Gameplay.Features.TypingInputManagement;
 using _Project.Develop.Runtime.UI.Core;
 
-namespace _Project.Develop.Runtime.UI.Level
+namespace _Project.Develop.Runtime.UI.Gameplay
 {
     public class LevelInterfacePresenter : IPresenter
     {

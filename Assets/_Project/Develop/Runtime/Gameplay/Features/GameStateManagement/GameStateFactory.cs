@@ -1,17 +1,18 @@
 using _Project.Develop.Runtime.Configs.Meta.Progression;
 using _Project.Develop.Runtime.Data.PlayerData;
-using _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagement;
-using _Project.Develop.Runtime.Gameplay.Logic.TypingInputManagement;
+using _Project.Develop.Runtime.Gameplay.Features.GameStateManagement.GameStates;
+using _Project.Develop.Runtime.Gameplay.Features.KeyInputManagement;
+using _Project.Develop.Runtime.Gameplay.Features.StringMatchingManagement;
+using _Project.Develop.Runtime.Gameplay.Features.TypingInputManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
-using _Project.Develop.Runtime.UI.Level;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.GameStateManagement
+namespace _Project.Develop.Runtime.Gameplay.Features.GameStateManagement
 {
     public class GameStateFactory
     {

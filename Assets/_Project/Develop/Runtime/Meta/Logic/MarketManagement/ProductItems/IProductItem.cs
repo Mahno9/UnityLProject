@@ -1,4 +1,4 @@
-namespace _Project.Develop.Runtime.Meta.Logic.MarketManagement
+namespace _Project.Develop.Runtime.Meta.Logic.MarketManagement.ProductItems
 {
     public interface IProductItem
     {

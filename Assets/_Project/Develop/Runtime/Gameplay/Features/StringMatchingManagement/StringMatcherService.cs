@@ -1,4 +1,4 @@
-namespace _Project.Develop.Runtime.Gameplay.Logic.StringMatchingManagement
+namespace _Project.Develop.Runtime.Gameplay.Features.StringMatchingManagement
 {
     public class StringMatcherService
     {

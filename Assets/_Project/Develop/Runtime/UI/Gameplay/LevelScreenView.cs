@@ -3,7 +3,7 @@ using _Project.Develop.Runtime.UI.Core;
 
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.UI.Level
+namespace _Project.Develop.Runtime.UI.Gameplay
 {
     public class LevelScreenView : MonoBehaviour, IView
     {

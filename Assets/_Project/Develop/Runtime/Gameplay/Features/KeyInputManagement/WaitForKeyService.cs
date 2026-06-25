@@ -5,7 +5,7 @@ using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 
 using UnityEngine;
 
-namespace _Project.Develop.Runtime.Gameplay.Logic.KeyInputManagement
+namespace _Project.Develop.Runtime.Gameplay.Features.KeyInputManagement
 {
     public class WaitForKeyService
     {
