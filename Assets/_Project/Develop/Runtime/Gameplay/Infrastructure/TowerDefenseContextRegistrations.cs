@@ -60,7 +60,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateMineSpawnService);
             container.RegisterAsSingle(CreatePlayerExplosionOnClickService);
             container.RegisterAsSingle(CreateStartBattleService);
-            container.RegisterAsSingle(CreateTowerDefensePhaseService);
+            container.RegisterAsSingleWithInterfaces(CreateTowerDefensePhaseService);
 
             container.RegisterAsSingle(CreateStagesFactory);
             container.RegisterAsSingle(CreateStageProviderService);

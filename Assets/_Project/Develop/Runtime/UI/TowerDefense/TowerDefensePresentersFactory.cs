@@ -38,13 +38,13 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
                 _container.Resolve<WaveEnemyCounterService>(),
                 _container.Resolve<StageProviderService>(),
                 _container.Resolve<LevelConfig>(),
-                _container.Resolve<TowerDefensePhaseService>());
+                _container.Resolve<ITowerDefencePhaseReader>());
 
         public StartButtonPresenter CreateStartButtonPresenter(Button button, TMP_Text label)
             => new StartButtonPresenter(
                 button,
                 label,
-                _container.Resolve<TowerDefensePhaseService>(),
+                _container.Resolve<ITowerDefencePhaseReader>(),
                 _container.Resolve<StartBattleService>(),
                 _container.Resolve<SceneSwitcherService>(),
                 _container.Resolve<ICoroutinesPerformer>());

@@ -17,7 +17,7 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
         private readonly WaveEnemyCounterService  _waveEnemyCounter;
         private readonly StageProviderService     _stageProviderService;
         private readonly LevelConfig              _levelConfig;
-        private readonly TowerDefensePhaseService _phaseService;
+        private readonly ITowerDefencePhaseReader _phaseService;
 
         private IDisposable _killedSubscription;
         private IDisposable _stageNumberSubscription;
@@ -31,7 +31,7 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
             WaveEnemyCounterService waveEnemyCounter,
             StageProviderService stageProviderService,
             LevelConfig levelConfig,
-            TowerDefensePhaseService phaseService)
+            ITowerDefencePhaseReader phaseService)
         {
             _view = view;
             _waveEnemyCounter = waveEnemyCounter;

@@ -83,7 +83,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
                 .Add(new FuncCondition(() => stageProviderService.CurrentStageResult.Value == StageResults.Completed))
                 .Add(new FuncCondition(() => stageProviderService.HasNextStage() == false));
 
-            TowerDefensePhaseService phaseService = _container.Resolve<TowerDefensePhaseService>();
+            ITowerDefensePhaseSetter phaseService = _container.Resolve<ITowerDefensePhaseSetter>();
 
             List<IDisposable> phaseSubscriptions = new()
             {
@@ -118,7 +118,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             FuncCondition combatToPreparationCondition =
                 new FuncCondition(() => stageProviderService.CurrentStageResult.Value == StageResults.Completed);
 
-            TowerDefensePhaseService phaseService = _container.Resolve<TowerDefensePhaseService>();
+            ITowerDefensePhaseSetter phaseService = _container.Resolve<ITowerDefensePhaseSetter>();
 
             List<IDisposable> phaseSubscriptions = new()
             {

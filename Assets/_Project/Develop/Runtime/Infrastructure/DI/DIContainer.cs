@@ -32,16 +32,34 @@ namespace _Project.Develop.Runtime.Infrastructure.DI
             return registration;
         }
 
-        public bool IsAlreadyRegister<T>()
+        public Registration RegisterAsSingleWithInterfaces<T>(Func<DIContainer, T> creator)
         {
-            if (_container.ContainsKey(typeof(T)))
+            Type         implementationType = typeof(T);
+            Registration registration       = new(container => creator.Invoke(container));
+
+            foreach (Type interfaceType in implementationType.GetInterfaces())
+            {
+                if (IsAlreadyRegister(interfaceType))
+                    throw new InvalidOperationException($"{interfaceType} already register");
+
+                _container.Add(interfaceType, registration);
+            }
+
+            return registration;
+        }
+
+        public bool IsAlreadyRegister(Type t)
+        {
+            if (_container.ContainsKey(t))
                 return true;
 
             if (_parent != null)
-                return _parent.IsAlreadyRegister<T>();
+                return _parent.IsAlreadyRegister(t);
 
             return false;
         }
+
+        public bool IsAlreadyRegister<T>() => IsAlreadyRegister(typeof(T));
 
         public T Resolve<T>()
         {
