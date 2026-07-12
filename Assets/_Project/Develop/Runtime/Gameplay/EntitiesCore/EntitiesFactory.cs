@@ -403,7 +403,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, R.Entities.Explosion);
+            _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
             AddAreaDetectionCollider(entity, config.Radius);
 

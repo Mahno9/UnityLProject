@@ -22,10 +22,22 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Explosion
             _configsProviderService = container.Resolve<ConfigsProviderService>();
         }
 
-        public Entity Create(Vector3 position, float damage, Teams team)
+        public Entity CreatePlayerExplosion(Vector3 position, float damage, Teams team)
         {
-            ExplosionConfig config = _configsProviderService.GetConfig<ExplosionConfig>();
+            PlayerExplosionConfig config = _configsProviderService.GetConfig<PlayerExplosionConfig>();
 
+            return CreateExplosion(position, damage, team, config);
+        }
+
+        public Entity CreateEnemyExplosion(Vector3 position, float damage, Teams team)
+        {
+            EnemyExplosionConfig config = _configsProviderService.GetConfig<EnemyExplosionConfig>();
+
+            return CreateExplosion(position, damage, team, config);
+        }
+
+        private Entity CreateExplosion(Vector3 position, float damage, Teams team, ExplosionConfig config)
+        {
             Entity entity = _entitiesFactory.CreateExplosion(position, damage, config);
 
             entity.AddTeam(new ReactiveVariable<Teams>(team));

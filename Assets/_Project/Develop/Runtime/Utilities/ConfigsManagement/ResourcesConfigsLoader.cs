@@ -11,6 +11,7 @@ using _Project.Develop.Runtime.Configs.Meta.Wallet;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
 {
@@ -28,8 +29,9 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
             { typeof(MetricsIconsConfig), R.Configs.Meta.Statistic.MetricsIconsConfig },
             { typeof(HeroConfig), R.Configs.Gameplay.Entites.Characters.HeroConfig },
             { typeof(TowerConfig), R.Configs.Gameplay.Entites.Characters.TowerConfig },
-            { typeof(MineConfig), R.Configs.Gameplay.Entites.Characters.MineConfig },
-            { typeof(ExplosionConfig), R.Configs.Gameplay.Entites.Characters.ExplosionConfig },
+            { typeof(MineConfig), R.Configs.Gameplay.Entites.Objects.MineConfig },
+            { typeof(PlayerExplosionConfig), R.Configs.Gameplay.Entites.Objects.PlayerExplosionConfig },
+            { typeof(EnemyExplosionConfig), R.Configs.Gameplay.Entites.Objects.EnemyExplosionConfig },
             { typeof(LevelsListConfig), R.Configs.Gameplay.Levels.RunningLevelsListConfig },
         };
 
@@ -45,6 +47,7 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
             foreach (KeyValuePair<Type, string> configResourcesPath in _configsResourcesPaths)
             {
                 ScriptableObject config = _resources.Load<ScriptableObject>(configResourcesPath.Value);
+                Assert.IsNotNull(config);
                 loadedConfigs.Add(configResourcesPath.Key, config);
                 yield return null;
             }

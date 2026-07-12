@@ -137,7 +137,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static PlayerExplosionOnClickService CreatePlayerExplosionOnClickService(DIContainer c)
         {
-            ExplosionConfig config = c.Resolve<ConfigsProviderService>().GetConfig<ExplosionConfig>();
+            PlayerExplosionConfig config = c.Resolve<ConfigsProviderService>().GetConfig<PlayerExplosionConfig>();
+            // TODO: move these settings to player settings
 
             return new PlayerExplosionOnClickService(
                 c.Resolve<ClickAreaService>(),

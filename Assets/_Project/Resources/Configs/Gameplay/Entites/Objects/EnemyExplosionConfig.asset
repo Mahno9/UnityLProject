@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf181d031404c344a8b1ffec9af5b49, type: 3}
-  m_Name: ExplosionConfig
-  m_EditorClassIdentifier: 
+  m_Script: {fileID: 0}
+  m_Name: EnemyExplosionConfig
+  m_EditorClassIdentifier: Assembly-CSharp:_Project.Develop.Runtime.Configs.Gameplay.Entities:EnemyExplosionConfig
   <Radius>k__BackingField: 3
-  <Lifetime>k__BackingField: 0.4
+  <Lifetime>k__BackingField: 3
   <CreationCooldown>k__BackingField: 0.5
   <Damage>k__BackingField: 50
+  <PrefabPath>k__BackingField: Entities/EnemyExplosion
