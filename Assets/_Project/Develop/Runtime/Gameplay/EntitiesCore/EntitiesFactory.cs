@@ -44,7 +44,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, R.Entities.Hero);
+            _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
             entity.AddName("Hero")
 
@@ -141,7 +141,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         {
             Entity entity = CreateEmpty();
 
-            _monoEntitiesFactory.Create(entity, position, R.Entities.Ghost);
+            _monoEntitiesFactory.Create(entity, position, config.PrefabPath);
 
             entity
                 .AddName(name)

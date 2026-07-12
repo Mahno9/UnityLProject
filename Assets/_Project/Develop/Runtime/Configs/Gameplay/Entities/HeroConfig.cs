@@ -5,7 +5,7 @@ namespace _Project.Develop.Runtime.Configs.Gameplay.Entities
     [CreateAssetMenu(menuName = "Configs/Gameplay/Entities/NewHeroConfig", fileName = "HeroConfig")]
     public class HeroConfig : EntityConfig
     {
-        [field: SerializeField] public string PrefabPath { get; private set; } = "Entities/Hero";
+        [field: SerializeField] public string PrefabPath { get; private set; } = R.Entities.Hero;
         [field: SerializeField, Min(0)] public float MoveSpeed { get; private set; } = 9;
         [field: SerializeField, Min(0)] public float RotationSpeed { get; private set; } = 900;
         [field: SerializeField, Min(0)] public float AttackProcessTime { get; private set; } = 1.5f;
