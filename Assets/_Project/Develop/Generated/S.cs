@@ -5,6 +5,31 @@ public static class S
 {
     public static class _Project
     {
+        public static class Art
+        {
+            public static class GUI_Pro_FantasyRPG
+            {
+                public static class Scene
+                {
+                    public const string DemoScene_FantasyRPG = "DemoScene_FantasyRPG";
+                }
+            }
+            public static class RPG_Monster_DUO_PBR_Polyart
+            {
+                public static class Scenes
+                {
+                    public const string PBR = "PBR";
+                    public const string Polyart = "Polyart";
+                }
+            }
+            public static class Turret_Towers
+            {
+                public static class Scenes
+                {
+                    public const string Demo = "Demo";
+                }
+            }
+        }
         public static class Scenes
         {
             public const string Empty = "Empty";
