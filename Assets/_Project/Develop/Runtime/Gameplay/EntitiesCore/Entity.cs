@@ -7,13 +7,15 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 {
     public partial class Entity : IDisposable
     {
+        public event Action<Entity> Initialized;
+
         private readonly Dictionary<Type, IEntityComponent> _components = new();
 
         private readonly List<IEntitySystem> _systems = new();
 
         private readonly List<IInitializableSystem> _initializables = new();
-        private readonly List<IUpdatableSystem> _updatables = new();
-        private readonly List<IDisposableSystem> _disposables = new();
+        private readonly List<IUpdatableSystem>     _updatables     = new();
+        private readonly List<IDisposableSystem>    _disposables    = new();
 
         private bool _isInit;
 
@@ -25,6 +27,8 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 initializable.OnInit(this);
 
             _isInit = true;
+
+            Initialized?.Invoke(this);
         }
 
         public void OnUpdate(float deltaTime)
@@ -57,7 +61,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
         public bool TryGetComponent<TComponent>(out TComponent component) where TComponent : class, IEntityComponent
         {
-            if(_components.TryGetValue(typeof(TComponent), out IEntityComponent findedObject))
+            if (_components.TryGetValue(typeof(TComponent), out IEntityComponent findedObject))
             {
                 component = (TComponent)findedObject;
                 return true;
