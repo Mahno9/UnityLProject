@@ -54,6 +54,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateMarketService);
 
             container.RegisterAsSingle(CreateClickAreaService);
+            container.RegisterAsSingle(CreateCursorMoveAreaService);
             container.RegisterAsSingle(CreateEntityTrackingService);
             container.RegisterAsSingle(CreateWaveEnemyCounterService);
             container.RegisterAsSingle(CreateEnemySpawnService);
@@ -119,6 +120,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static StagesFactory CreateStagesFactory(DIContainer c)
             => new(c);
+
+        private static CursorMoveAreaService CreateCursorMoveAreaService(DIContainer c)
+            => new();
 
         private static ClickAreaService CreateClickAreaService(DIContainer c)
             => new();

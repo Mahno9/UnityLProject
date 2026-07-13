@@ -28,6 +28,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private AIBrainsContext       _brainsContext;
         private ClickAreaService      _clickAreaService;
         private GameplayStatesContext _gameplayStatesContext;
+        private CursorMoveAreaService _cursorMoveAreaService;
 
         public override void ProcessRegistrations(DIContainer container, IInputSceneArgs sceneArgs = null)
         {
@@ -44,6 +45,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _brainsContext = _container.Resolve<AIBrainsContext>();
             _clickAreaService = _container.Resolve<ClickAreaService>();
             _gameplayStatesContext = _container.Resolve<GameplayStatesContext>();
+            _cursorMoveAreaService = _container.Resolve<CursorMoveAreaService>();
 
             LevelConfig levelConfig = _container.Resolve<LevelConfig>();
 
@@ -69,6 +71,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             _brainsContext?.Update(Time.deltaTime);
             _clickAreaService?.Update(Time.deltaTime);
             _gameplayStatesContext?.Update(Time.deltaTime);
+            _cursorMoveAreaService?.Update(Time.deltaTime);
         }
     }
 }

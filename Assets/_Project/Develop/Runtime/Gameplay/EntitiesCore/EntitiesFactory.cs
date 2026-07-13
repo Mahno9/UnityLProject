@@ -9,6 +9,7 @@ using _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot;
 using _Project.Develop.Runtime.Gameplay.Features.ContactTakeDamage;
 using _Project.Develop.Runtime.Gameplay.Features.Energy;
+using _Project.Develop.Runtime.Gameplay.Features.InputFeature;
 using _Project.Develop.Runtime.Gameplay.Features.LifeCycle;
 using _Project.Develop.Runtime.Gameplay.Features.MovementFeature;
 using _Project.Develop.Runtime.Gameplay.Features.RotationFeature;
@@ -31,6 +32,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
         private readonly EntitiesLifeContext      _entitiesLifeContext;
         private readonly CollidersRegistryService _collidersRegistryService;
         private readonly MonoEntitiesFactory      _monoEntitiesFactory;
+        private readonly CursorMoveAreaService    _cursorMoveAreaService;
 
         public EntitiesFactory(DIContainer container)
         {
@@ -38,6 +40,7 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             _entitiesLifeContext = _container.Resolve<EntitiesLifeContext>();
             _monoEntitiesFactory = _container.Resolve<MonoEntitiesFactory>();
             _collidersRegistryService = _container.Resolve<CollidersRegistryService>();
+            _cursorMoveAreaService = _container.Resolve<CursorMoveAreaService>();
         }
 
         public Entity CreateHero(Vector3 position, HeroConfig config)
@@ -523,7 +526,10 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
                 .AddIsDead()
                 .AddInDeathProcess()
                 .AddDeathProcessInitialTime(new ReactiveVariable<float>(config.DeathProcessTime))
-                .AddDeathProcessCurrentTime();
+                .AddDeathProcessCurrentTime()
+                .AddGunRotationDirection()
+                .AddGunRotationSpeed(new ReactiveVariable<float>(config.GunRotationSpeed))
+                ;
 
             ICompositeCondition mustDie = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.CurrentHealth.Value <= 0));
@@ -535,17 +541,25 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
             ICompositeCondition canApplyDamage = new CompositeCondition()
                 .Add(new FuncCondition(() => entity.IsDead.Value == false));
 
+            ICompositeCondition canRotate = new CompositeCondition()
+                .Add(new FuncCondition(() => entity.IsDead.Value == false));
+
             entity
                 .AddMustDie(mustDie)
                 .AddMustSelfRelease(mustSelfRelease)
-                .AddCanApplyDamage(canApplyDamage);
+                .AddCanApplyDamage(canApplyDamage)
+                .AddCanRotate(canRotate)
+                ;
 
             entity
                 .AddSystem(new ApplyDamageSystem())
                 .AddSystem(new DeathSystem())
                 .AddSystem(new DisableCollidersOnDeathSystem())
                 .AddSystem(new DeathProcessTimerSystem())
-                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext));
+                .AddSystem(new SelfReleaseSystem(_entitiesLifeContext))
+                .AddSystem(new CalcGunRotationToPointerSystem(_cursorMoveAreaService))
+                .AddSystem(new GunTransformRotationSystem())
+                ;
 
             return entity;
         }
@@ -604,5 +618,4 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 
         private Entity CreateEmpty() => new Entity();
     }
-
 }

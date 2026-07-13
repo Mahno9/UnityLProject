@@ -293,54 +293,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.Sensors.IsTouchTarget() {Value = value}); 
 		}
 
-		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection RotationDirectionC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection>();
-
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> RotationDirection => RotationDirectionC.Value;
-
-		public bool TryGetRotationDirection(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
-		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection component);
-			if(result)
-				value = component.Value;
-			else
-				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>);
-			return result;
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationDirection()
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>() }); 
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationDirection(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection() {Value = value}); 
-		}
-
-		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed RotationSpeedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed>();
-
-		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> RotationSpeed => RotationSpeedC.Value;
-
-		public bool TryGetRotationSpeed(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
-		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed component);
-			if(result)
-				value = component.Value;
-			else
-				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
-			return result;
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationSpeed()
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationSpeed(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed() {Value = value}); 
-		}
-
 		public _Project.Develop.Runtime.Gameplay.Features.Naming.Name NameC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Naming.Name>();
 
 		public System.String Name => NameC.Value;
@@ -449,25 +401,6 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanMove(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanMove() {Value = value}); 
-		}
-
-		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanRotate CanRotateC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanRotate>();
-
-		public _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanRotate => CanRotateC.Value;
-
-		public bool TryGetCanRotate(out _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
-		{
-			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanRotate component);
-			if(result)
-				value = component.Value;
-			else
-				value = default(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition);
-			return result;
-		}
-
-		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanRotate(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
-		{
-			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.MovementFeature.CanRotate() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRadius TeleportRadiusC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.MovementFeature.TeleportRadius>();
@@ -925,6 +858,140 @@ namespace _Project.Develop.Runtime.Gameplay.EntitiesCore
 		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddDisableCollidersOnDeath(System.Collections.Generic.List<UnityEngine.Collider> value)
 		{
 			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.LifeCycle.DisableCollidersOnDeath() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunTransform GunTransformC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.GunFeature.GunTransform>();
+
+		public UnityEngine.Transform GunTransform => GunTransformC.Value;
+
+		public bool TryGetGunTransform(out UnityEngine.Transform value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunTransform component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(UnityEngine.Transform);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddGunTransform(UnityEngine.Transform value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunTransform() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationDirection GunRotationDirectionC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationDirection>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> GunRotationDirection => GunRotationDirectionC.Value;
+
+		public bool TryGetGunRotationDirection(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationDirection component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddGunRotationDirection()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationDirection() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddGunRotationDirection(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationDirection() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationSpeed GunRotationSpeedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationSpeed>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> GunRotationSpeed => GunRotationSpeedC.Value;
+
+		public bool TryGetGunRotationSpeed(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationSpeed component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddGunRotationSpeed()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationSpeed() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddGunRotationSpeed(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.GunFeature.GunRotationSpeed() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection RotationDirectionC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> RotationDirection => RotationDirectionC.Value;
+
+		public bool TryGetRotationDirection(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationDirection()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationDirection(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<UnityEngine.Vector3> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationDirection() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed RotationSpeedC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed>();
+
+		public _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> RotationSpeed => RotationSpeedC.Value;
+
+		public bool TryGetRotationSpeed(out _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationSpeed()
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed() { Value = new _Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single>() }); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddRotationSpeed(_Project.Develop.Runtime.Utilities.Reactive.ReactiveVariable<System.Single> value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.RotationSpeed() {Value = value}); 
+		}
+
+		public _Project.Develop.Runtime.Gameplay.Features.RotationFeature.CanRotate CanRotateC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.RotationFeature.CanRotate>();
+
+		public _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition CanRotate => CanRotateC.Value;
+
+		public bool TryGetCanRotate(out _Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			bool result = TryGetComponent(out _Project.Develop.Runtime.Gameplay.Features.RotationFeature.CanRotate component);
+			if(result)
+				value = component.Value;
+			else
+				value = default(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition);
+			return result;
+		}
+
+		public _Project.Develop.Runtime.Gameplay.EntitiesCore.Entity AddCanRotate(_Project.Develop.Runtime.Utilities.Conditions.ICompositeCondition value)
+		{
+			return AddComponent(new _Project.Develop.Runtime.Gameplay.Features.RotationFeature.CanRotate() {Value = value}); 
 		}
 
 		public _Project.Develop.Runtime.Gameplay.Features.Energy.Energy EnergyC => GetComponent<_Project.Develop.Runtime.Gameplay.Features.Energy.Energy>();

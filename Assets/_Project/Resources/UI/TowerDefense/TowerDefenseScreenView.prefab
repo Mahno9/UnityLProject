@@ -208,7 +208,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -340,6 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2775857603069035366}
   - component: {fileID: 4699022878381443837}
+  - component: {fileID: 8762835986766104632}
   m_Layer: 0
   m_Name: TowerDefenseScreenView
   m_TagString: Untagged
@@ -386,6 +387,18 @@ MonoBehaviour:
   <EnemyCountView>k__BackingField: {fileID: 4899593264484021749}
   <StartButton>k__BackingField: {fileID: 75204461000161986}
   _startButtonText: {fileID: 752039224073909849}
+--- !u!114 &8762835986766104632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8546670283719323666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd420a047b14c6294f2bfc79d68469a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &764424441406360066
 PrefabInstance:
   m_ObjectHideFlags: 0
