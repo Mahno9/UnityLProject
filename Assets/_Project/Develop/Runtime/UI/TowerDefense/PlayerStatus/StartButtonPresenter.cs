@@ -18,7 +18,7 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
     public class StartButtonPresenter : IPresenter
     {
         private const string START_WAVE_TEXT   = "Начать волну";
-        private const string EXIT_TO_MENU_TEXT = "Перейти в меню";
+        private const string EXIT_TO_MENU_TEXT = "В меню";
 
         private readonly Button                   _button;
         private readonly TMP_Text                 _label;
