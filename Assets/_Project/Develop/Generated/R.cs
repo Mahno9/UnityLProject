@@ -127,7 +127,6 @@ public static class R
         public static class General
         {
             public const string IconTextBase = "UI/General/IconTextBase";
-            public const string WalletView = "UI/General/WalletView";
         }
         public static class MainMenu
         {
@@ -142,9 +141,20 @@ public static class R
         }
         public static class TowerDefense
         {
+            public const string EnemyCountView = "UI/TowerDefense/EnemyCountView";
             public const string HealthView = "UI/TowerDefense/HealthView";
             public const string TowerDefenseScreenView = "UI/TowerDefense/TowerDefenseScreenView";
+            public const string TowerDefenseUIRoot = "UI/TowerDefense/TowerDefenseUIRoot";
             public const string WaveView = "UI/TowerDefense/WaveView";
+            public static class Popups
+            {
+                public const string Gold_Reward = "UI/TowerDefense/Popups/Gold Reward";
+                public const string WinPopup = "UI/TowerDefense/Popups/WinPopup";
+            }
+        }
+        public static class Wallet
+        {
+            public const string WalletView = "UI/Wallet/WalletView";
         }
     }
     public static class Utilities

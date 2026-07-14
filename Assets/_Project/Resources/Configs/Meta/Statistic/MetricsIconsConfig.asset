@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fbb16fb04e4991b81c419390b2b356, type: 3}
   m_Name: MetricsIconsConfig
   m_EditorClassIdentifier: 
-  _winSprite: {fileID: 21300000, guid: 470db8e21d5db694cbff754d2cef509f, type: 3}
-  _loseSprite: {fileID: 21300000, guid: a40454e8770ea6046ab6f065f59d0359, type: 3}
+  _winSprite: {fileID: 21300000, guid: e9c46af63be98254aacca484ddae001f, type: 3}
+  _loseSprite: {fileID: 21300000, guid: 63fef4b7e275c4f4582d15932d0e7aad, type: 3}

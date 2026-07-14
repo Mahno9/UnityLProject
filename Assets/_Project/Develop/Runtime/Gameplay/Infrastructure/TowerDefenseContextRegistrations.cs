@@ -25,7 +25,6 @@ using _Project.Develop.Runtime.UI.TowerDefense;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
-using _Project.Develop.Runtime.Utilities.SceneManagement;
 using _Project.Develop.Runtime.Utilities.Timer;
 
 using UnityEngine;
@@ -68,7 +67,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStatesFactory);
             container.RegisterAsSingle((c) => CreateGameplayStatesContext(c, args));
 
-            container.RegisterAsSingle(CreateLevelUIRoot);
+            container.RegisterAsSingle(CreateTowerDefenseUIRoot);
             container.RegisterAsSingle(CreateTowerDefensePresentersFactory);
             container.RegisterAsSingle(CreateTowerDefenseScreenPresenter).NonLazy();
 
@@ -80,9 +79,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             return new StageProviderService(c.Resolve<LevelConfig>(), c.Resolve<StagesFactory>());
         }
 
-        private static LevelUIRoot CreateLevelUIRoot(DIContainer c)
+        private static TowerDefenseUIRoot CreateTowerDefenseUIRoot(DIContainer c)
         {
-            LevelUIRoot uiRootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<LevelUIRoot>(R.UI.Gameplay.LevelUIRoot);
+            TowerDefenseUIRoot uiRootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<TowerDefenseUIRoot>(R.UI.TowerDefense.TowerDefenseUIRoot);
 
             return Object.Instantiate(uiRootPrefab);
         }
@@ -92,7 +91,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static TowerDefenseScreenPresenter CreateTowerDefenseScreenPresenter(DIContainer c)
         {
-            LevelUIRoot uiRoot = c.Resolve<LevelUIRoot>();
+            TowerDefenseUIRoot uiRoot = c.Resolve<TowerDefenseUIRoot>();
 
             TowerDefenseScreenView view = c.Resolve<ViewsFactory>()
                 .Create<TowerDefenseScreenView>(ViewIDs.TowerDefenseScreen, uiRoot.HUDLayer);

@@ -29,6 +29,14 @@ public static class S
                     public const string Demo = "Demo";
                 }
             }
+            public static class VanillaArt_MeadevilPack_FREE
+            {
+                public static class Scenes
+                {
+                    public const string EveryObjectScene = "EveryObjectScene";
+                    public const string PresentationScene = "PresentationScene";
+                }
+            }
         }
         public static class Scenes
         {
