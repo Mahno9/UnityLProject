@@ -5,6 +5,8 @@ using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
+using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
@@ -39,7 +41,8 @@ namespace _Project.Develop.Runtime.Gameplay.States
                 inputArgs,
                 _container.Resolve<PlayerDataProvider>(),
                 _container.Resolve<SceneSwitcherService>(),
-                _container.Resolve<ICoroutinesPerformer>());
+                _container.Resolve<ICoroutinesPerformer>()
+                );
         }
 
         public DefeatState CreateDefeatState(MovingGameplayInputArgs inputArgs)

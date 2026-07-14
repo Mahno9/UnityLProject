@@ -70,6 +70,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateTowerDefenseUIRoot);
             container.RegisterAsSingle(CreateTowerDefensePresentersFactory);
             container.RegisterAsSingle(CreateTowerDefenseScreenPresenter).NonLazy();
+            container.RegisterAsSingle(CreateTowerDefensePopupService);
 
             container.Initialize();
         }
@@ -189,6 +190,16 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<ResourcesAssetsLoader>(),
                 c.Resolve<EntitiesLifeContext>(),
                 c.Resolve<CollidersRegistryService>());
+        }
+
+        private static TowerDefensePopupService CreateTowerDefensePopupService(DIContainer c)
+        {
+            return new TowerDefensePopupService(
+                c.Resolve<ViewsFactory>(),
+                c.Resolve<ProjectPresentersFactory>(),
+                c.Resolve<TowerDefenseUIRoot>(),
+                c.Resolve<TowerDefensePresentersFactory>()
+            );
         }
     }
 }

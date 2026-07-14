@@ -14,6 +14,7 @@ using _Project.Develop.Runtime.Gameplay.States;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.Meta.Logic.RewardManagement;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.Conditions;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 
@@ -53,7 +54,9 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
                 _container.Resolve<ICoroutinesPerformer>(),
                 _container.Resolve<RewardService>(),
                 _container.Resolve<LevelConfig>(),
-                _container.Resolve<StatisticService>());
+                _container.Resolve<StatisticService>(),
+                _container.Resolve<TowerDefensePopupService>()
+                );
         }
 
         public DefeatState CreateDefeatState(TowerDefenseInputArgs inputArgs)

@@ -3,6 +3,7 @@ using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManagement;
 using _Project.Develop.Runtime.Meta.Logic.RewardManagement;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.StateMachineCore;
 
@@ -22,6 +23,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
         private readonly RewardService            _rewardService;
         private readonly LevelConfig              _levelConfig;
         private readonly StatisticService         _statisticService;
+        private readonly TowerDefensePopupService _popupService;
 
         public VictoryState(
             LevelsProgressionService levelsProgressionService,
@@ -30,7 +32,9 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             ICoroutinesPerformer coroutinesPerformer,
             RewardService rewardService,
             LevelConfig levelConfig,
-            StatisticService statisticService)
+            StatisticService statisticService,
+            TowerDefensePopupService popupService
+            )
         {
             _levelsProgressionService = levelsProgressionService;
             _inputArgs = inputArgs;
@@ -39,6 +43,7 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             _rewardService = rewardService;
             _levelConfig = levelConfig;
             _statisticService = statisticService;
+            _popupService = popupService;
         }
 
         public override void Enter()
@@ -51,6 +56,8 @@ namespace _Project.Develop.Runtime.Gameplay.States.TowerDefense
             _statisticService.RegisterWin();
             _rewardService.Grant(_levelConfig.WinReward);
             _coroutinesPerformer.StartPerform(_playerDataProvider.SaveAsync());
+
+            _popupService.OpenWinPopup(_levelConfig.WinReward);
         }
 
         public void Update(float deltaTime)

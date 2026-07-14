@@ -4,6 +4,7 @@ using _Project.Develop.Runtime.Gameplay.Features.StagesFeature;
 using _Project.Develop.Runtime.Gameplay.Features.TowerDefensePhaseManagement;
 using _Project.Develop.Runtime.Infrastructure.DI;
 using _Project.Develop.Runtime.UI.CommonViews;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.UI.Wallet;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
@@ -48,5 +49,15 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
                 _container.Resolve<StartBattleService>(),
                 _container.Resolve<SceneSwitcherService>(),
                 _container.Resolve<ICoroutinesPerformer>());
+
+
+        public WinPopupPresenter CreateWinPopupPresenter(WinPopupView view)
+        {
+            return new WinPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                view,
+                _container.Resolve<SceneSwitcherService>()
+            );
+        }
     }
 }

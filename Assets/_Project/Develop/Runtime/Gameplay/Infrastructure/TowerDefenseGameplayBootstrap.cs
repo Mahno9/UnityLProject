@@ -11,7 +11,6 @@ using _Project.Develop.Runtime.Gameplay.Infrastructure.GameplayInputArgsManageme
 using _Project.Develop.Runtime.Gameplay.States;
 using _Project.Develop.Runtime.Infrastructure;
 using _Project.Develop.Runtime.Infrastructure.DI;
-using _Project.Develop.Runtime.UI.TowerDefense;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 
 using UnityEngine;

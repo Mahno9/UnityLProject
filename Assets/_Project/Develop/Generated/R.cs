@@ -34,12 +34,14 @@ public static class R
                 public const string RunningLevelsListConfig = "Configs/Gameplay/Levels/RunningLevelsListConfig";
                 public const string TD_DefenseLevels = "Configs/Gameplay/Levels/TD_DefenseLevels";
                 public const string TD_Level1 = "Configs/Gameplay/Levels/TD_Level1";
+                public const string TD_TestLevel = "Configs/Gameplay/Levels/TD_TestLevel";
             }
             public static class Stages
             {
                 public const string ClearAllEnemiesStage = "Configs/Gameplay/Stages/ClearAllEnemiesStage";
                 public const string TD_Stage1 = "Configs/Gameplay/Stages/TD_Stage1";
                 public const string TD_Stage2 = "Configs/Gameplay/Stages/TD_Stage2";
+                public const string TD_TestStage = "Configs/Gameplay/Stages/TD_TestStage";
             }
         }
         public static class Meta
@@ -148,7 +150,8 @@ public static class R
             public const string WaveView = "UI/TowerDefense/WaveView";
             public static class Popups
             {
-                public const string Gold_Reward = "UI/TowerDefense/Popups/Gold Reward";
+                public const string DefeatPopup = "UI/TowerDefense/Popups/DefeatPopup";
+                public const string Reward = "UI/TowerDefense/Popups/Reward";
                 public const string WinPopup = "UI/TowerDefense/Popups/WinPopup";
             }
         }

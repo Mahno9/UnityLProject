@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232954aaddf8470498946a9c0e4fe872, type: 3}
-  m_Name: TD_DefenseLevels
+  m_Script: {fileID: 11500000, guid: 92c92da55b8610c4ebe626bf46a783a4, type: 3}
+  m_Name: TD_TestStage
   m_EditorClassIdentifier: 
-  _levels:
-  - {fileID: 11400000, guid: 0a7ec2665464e854ebc1524db7a31d86, type: 2}
-  - {fileID: 11400000, guid: 211735ea15c024b4f9928c2308ec6115, type: 2}
+  _waves:
+  - <EnemyConfig>k__BackingField: {fileID: 11400000, guid: dbd64e348b3863f4bb2ddbb2a5df892d, type: 2}
+    <TotalCount>k__BackingField: 1
+    <MaxAliveAtOnce>k__BackingField: 1

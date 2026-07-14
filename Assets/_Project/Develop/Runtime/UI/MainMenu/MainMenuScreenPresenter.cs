@@ -11,7 +11,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
     {
         private readonly MainMenuScreenView        _screen;
         private readonly ProjectPresentersFactory  _projectPresentersFactory;
-        private readonly MainMenuPopupService      _popupService;
         private readonly MainMenuPresentersFactory _mainMenuPresentersFactory;
 
         private readonly List<IPresenter>          _childPresenters = new();
@@ -19,19 +18,15 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         public MainMenuScreenPresenter(
             MainMenuScreenView       screen,
             ProjectPresentersFactory projectPresentersFactory,
-            MainMenuPopupService     popupService,
             MainMenuPresentersFactory mainMenuPresentersFactory)
         {
             _screen = screen;
             _projectPresentersFactory = projectPresentersFactory;
-            _popupService = popupService;
             _mainMenuPresentersFactory = mainMenuPresentersFactory;
         }
 
         public void Initialize()
         {
-            // _screen.OpenLevelsMenuButtonClicked += OnOpenLevelsMenuButtonClicked;
-
             CreateStatistic();
             CreateWallet();
             CreateMenuItems();
@@ -42,8 +37,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
 
         public void Dispose()
         {
-            // _screen.OpenLevelsMenuButtonClicked -= OnOpenLevelsMenuButtonClicked;
-
             foreach (IPresenter presenter in _childPresenters)
                 presenter.Dispose();
 
@@ -70,10 +63,5 @@ namespace _Project.Develop.Runtime.UI.MainMenu
 
             _childPresenters.Add(mainMenuItems);
         }
-
-        // private void OnOpenLevelsMenuButtonClicked()
-        // {
-        //     // _popupService.OpenLevelsMenuPopup();
-        // }
     }
 }

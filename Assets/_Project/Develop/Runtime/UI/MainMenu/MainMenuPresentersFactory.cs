@@ -22,7 +22,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             return new MainMenuScreenPresenter(
                 mainMenuView,
                 _container.Resolve<ProjectPresentersFactory>(),
-                _container.Resolve<MainMenuPopupService>(),
                 _container.Resolve<MainMenuPresentersFactory>()
             );
         }
