@@ -63,7 +63,6 @@ public static class R
             }
             public static class Wallet
             {
-                public const string CurrencyIconsConfig = "Configs/Meta/Wallet/CurrencyIconsConfig";
                 public const string StartWalletConfig = "Configs/Meta/Wallet/StartWalletConfig";
             }
         }
@@ -125,6 +124,11 @@ public static class R
             public const string LevelScreenView = "UI/Gameplay/LevelScreenView";
             public const string LevelUIRoot = "UI/Gameplay/LevelUIRoot";
         }
+        public static class General
+        {
+            public const string IconTextBase = "UI/General/IconTextBase";
+            public const string WalletView = "UI/General/WalletView";
+        }
         public static class MainMenu
         {
             public const string MainMenuScreenView = "UI/MainMenu/MainMenuScreenView";
@@ -141,10 +145,6 @@ public static class R
             public const string HealthView = "UI/TowerDefense/HealthView";
             public const string TowerDefenseScreenView = "UI/TowerDefense/TowerDefenseScreenView";
             public const string WaveView = "UI/TowerDefense/WaveView";
-        }
-        public static class Wallet
-        {
-            public const string WalletView = "UI/Wallet/WalletView";
         }
     }
     public static class Utilities
