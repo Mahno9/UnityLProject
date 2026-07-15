@@ -16,8 +16,6 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
             return subscriber;
         }
 
-        private void Remove(Subscriber<T> subscriber) => _toRemove.Add(subscriber);
-
         public void Invoke(T arg)
         {
             if (_toAdd.Count > 0)
@@ -37,6 +35,8 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
             foreach (Subscriber<T> subscriber in _subscribers)
                 subscriber.Invoke(arg);
         }
+
+        private void Remove(Subscriber<T> subscriber) => _toRemove.Add(subscriber);
     }
 
     public class ReactiveEvent : IReadOnlyEvent
@@ -51,8 +51,6 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
             _toAdd.Add(subscriber);
             return subscriber;
         }
-
-        private void Remove(Subscriber subscriber) => _toRemove.Add(subscriber);
 
         public void Invoke()
         {
@@ -73,5 +71,7 @@ namespace _Project.Develop.Runtime.Utilities.Reactive
             foreach (Subscriber subscriber in _subscribers)
                 subscriber.Invoke();
         }
+
+        private void Remove(Subscriber subscriber) => _toRemove.Add(subscriber);
     }
 }

@@ -27,6 +27,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             _timerDisposable = _attackProcessCurrentTime.Subscribe(OnTimerChanged);
         }
 
+        public void OnDispose()
+        {
+            _timerDisposable.Dispose();
+        }
+
         private void OnTimerChanged(float arg1, float currentTime)
         {
             if (TimeIsDone(currentTime))
@@ -35,11 +40,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
                 _inAttackProcess.Value = false;
                 _endAttackEvent.Invoke();
             }
-        }
-
-        public void OnDispose()
-        {
-            _timerDisposable.Dispose();
         }
 
         private bool TimeIsDone(float currentTime) => currentTime >= _attackProcessInitialTime.Value;

@@ -18,25 +18,4 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI.States
             _entity.TeleportCooldownTimer.Value = _entity.InitialTeleportCooldownTimer;
         }
     }
-
-    // public class RestoreEnergyState : UpdatableState
-    // {
-    //     private readonly Entity _entity;
-    //     private readonly int    _energyRequireQuantity;
-    //
-    //     public RestoreEnergyState(Entity entity, int energyRequireQuantity)
-    //     {
-    //         _entity = entity;
-    //         _energyRequireQuantity = energyRequireQuantity;
-    //     }
-    //
-    //     public override void Update(float deltaTime)
-    //     {
-    //         base.Update(deltaTime);
-    //         if (_entity.Energy < _energyRequireQuantity)
-    //         {
-    //
-    //         }
-    //     }
-    // }
 }

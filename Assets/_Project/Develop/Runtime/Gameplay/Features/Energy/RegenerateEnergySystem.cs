@@ -25,11 +25,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Energy
             _energy.Subscribe(LogEnergyRegen);
         }
 
-        private void LogEnergyRegen(int _, int newEnergyValue)
-        {
-            Debug.Log($"Energy new value: {newEnergyValue}");
-        }
-
         public void OnUpdate(float deltaTime)
         {
             _timeTilRegeneration.Value -= deltaTime;
@@ -40,6 +35,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Energy
                 _energy.Value = (int)MathF.Min(_initialEnergy.Value, _energy.Value + energyToRegenerate);
                 _timeTilRegeneration.Value = _regenerateCooldown.Value;
             }
+        }
+
+        private void LogEnergyRegen(int _, int newEnergyValue)
+        {
+            Debug.Log($"Energy new value: {newEnergyValue}");
         }
     }
 }

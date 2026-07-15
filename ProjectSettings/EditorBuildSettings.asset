@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/MovingGameplayScene.unity
     guid: 27929aa5d17fedd48b4c1db385478b71
+  - enabled: 1
+    path: Assets/_Project/Scenes/TowerDefenseGameplayScene.unity
+    guid: 89a335b97fb853644b3d1502fce3727f
   m_configObjects: {}

@@ -31,12 +31,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
             _teleportHappenedEvent.Subscribe(OnTeleportHappened);
         }
 
-        private void OnTeleportHappened()
-        {
-            if (_autoRestart)
-                _timerLeft.Value = _timerInitial;
-        }
-
         public void OnUpdate(float deltaTime)
         {
             if (!(_timerLeft.Value > 0))
@@ -46,6 +40,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
 
             if (_timerLeft.Value <= 0)
                 _cooldownDoneEvent?.Invoke();
+        }
+
+        private void OnTeleportHappened()
+        {
+            if (_autoRestart)
+                _timerLeft.Value = _timerInitial;
         }
     }
 }

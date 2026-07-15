@@ -1,5 +1,6 @@
 ﻿using _Project.Develop.Runtime.Data.PlayerData;
 using _Project.Develop.Runtime.Infrastructure.DI;
+using _Project.Develop.Runtime.Meta.Logic.RewardManagement;
 using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 using _Project.Develop.Runtime.UI;
@@ -14,6 +15,8 @@ using _Project.Develop.Runtime.Utilities.DataManagement.Serializers;
 using _Project.Develop.Runtime.Utilities.LoadingScreen;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
 using _Project.Develop.Runtime.Utilities.Timer;
+
+using Assets._Project.Develop.Runtime.Meta.Features.LevelsProgression;
 
 using UnityEngine;
 
@@ -33,13 +36,21 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle<ILoadingScreen>(CreateLoadingScreen);
             container.RegisterAsSingle(CreateSaveLoadService);
             container.RegisterAsSingle(CreateWalletService);
+            container.RegisterAsSingle(CreateRewardFactory);
+            container.RegisterAsSingle(CreateRewardService);
             container.RegisterAsSingle(CreatePlayerDataProvider);
             container.RegisterAsSingle(CreateStatisticService);
             container.RegisterAsSingle(CreateViewFactory);
             container.RegisterAsSingle(CreateProjectPresentersFactory);
             container.RegisterAsSingle(CreateTimerService);
+            container.RegisterAsSingle(CreateLevelsProgressionService);
 
             container.Initialize();
+        }
+
+        private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
+        {
+            return new LevelsProgressionService(c.Resolve<PlayerDataProvider>());
         }
 
         private static TimerServiceFactory CreateTimerService(DIContainer c)
@@ -70,6 +81,12 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
         {
             return new(c.Resolve<PlayerDataProvider>());
         }
+
+        private static RewardFactory CreateRewardFactory(DIContainer c)
+            => new RewardFactory(c);
+
+        private static RewardService CreateRewardService(DIContainer c)
+            => new RewardService(c.Resolve<RewardFactory>());
 
         private static SaveLoadService CreateSaveLoadService(DIContainer c)
         {

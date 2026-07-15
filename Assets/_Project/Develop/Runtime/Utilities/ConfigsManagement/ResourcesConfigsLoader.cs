@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using _Project.Develop.Runtime.Configs.Gameplay.Entities;
+using _Project.Develop.Runtime.Configs.Gameplay.Levels;
 using _Project.Develop.Runtime.Configs.Meta.Market;
 using _Project.Develop.Runtime.Configs.Meta.Progression;
 using _Project.Develop.Runtime.Configs.Meta.Statistic;
@@ -18,12 +20,17 @@ namespace _Project.Develop.Runtime.Utilities.ConfigsManagement
 
         private readonly Dictionary<Type, string> _configsResourcesPaths = new()
         {
-            {typeof(StartWalletConfig), R.Configs.Meta.Wallet.StartWalletConfig},
-            {typeof(StartStatisticConfig), R.Configs.Meta.Statistic.StartStatisticConfig},
-            {typeof(ProgressionConfig), R.Configs.Meta.Progression.ProgressionConfig},
-            {typeof(MarketConfig), R.Configs.Meta.Market.MarketConfig},
-            {typeof(CurrencyIconsConfig), R.Configs.Meta.Wallet.CurrencyIconsConfig},
-            {typeof(MetricsIconsConfig), R.Configs.Meta.Statistic.MetricsIconsConfig},
+            { typeof(StartWalletConfig), R.Configs.Meta.Wallet.StartWalletConfig },
+            { typeof(StartStatisticConfig), R.Configs.Meta.Statistic.StartStatisticConfig },
+            { typeof(ProgressionConfig), R.Configs.Meta.Progression.ProgressionConfig },
+            { typeof(MarketConfig), R.Configs.Meta.Market.MarketConfig },
+            { typeof(CurrencyIconsConfig), R.Configs.Meta.Wallet.CurrencyIconsConfig },
+            { typeof(MetricsIconsConfig), R.Configs.Meta.Statistic.MetricsIconsConfig },
+            { typeof(HeroConfig), R.Configs.Gameplay.Entites.Characters.HeroConfig },
+            { typeof(TowerConfig), R.Configs.Gameplay.Entites.Characters.TowerConfig },
+            { typeof(MineConfig), R.Configs.Gameplay.Entites.Characters.MineConfig },
+            { typeof(ExplosionConfig), R.Configs.Gameplay.Entites.Characters.ExplosionConfig },
+            { typeof(LevelsListConfig), R.Configs.Gameplay.Levels.RunningLevelsListConfig },
         };
 
         public ResourcesConfigsLoader(ResourcesAssetsLoader resources)

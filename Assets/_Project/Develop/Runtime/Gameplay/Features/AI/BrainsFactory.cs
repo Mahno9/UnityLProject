@@ -9,8 +9,6 @@ using _Project.Develop.Runtime.Utilities.Timer;
 using System;
 using System.Collections.Generic;
 
-using _Project.Develop.Runtime.Utilities.StateMachineCore;
-
 using UnityEngine;
 
 namespace _Project.Develop.Runtime.Gameplay.Features.AI
@@ -51,41 +49,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             _brainsContext.SetFor(entity, brain);
 
             return brain;
-        }
-
-        // To the lowest HP on 40+ energy
-        private AIStateMachine CreateIntelligentTeleporterBehaviour(Entity entity)
-        {
-            AIStateMachine behaviour = new();
-
-            TeleportToTargetState teleportState      = new(entity);
-            TeleportCooldownState cooldownState      = new(entity);
-            EmptyState            restoreEnergyState = new();
-            FindTargetState       findTargetState    = new(new LowestHPDamageableTargetSelector(entity), _entitiesLifeContext, entity);
-            behaviour.AddStates(findTargetState, teleportState, cooldownState, restoreEnergyState);
-
-            behaviour.AddTransition(teleportState, cooldownState, entity.TeleportDoneEvent);
-            behaviour.AddTransition(cooldownState, restoreEnergyState, entity.TeleportCooldownDoneEvent);
-            behaviour.AddTransition(restoreEnergyState, findTargetState, new FuncCondition(() => entity.Energy.Value >= 40));
-            behaviour.AddTransition(findTargetState, restoreEnergyState, new FuncCondition(() => entity.Energy.Value < 40));
-            behaviour.AddTransition(findTargetState, teleportState, new FuncCondition(() => entity.CurrentTarget.Value != null));
-
-            return behaviour;
-        }
-
-        private static AIStateMachine CreateDefaultTeleporterBehaviour(Entity entity)
-        {
-            AIStateMachine behaviour = new();
-
-            TeleportCooldownState cooldownState   = new(entity);
-            RandomTeleportState   teleporterState = new(entity);
-            behaviour.AddState(cooldownState);
-            behaviour.AddState(teleporterState);
-
-            behaviour.AddTransition(cooldownState, teleporterState, entity.TeleportCooldownDoneEvent);
-            behaviour.AddTransition(teleporterState, cooldownState, entity.TeleportDoneEvent);
-
-            return behaviour;
         }
 
         public StateMachineBrain CreateMainHeroManualCombatBrain(Entity entity)
@@ -153,6 +116,60 @@ namespace _Project.Develop.Runtime.Gameplay.Features.AI
             _brainsContext.SetFor(entity, brain);
 
             return brain;
+        }
+
+        public StateMachineBrain CreateZombieBrain(Entity entity)
+        {
+            FindTargetState findTargetState = new FindTargetState(
+                new NearestDamageableTargetSelector(entity), _entitiesLifeContext, entity);
+
+            MoveToTargetState moveToTargetState = new MoveToTargetState(entity);
+
+            AIParallelState parallelState = new AIParallelState(findTargetState, moveToTargetState);
+
+            AIStateMachine rootStateMachine = new AIStateMachine();
+            rootStateMachine.AddState(parallelState);
+
+            StateMachineBrain brain = new StateMachineBrain(rootStateMachine);
+
+            _brainsContext.SetFor(entity, brain);
+
+            return brain;
+        }
+
+        // To the lowest HP on 40+ energy
+        private AIStateMachine CreateIntelligentTeleporterBehaviour(Entity entity)
+        {
+            AIStateMachine behaviour = new();
+
+            TeleportToTargetState teleportState      = new(entity);
+            TeleportCooldownState cooldownState      = new(entity);
+            EmptyState            restoreEnergyState = new();
+            FindTargetState       findTargetState    = new(new LowestHPDamageableTargetSelector(entity), _entitiesLifeContext, entity);
+            behaviour.AddStates(findTargetState, teleportState, cooldownState, restoreEnergyState);
+
+            behaviour.AddTransition(teleportState, cooldownState, entity.TeleportDoneEvent);
+            behaviour.AddTransition(cooldownState, restoreEnergyState, entity.TeleportCooldownDoneEvent);
+            behaviour.AddTransition(restoreEnergyState, findTargetState, new FuncCondition(() => entity.Energy.Value >= 40));
+            behaviour.AddTransition(findTargetState, restoreEnergyState, new FuncCondition(() => entity.Energy.Value < 40));
+            behaviour.AddTransition(findTargetState, teleportState, new FuncCondition(() => entity.CurrentTarget.Value != null));
+
+            return behaviour;
+        }
+
+        private static AIStateMachine CreateDefaultTeleporterBehaviour(Entity entity)
+        {
+            AIStateMachine behaviour = new();
+
+            TeleportCooldownState cooldownState   = new(entity);
+            RandomTeleportState   teleporterState = new(entity);
+            behaviour.AddState(cooldownState);
+            behaviour.AddState(teleporterState);
+
+            behaviour.AddTransition(cooldownState, teleporterState, entity.TeleportCooldownDoneEvent);
+            behaviour.AddTransition(teleporterState, cooldownState, entity.TeleportDoneEvent);
+
+            return behaviour;
         }
 
         private AIStateMachine CreateRandomMovementStateMachine(Entity entity)

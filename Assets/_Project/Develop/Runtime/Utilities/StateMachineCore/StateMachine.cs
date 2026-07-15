@@ -67,8 +67,6 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
             UpdateLogic(deltaTime);
         }
 
-        protected virtual void UpdateLogic(float deltaTime) { }
-
         public void Dispose()
         {
             _isRunning = false;
@@ -103,6 +101,8 @@ namespace _Project.Develop.Runtime.Utilities.StateMachineCore
 
             _isRunning = false;
         }
+
+        protected virtual void UpdateLogic(float deltaTime) { }
 
         private void SwitchState(StateNode<TState> nextState)
         {

@@ -32,6 +32,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             _startAttackDisposable = _startAttackEvent.Subscribe(OnStartAttack);
         }
 
+        public void OnDispose()
+        {
+            _timerDisposable.Dispose();
+            _startAttackDisposable.Dispose();
+        }
+
         private void OnStartAttack()
         {
             _alreadyAttacked = false;
@@ -48,12 +54,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
                 _attackDelayEndEvent.Invoke();
                 _alreadyAttacked = true;
             }
-        }
-
-        public void OnDispose()
-        {
-            _timerDisposable.Dispose();
-            _startAttackDisposable.Dispose();
         }
     }
 }

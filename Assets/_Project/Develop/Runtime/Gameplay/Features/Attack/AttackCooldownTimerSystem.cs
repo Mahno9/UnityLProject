@@ -28,13 +28,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             _endAttackEventDisposable = _endAttackEvent.Subscribe(OnEndAttack);
         }
 
-        private void OnEndAttack()
-        {
-            Debug.Log("КУЛДАУН НАЧАЛСЯ");
-            _currentTime.Value = _initialTime.Value;
-            _inAttackCooldown.Value = true;
-        }
-
         public void OnUpdate(float deltaTime)
         {
             if (_inAttackCooldown.Value == false)
@@ -49,11 +42,18 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             }
         }
 
-        private bool CooldownIsOver() => _currentTime.Value <= 0;
-
         public void OnDispose()
         {
             _endAttackEventDisposable.Dispose();
         }
+
+        private void OnEndAttack()
+        {
+            Debug.Log("КУЛДАУН НАЧАЛСЯ");
+            _currentTime.Value = _initialTime.Value;
+            _inAttackCooldown.Value = true;
+        }
+
+        private bool CooldownIsOver() => _currentTime.Value <= 0;
     }
 }

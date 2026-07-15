@@ -18,6 +18,42 @@ namespace _Project.Develop.Editor
         private static string OutputPath
             => Path.Combine(Application.dataPath, "_Project/Develop/Runtime/Gameplay/EntitiesCore/Generated/EntityAPI.cs");
 
+        public static string GetVariableNameFrom(string name) => char.ToLowerInvariant(name[0]) + name.Substring(1);
+
+        public static string GetValidTypeName(Type type)
+        {
+            if (type.IsGenericType)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                string fullTypeName = type.FullName;
+                var backtickIndex = fullTypeName.IndexOf('`');
+
+                if (backtickIndex >= 0)
+                    fullTypeName = fullTypeName.Substring(0, backtickIndex);
+
+                sb.Append(fullTypeName);
+                sb.Append("<");
+
+                Type[] genericArgs = type.GetGenericArguments();
+
+                for (int i = 0; i < genericArgs.Length; i++)
+                {
+                    if (i > 0)
+                        sb.Append(", ");
+
+                    sb.Append(GetValidTypeName(genericArgs[i]));
+                }
+
+                sb.Append(">");
+                return sb.ToString();
+            }
+            else
+            {
+                return type.FullName;
+            }
+        }
+
         [InitializeOnLoadMethod]
         [MenuItem("Tools/GenerateEntityAPI")]
         private static void Generate()
@@ -130,8 +166,6 @@ namespace _Project.Develop.Editor
             return "{" + string.Join(", ", initializers) + "}";
         }
 
-        public static string GetVariableNameFrom(string name) => char.ToLowerInvariant(name[0]) + name.Substring(1);
-
         private static bool HasSingleField(Type type, out FieldInfo field)
         {
             FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
@@ -163,40 +197,6 @@ namespace _Project.Develop.Editor
                 .Where(type => type.IsInterface == false
                     && type.IsAbstract == false
                     && typeof(IEntityComponent).IsAssignableFrom(type));
-        }
-
-        public static string GetValidTypeName(Type type)
-        {
-            if (type.IsGenericType)
-            {
-                StringBuilder sb = new StringBuilder();
-
-                string fullTypeName = type.FullName;
-                var backtickIndex = fullTypeName.IndexOf('`');
-
-                if (backtickIndex >= 0)
-                    fullTypeName = fullTypeName.Substring(0, backtickIndex);
-
-                sb.Append(fullTypeName);
-                sb.Append("<");
-
-                Type[] genericArgs = type.GetGenericArguments();
-
-                for (int i = 0; i < genericArgs.Length; i++)
-                {
-                    if (i > 0)
-                        sb.Append(", ");
-
-                    sb.Append(GetValidTypeName(genericArgs[i]));
-                }
-
-                sb.Append(">");
-                return sb.ToString();
-            }
-            else
-            {
-                return type.FullName;
-            }
         }
     }
 }

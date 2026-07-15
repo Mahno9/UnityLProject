@@ -11,7 +11,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage
 {
     public class AreaTargetsSelectorSystem : IInitializableSystem, IDisposableSystem
     {
-        private readonly bool _excludeSelf;
+        private readonly bool  _excludeSelf;
+        private readonly float _gizmoDuration;
 
         private Collider         _areaCollider;
         private Collider         _selfCollider;
@@ -21,9 +22,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage
 
         private IDisposable _collectRequestSubscription;
 
-        public AreaTargetsSelectorSystem(bool excludeSelf = true)
+        public AreaTargetsSelectorSystem(bool excludeSelf = true, float gizmoDuration = 1f)
         {
             _excludeSelf = excludeSelf;
+            _gizmoDuration = gizmoDuration;
         }
 
         public void OnInit(Entity entity)
@@ -31,8 +33,12 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage
             _targets = entity.TargetsCollidersBuffer;
             _mask = entity.TargetsDetectingMask;
             _areaCollider = entity.AreaAttackCollider;
-            _selfCollider = entity.BodyCollider;
             _collectRequest = entity.AreaTargetsCollectRequest;
+
+            // Self-exclusion only matters for entities whose own non-trigger body collider can
+            // appear in the overlap; detection-only entities (explosion, mine) have no body collider.
+            if (entity.TryGetBodyCollider(out CapsuleCollider selfBody))
+                _selfCollider = selfBody;
 
             _collectRequestSubscription = _collectRequest.Subscribe(OnCollectRequest);
         }
@@ -50,7 +56,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.AreaDamage
                 RemoveSelfFromTargets();
 
 #if UNITY_EDITOR
-            DebugDrawUtils.DrawWireCollider(_areaCollider, _targets.Count > 0 ? Color.red : Color.green, 1f);
+            DebugDrawUtils.DrawWireCollider(_areaCollider, _targets.Count > 0 ? Color.red : Color.green, _gizmoDuration);
 #endif
         }
 

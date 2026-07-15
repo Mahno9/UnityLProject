@@ -7,5 +7,8 @@ namespace _Project.Develop.Runtime.Data.PlayerData
         public int Gold;
         public int Wins;
         public int Loses;
+
+        public int MovingWins;
+        public int MovingDefeats;
     }
 }

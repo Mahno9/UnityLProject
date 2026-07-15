@@ -9,6 +9,35 @@ public static class R
     public const string TMP_Settings = "TMP Settings";
     public static class Configs
     {
+        public static class Gameplay
+        {
+            public static class Entites
+            {
+                public static class Characters
+                {
+                    public const string ExplosionConfig = "Configs/Gameplay/Entites/Characters/ExplosionConfig";
+                    public const string GhostConfig = "Configs/Gameplay/Entites/Characters/GhostConfig";
+                    public const string HeroConfig = "Configs/Gameplay/Entites/Characters/HeroConfig";
+                    public const string MineConfig = "Configs/Gameplay/Entites/Characters/MineConfig";
+                    public const string TowerConfig = "Configs/Gameplay/Entites/Characters/TowerConfig";
+                    public const string ZombieConfig = "Configs/Gameplay/Entites/Characters/ZombieConfig";
+                }
+            }
+            public static class Levels
+            {
+                public const string LevelConfig = "Configs/Gameplay/Levels/LevelConfig";
+                public const string LevelConfig_1 = "Configs/Gameplay/Levels/LevelConfig 1";
+                public const string RunningLevelsListConfig = "Configs/Gameplay/Levels/RunningLevelsListConfig";
+                public const string TD_DefenseLevels = "Configs/Gameplay/Levels/TD_DefenseLevels";
+                public const string TD_Level1 = "Configs/Gameplay/Levels/TD_Level1";
+            }
+            public static class Stages
+            {
+                public const string ClearAllEnemiesStage = "Configs/Gameplay/Stages/ClearAllEnemiesStage";
+                public const string TD_Stage1 = "Configs/Gameplay/Stages/TD_Stage1";
+                public const string TD_Stage2 = "Configs/Gameplay/Stages/TD_Stage2";
+            }
+        }
         public static class Meta
         {
             public static class Market
@@ -18,6 +47,10 @@ public static class R
             public static class Progression
             {
                 public const string ProgressionConfig = "Configs/Meta/Progression/ProgressionConfig";
+            }
+            public static class Rewards
+            {
+                public const string TD_Level1WinReward = "Configs/Meta/Rewards/TD_Level1WinReward";
             }
             public static class Statistic
             {
@@ -34,10 +67,15 @@ public static class R
     public static class Entities
     {
         public const string CharacterOriginal = "Entities/CharacterOriginal";
+        public const string ContactTrigger = "Entities/ContactTrigger";
+        public const string Explosion = "Entities/Explosion";
         public const string Ghost = "Entities/Ghost";
         public const string Hero = "Entities/Hero";
+        public const string Mine = "Entities/Mine";
         public const string Projectile = "Entities/Projectile";
         public const string TeleporterEnemy = "Entities/TeleporterEnemy";
+        public const string Tower = "Entities/Tower";
+        public const string Zombie = "Entities/Zombie";
     }
     public static class Fonts___Materials
     {
@@ -45,6 +83,13 @@ public static class R
         public const string LiberationSans_SDF___Drop_Shadow = "Fonts & Materials/LiberationSans SDF - Drop Shadow";
         public const string LiberationSans_SDF___Fallback = "Fonts & Materials/LiberationSans SDF - Fallback";
         public const string LiberationSans_SDF___Outline = "Fonts & Materials/LiberationSans SDF - Outline";
+    }
+    public static class Materials
+    {
+        public const string ExplosionMaterial = "Materials/ExplosionMaterial";
+        public const string GroundMaterial = "Materials/GroundMaterial";
+        public const string MineMaterial = "Materials/MineMaterial";
+        public const string ZombieMaterial = "Materials/ZombieMaterial";
     }
     public static class Prefabs
     {
@@ -57,8 +102,10 @@ public static class R
     }
     public static class Sprites
     {
+        public const string EnemyWave = "Sprites/EnemyWave";
         public const string GoldCointIcon = "Sprites/GoldCointIcon";
         public const string LoseIcon = "Sprites/LoseIcon";
+        public const string TowerHealth = "Sprites/TowerHealth";
         public const string WinIcon = "Sprites/WinIcon";
     }
     public static class Style_Sheets
@@ -83,6 +130,12 @@ public static class R
         {
             public const string MetricView = "UI/Statistic/MetricView";
             public const string StatisticView = "UI/Statistic/StatisticView";
+        }
+        public static class TowerDefense
+        {
+            public const string HealthView = "UI/TowerDefense/HealthView";
+            public const string TowerDefenseScreenView = "UI/TowerDefense/TowerDefenseScreenView";
+            public const string WaveView = "UI/TowerDefense/WaveView";
         }
         public static class Wallet
         {

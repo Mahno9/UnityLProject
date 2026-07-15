@@ -14,8 +14,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot
 
         private ReactiveEvent _attackDelayEndEvent;
 
+        private Entity _entity;
+
         private ReactiveVariable<float> _damage;
-        private Transform               _shootPoint;
+        private Transform _shootPoint;
 
         private IDisposable _attackDelayEndDisposable;
 
@@ -26,6 +28,8 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot
 
         public void OnInit(Entity entity)
         {
+            _entity = entity;
+
             _attackDelayEndEvent = entity.AttackDelayEndEvent;
 
             _damage = entity.InstantAttackDamage;
@@ -34,14 +38,14 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack.Shoot
             _attackDelayEndDisposable = _attackDelayEndEvent.Subscribe(OnAttackDelayEnd);
         }
 
-        private void OnAttackDelayEnd()
-        {
-            _entitiesFactory.CreateProjectile(_shootPoint.position, _shootPoint.forward, _damage.Value);
-        }
-
         public void OnDispose()
         {
             _attackDelayEndDisposable.Dispose();
+        }
+
+        private void OnAttackDelayEnd()
+        {
+            _entitiesFactory.CreateProjectile(_shootPoint.position, _shootPoint.forward, _damage.Value, _entity);
         }
 
     }

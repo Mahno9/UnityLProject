@@ -15,6 +15,9 @@ namespace _Project.Develop.Runtime.Gameplay.Features.RotationFeature
         {
             _moveDirection     = entity.MoveDirection;
             _rotationDirection = entity.RotationDirection;
+
+            if (_moveDirection.Value != Vector3.zero)
+                _rotationDirection.Value = _moveDirection.Value;
         }
 
         public void OnUpdate(float deltaTime)

@@ -25,11 +25,6 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
             _startAttackEventDisposable = _startAttackEvent.Subscribe(OnStartAttackProcess);
         }
 
-        private void OnStartAttackProcess()
-        {
-            _currentTime.Value = 0;
-        }
-
         public void OnUpdate(float deltaTime)
         {
             if (_inAttackProcess.Value == false)
@@ -41,6 +36,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Attack
         public void OnDispose()
         {
             _startAttackEventDisposable.Dispose();
+        }
+
+        private void OnStartAttackProcess()
+        {
+            _currentTime.Value = 0;
         }
     }
 }
