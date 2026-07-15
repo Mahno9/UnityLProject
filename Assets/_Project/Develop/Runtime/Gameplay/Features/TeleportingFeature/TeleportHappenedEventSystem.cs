@@ -15,7 +15,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.MovementFeature
         public void OnInit(Entity entity)
         {
             _rigidbody            = entity.Rigidbody;
-            _onTeleportEvent      = entity.TeleportHappenedEvent;
+            _onTeleportEvent      = entity.TeleportDoneEvent;
             _previousBodyPosition = entity.PreviousBodyPositionC;
             _previousBodyPosition.Value = _rigidbody.position;
         }

@@ -13,6 +13,7 @@ using _Project.Develop.Runtime.Utilities.DataManagement.SaveLoadManagement;
 using _Project.Develop.Runtime.Utilities.DataManagement.Serializers;
 using _Project.Develop.Runtime.Utilities.LoadingScreen;
 using _Project.Develop.Runtime.Utilities.SceneManagement;
+using _Project.Develop.Runtime.Utilities.Timer;
 
 using UnityEngine;
 
@@ -36,9 +37,13 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateStatisticService);
             container.RegisterAsSingle(CreateViewFactory);
             container.RegisterAsSingle(CreateProjectPresentersFactory);
+            container.RegisterAsSingle(CreateTimerService);
 
             container.Initialize();
         }
+
+        private static TimerServiceFactory CreateTimerService(DIContainer c)
+            => new TimerServiceFactory(c);
 
         private static ProjectPresentersFactory CreateProjectPresentersFactory(DIContainer c)
         {
