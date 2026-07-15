@@ -22,7 +22,7 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
 
         private readonly Button                   _button;
         private readonly TMP_Text                 _label;
-        private readonly ITowerDefencePhaseReader _phaseService;
+        private readonly ITowerDefensePhaseReader _phaseService;
         private readonly StartBattleService       _startBattleService;
         private readonly SceneSwitcherService     _sceneSwitcherService;
         private readonly ICoroutinesPerformer     _coroutinesPerformer;
@@ -34,7 +34,7 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
         public StartButtonPresenter(
             Button button,
             TMP_Text label,
-            ITowerDefencePhaseReader phaseService,
+            ITowerDefensePhaseReader phaseService,
             StartBattleService startBattleService,
             SceneSwitcherService sceneSwitcherService,
             ICoroutinesPerformer coroutinesPerformer)

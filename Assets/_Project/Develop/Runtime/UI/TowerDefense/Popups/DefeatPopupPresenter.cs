@@ -4,15 +4,15 @@ using _Project.Develop.Runtime.Utilities.SceneManagement;
 
 namespace _Project.Develop.Runtime.UI.Gameplay
 {
-    public class WinPopupPresenter : PopupPresenterBase
+    public class DefeatPopupPresenter : PopupPresenterBase
     {
         private readonly ICoroutinesPerformer _coroutinesPerformer;
-        private readonly WinPopupView         _view;
+        private readonly DefeatPopupView         _view;
         private readonly SceneSwitcherService _sceneSwitcher;
 
-        public WinPopupPresenter(
+        public DefeatPopupPresenter(
             ICoroutinesPerformer coroutinesPerformer,
-            WinPopupView         view,
+            DefeatPopupView         view,
             SceneSwitcherService sceneSwitcher
         ) : base(coroutinesPerformer)
         {

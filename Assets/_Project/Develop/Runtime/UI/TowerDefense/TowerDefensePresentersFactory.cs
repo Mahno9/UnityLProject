@@ -39,13 +39,13 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
                 _container.Resolve<WaveEnemyCounterService>(),
                 _container.Resolve<StageProviderService>(),
                 _container.Resolve<LevelConfig>(),
-                _container.Resolve<ITowerDefencePhaseReader>());
+                _container.Resolve<ITowerDefensePhaseReader>());
 
         public StartButtonPresenter CreateStartButtonPresenter(Button button, TMP_Text label)
             => new StartButtonPresenter(
                 button,
                 label,
-                _container.Resolve<ITowerDefencePhaseReader>(),
+                _container.Resolve<ITowerDefensePhaseReader>(),
                 _container.Resolve<StartBattleService>(),
                 _container.Resolve<SceneSwitcherService>(),
                 _container.Resolve<ICoroutinesPerformer>());
@@ -54,6 +54,15 @@ namespace _Project.Develop.Runtime.UI.TowerDefense
         public WinPopupPresenter CreateWinPopupPresenter(WinPopupView view)
         {
             return new WinPopupPresenter(
+                _container.Resolve<ICoroutinesPerformer>(),
+                view,
+                _container.Resolve<SceneSwitcherService>()
+            );
+        }
+
+        public DefeatPopupPresenter CreateDefeatPopupPresenter(DefeatPopupView view)
+        {
+            return new DefeatPopupPresenter(
                 _container.Resolve<ICoroutinesPerformer>(),
                 view,
                 _container.Resolve<SceneSwitcherService>()

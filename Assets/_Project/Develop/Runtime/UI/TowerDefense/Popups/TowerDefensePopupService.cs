@@ -42,5 +42,16 @@ namespace _Project.Develop.Runtime.UI.Gameplay
 
             return popup;
         }
+
+        public DefeatPopupPresenter OpenDefeatPopup(Action closeCallback = null)
+        {
+            DefeatPopupView view = ViewsFactory.Create<DefeatPopupView>(ViewIDs.TowerDefenseDefeatPopup, PopupLayer);
+
+            DefeatPopupPresenter popup = _towerDefensePresentersFactory.CreateDefeatPopupPresenter(view);
+
+            OnPopupCreated(popup, view, closeCallback);
+
+            return popup;
+        }
     }
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stageConfigs:
   - {fileID: 11400000, guid: 8e36bbd2419d8fb41a976327c053d276, type: 2}
-  <TowerMaxHealth>k__BackingField: 300
+  <TowerMaxHealth>k__BackingField: 1
   <WinReward>k__BackingField: {fileID: 11400000, guid: e138676b156d175418e3f21be232617b, type: 2}
   <EnemySpawnRadius>k__BackingField: 24
