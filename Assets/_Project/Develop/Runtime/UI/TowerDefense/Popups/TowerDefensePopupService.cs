@@ -3,6 +3,7 @@ using System;
 using _Project.Develop.Runtime.Configs.Meta.Rewards;
 using _Project.Develop.Runtime.UI.Core;
 using _Project.Develop.Runtime.UI.TowerDefense;
+using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
 
 using UnityEngine;
 
@@ -12,16 +13,19 @@ namespace _Project.Develop.Runtime.UI.Gameplay
     {
         private readonly TowerDefenseUIRoot            _uiRoot;
         private readonly TowerDefensePresentersFactory _towerDefensePresentersFactory;
+        private readonly TimedCountersFactory          _countersFactory;
 
         public TowerDefensePopupService(
             ViewsFactory                  viewsFactory,
             ProjectPresentersFactory      presentersFactory,
             TowerDefenseUIRoot            uiRoot,
-            TowerDefensePresentersFactory towerDefensePresentersFactory)
+            TowerDefensePresentersFactory towerDefensePresentersFactory,
+            TimedCountersFactory timedCountersFactory)
             : base(viewsFactory, presentersFactory)
         {
             _uiRoot = uiRoot;
             _towerDefensePresentersFactory = towerDefensePresentersFactory;
+            _countersFactory = timedCountersFactory;
         }
 
         protected override Transform PopupLayer => _uiRoot.PopupsLayer;
@@ -30,8 +34,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay
         {
             WinPopupView view = ViewsFactory.Create<WinPopupView>(ViewIDs.TowerDefenseWinPopup, PopupLayer);
 
-            if (rewardConfig is GoldRewardConfig goldRewardConfig)
-                view.SetRewardGoldAmount(goldRewardConfig.Amount);
+            view.Initialize(((GoldRewardConfig)rewardConfig).Amount, _countersFactory);
 
             WinPopupPresenter popup = _towerDefensePresentersFactory.CreateWinPopupPresenter(view);
 

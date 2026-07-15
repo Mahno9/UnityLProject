@@ -198,7 +198,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<ViewsFactory>(),
                 c.Resolve<ProjectPresentersFactory>(),
                 c.Resolve<TowerDefenseUIRoot>(),
-                c.Resolve<TowerDefensePresentersFactory>()
+                c.Resolve<TowerDefensePresentersFactory>(),
+                c.Resolve<TimedCountersFactory>()
             );
         }
     }

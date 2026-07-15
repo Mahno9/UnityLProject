@@ -456,6 +456,7 @@ MonoBehaviour:
   _rewardText: {fileID: 8647543062906630108}
   _respectIconTransform: {fileID: 4175179092853949978}
   _respectTextTransform: {fileID: 3734864514945102761}
+  _countUpDuration: 0.6
 --- !u!1 &5847668282877858696
 GameObject:
   m_ObjectHideFlags: 0

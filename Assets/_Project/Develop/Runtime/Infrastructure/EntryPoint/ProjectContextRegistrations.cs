@@ -5,6 +5,7 @@ using _Project.Develop.Runtime.Meta.Logic.StatisticManagement;
 using _Project.Develop.Runtime.Meta.Logic.WalletManagement;
 using _Project.Develop.Runtime.UI;
 using _Project.Develop.Runtime.UI.Core;
+using _Project.Develop.Runtime.UI.Gameplay;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
@@ -44,8 +45,14 @@ namespace _Project.Develop.Runtime.Infrastructure.EntryPoint
             container.RegisterAsSingle(CreateProjectPresentersFactory);
             container.RegisterAsSingle(CreateTimerService);
             container.RegisterAsSingle(CreateLevelsProgressionService);
+            container.RegisterAsSingle(CreateTimedCountersFactory);
 
             container.Initialize();
+        }
+
+        private static TimedCountersFactory CreateTimedCountersFactory(DIContainer c)
+        {
+            return new TimedCountersFactory(c.Resolve<ICoroutinesPerformer>());
         }
 
         private static LevelsProgressionService CreateLevelsProgressionService(DIContainer c)
