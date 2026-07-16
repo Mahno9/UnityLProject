@@ -37,7 +37,7 @@ namespace _Project.Develop.Runtime.UI.Gameplay
 
         public void OnDisable()
         {
-            _counterSubscription.Dispose();
+            _counterSubscription?.Dispose();
             _counter?.Dispose();
         }
 
