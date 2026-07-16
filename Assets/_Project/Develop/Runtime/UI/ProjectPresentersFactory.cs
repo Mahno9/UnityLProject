@@ -45,7 +45,6 @@ namespace _Project.Develop.Runtime.UI
         {
             return new WalletPresenter(
                 _container.Resolve<WalletService>().GetGold(),
-                _container.Resolve<ConfigsProviderService>().GetConfig<CurrencyIconsConfig>(),
                 view);
         }
 

@@ -53,7 +53,10 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Explosion
             if (_shouldSpawn() == false)
                 return;
 
-            _explosionFactory.Create(_transform.position, _damage, _team.Value);
+            if (_team.Value == Teams.Enemies)
+                _explosionFactory.CreateEnemyExplosion(_transform.position, _damage, _team.Value);
+            else
+                _explosionFactory.CreatePlayerExplosion(_transform.position, _damage, _team.Value);
         }
     }
 }

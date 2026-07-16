@@ -4,5 +4,6 @@ namespace _Project.Develop.Runtime.UI.Core
     {
         None,
         Expand,
+        Fade,
     }
 }

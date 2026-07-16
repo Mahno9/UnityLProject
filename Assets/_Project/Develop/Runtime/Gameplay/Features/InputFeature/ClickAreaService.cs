@@ -27,7 +27,11 @@ namespace _Project.Develop.Runtime.Gameplay.Features.InputFeature
             if (Input.GetMouseButtonDown(0) == false)
                 return;
 
-            if (EventSystem.current is not null && EventSystem.current.IsPointerOverGameObject())
+            int pointerId = Input.touchCount > 0
+                ? Input.GetTouch(0).fingerId
+                : PointerInputModule.kMouseLeftId;
+
+            if (EventSystem.current is not null && EventSystem.current.IsPointerOverGameObject(pointerId))
                 return;
 
             if (_camera is null)

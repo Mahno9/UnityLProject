@@ -25,7 +25,6 @@ using _Project.Develop.Runtime.UI.TowerDefense;
 using _Project.Develop.Runtime.Utilities.AssetManagement;
 using _Project.Develop.Runtime.Utilities.ConfigsManagement;
 using _Project.Develop.Runtime.Utilities.CoroutinesManagement;
-using _Project.Develop.Runtime.Utilities.SceneManagement;
 using _Project.Develop.Runtime.Utilities.Timer;
 
 using UnityEngine;
@@ -54,6 +53,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateMarketService);
 
             container.RegisterAsSingle(CreateClickAreaService);
+            container.RegisterAsSingle(CreateCursorMoveAreaService);
             container.RegisterAsSingle(CreateEntityTrackingService);
             container.RegisterAsSingle(CreateWaveEnemyCounterService);
             container.RegisterAsSingle(CreateEnemySpawnService);
@@ -67,9 +67,10 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             container.RegisterAsSingle(CreateStatesFactory);
             container.RegisterAsSingle((c) => CreateGameplayStatesContext(c, args));
 
-            container.RegisterAsSingle(CreateLevelUIRoot);
+            container.RegisterAsSingle(CreateTowerDefenseUIRoot);
             container.RegisterAsSingle(CreateTowerDefensePresentersFactory);
             container.RegisterAsSingle(CreateTowerDefenseScreenPresenter).NonLazy();
+            container.RegisterAsSingle(CreateTowerDefensePopupService);
 
             container.Initialize();
         }
@@ -79,9 +80,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
             return new StageProviderService(c.Resolve<LevelConfig>(), c.Resolve<StagesFactory>());
         }
 
-        private static LevelUIRoot CreateLevelUIRoot(DIContainer c)
+        private static TowerDefenseUIRoot CreateTowerDefenseUIRoot(DIContainer c)
         {
-            LevelUIRoot uiRootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<LevelUIRoot>(R.UI.Gameplay.LevelUIRoot);
+            TowerDefenseUIRoot uiRootPrefab = c.Resolve<ResourcesAssetsLoader>().Load<TowerDefenseUIRoot>(R.UI.TowerDefense.TowerDefenseUIRoot);
 
             return Object.Instantiate(uiRootPrefab);
         }
@@ -91,7 +92,7 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static TowerDefenseScreenPresenter CreateTowerDefenseScreenPresenter(DIContainer c)
         {
-            LevelUIRoot uiRoot = c.Resolve<LevelUIRoot>();
+            TowerDefenseUIRoot uiRoot = c.Resolve<TowerDefenseUIRoot>();
 
             TowerDefenseScreenView view = c.Resolve<ViewsFactory>()
                 .Create<TowerDefenseScreenView>(ViewIDs.TowerDefenseScreen, uiRoot.HUDLayer);
@@ -120,6 +121,9 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
         private static StagesFactory CreateStagesFactory(DIContainer c)
             => new(c);
 
+        private static CursorMoveAreaService CreateCursorMoveAreaService(DIContainer c)
+            => new();
+
         private static ClickAreaService CreateClickAreaService(DIContainer c)
             => new();
 
@@ -137,7 +141,8 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
 
         private static PlayerExplosionOnClickService CreatePlayerExplosionOnClickService(DIContainer c)
         {
-            ExplosionConfig config = c.Resolve<ConfigsProviderService>().GetConfig<ExplosionConfig>();
+            PlayerExplosionConfig config = c.Resolve<ConfigsProviderService>().GetConfig<PlayerExplosionConfig>();
+            // TODO: move these settings to player settings
 
             return new PlayerExplosionOnClickService(
                 c.Resolve<ClickAreaService>(),
@@ -185,6 +190,17 @@ namespace _Project.Develop.Runtime.Gameplay.Infrastructure
                 c.Resolve<ResourcesAssetsLoader>(),
                 c.Resolve<EntitiesLifeContext>(),
                 c.Resolve<CollidersRegistryService>());
+        }
+
+        private static TowerDefensePopupService CreateTowerDefensePopupService(DIContainer c)
+        {
+            return new TowerDefensePopupService(
+                c.Resolve<ViewsFactory>(),
+                c.Resolve<ProjectPresentersFactory>(),
+                c.Resolve<TowerDefenseUIRoot>(),
+                c.Resolve<TowerDefensePresentersFactory>(),
+                c.Resolve<TimedCountersFactory>()
+            );
         }
     }
 }

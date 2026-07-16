@@ -18,7 +18,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
         [SerializeField] private string _resetStatisticButtonPrefix  = "Сбросить статистику за ";
         [SerializeField] private string _resetStatisticButtonPostfix = " деняк";
 
-        [SerializeField] private Button _startMovingGameButton;
         [SerializeField] private Button _startTowerDefenseButton;
 
         public event Action StartLettersGameClicked;
@@ -42,7 +41,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _startLettersGameButton.onClick.AddListener(OnStartLettersGameClicked);
             _startNumbersGameButton.onClick.AddListener(OnStartNumbersGameClicked);
             _resetStatisticButton.onClick.AddListener(OnResetStatisticClicked);
-            _startMovingGameButton.onClick.AddListener(OnStartMovingGameClicked);
 
             if (_startTowerDefenseButton != null)
                 _startTowerDefenseButton.onClick.AddListener(OnStartTowerDefenseClicked);
@@ -53,7 +51,6 @@ namespace _Project.Develop.Runtime.UI.MainMenu
             _startLettersGameButton.onClick.RemoveListener(OnStartLettersGameClicked);
             _startNumbersGameButton.onClick.RemoveListener(OnStartNumbersGameClicked);
             _resetStatisticButton.onClick.RemoveListener(OnResetStatisticClicked);
-            _startMovingGameButton.onClick.RemoveListener(OnStartMovingGameClicked);
 
             if (_startTowerDefenseButton != null)
                 _startTowerDefenseButton.onClick.RemoveListener(OnStartTowerDefenseClicked);

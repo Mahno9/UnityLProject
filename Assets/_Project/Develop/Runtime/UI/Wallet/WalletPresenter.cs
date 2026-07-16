@@ -14,25 +14,21 @@ namespace _Project.Develop.Runtime.UI.Wallet
     public class WalletPresenter : IPresenter
     {
         private readonly IReadOnlyVariable<int> _currency;
-        private readonly CurrencyIconsConfig    _currencyIconsConfig;
 
         private readonly IconTextView _view;
         private          IDisposable  _currencySubscription;
 
         public WalletPresenter(
             IReadOnlyVariable<int>   currency,
-            CurrencyIconsConfig currencyIconsConfig,
             IconTextView view)
         {
             _currency = currency;
-            _currencyIconsConfig = currencyIconsConfig;
             _view = view;
         }
 
         public void Initialize()
         {
             UpdateValue(_currency.Value);
-            _view.SetIcon(_currencyIconsConfig.GetGoldSprite);
 
             _currencySubscription = _currency.Subscribe(OnCurrencyChanged);
         }

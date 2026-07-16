@@ -54,7 +54,7 @@ namespace _Project.Develop.Runtime.Gameplay.Features.Explosion
             if (_cooldownTimer.IsOver == false)
                 return;
 
-            _explosionFactory.Create(point, _damage, Teams.Player);
+            _explosionFactory.CreatePlayerExplosion(point, _damage, Teams.Player);
             _cooldownTimer.Restart();
         }
     }
